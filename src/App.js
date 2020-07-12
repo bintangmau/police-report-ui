@@ -11,7 +11,7 @@ function App() {
       {/* <h1>Musito Product Police Report</h1>
       <Link to='/input-personil'>Input personil</Link> */}
       <Switch>
-        <Route path='/input-personil' component={InputPersonil} />
+        <Route path='/input-personil' component={InputPersonil} exact />
         <Route path="/login" component={LoginPage} exact  />
       </Switch>
     </div>
