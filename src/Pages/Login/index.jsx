@@ -1,9 +1,15 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+// ACTIONS
+import { loginPersonil } from '../../Redux/Actions'
 
 // API
 import { api } from '../../helper/database'
+
+// COMPONENTS
 import Loader from '../../Components/Loader'
 
 // STYLE 
@@ -19,10 +25,12 @@ function Login () {
 
     const history = useHistory()
     
-    const loginPersonil = () => {
+    const loginPersonilBtn = () => {
         if(!nrp) {
+            setLoginMessage('')
             setNrpEmpty('(Masukkan NRP!)')
         } else if(!password) {
+            setLoginMessage('')
             setPassEmpty('(Masukkan Password!)')
         } else {
             setLoading(true)
@@ -31,13 +39,16 @@ function Login () {
             })
             .then((res) => {
                 if(!res.data.token) {
+                    setNrp('')
+                    setPassword('')
                     setLoading(false)
                     setLoginMessage(res.data.message)
                 } else {
+                    var data = res.data.data
                     setLoginMessage('')
                     setLoading(false)
-                    localStorage.setItem('token', res.data.token)
                     history.push('/input-personil')
+                    loginPersonil(res.data.token, data.email, data.nama, data.id, data.nrp)
                 }
             })
             .catch((err) => {
@@ -49,11 +60,13 @@ function Login () {
     const onChangeNrp = (e) => {
         setNrp(e.target.value)
         setNrpEmpty('')
+        setLoginMessage('')
     }
 
     const onChangePassword = (e) => {
         setPassword(e.target.value)
         setPassEmpty('')
+        setLoginMessage('')
     }
 
     useEffect(()=>{
@@ -76,12 +89,13 @@ function Login () {
                             ?
                             <> <label>NRP</label> <br /> </>
                             :
-                            <> <label>NRP <span style={{ color: 'red' }}>{nrpEmpty}</span></label> <br /> </>
+                            <> <label>NRP <span style={{ color: 'red', fontWeight: '350', fontSize: '12px' }}>{nrpEmpty}</span></label> <br /> </>
                         }
                         <input 
                             type="text" 
                             placeholder='NRP' 
                             onChange={onChangeNrp}
+                            value={nrp}
                         />
                     </div>
 
@@ -91,9 +105,14 @@ function Login () {
                             ?
                             <> <label>Password</label> <br /> </>
                             :
-                            <> <label>Password <span style={{ color: 'red' }}>{passEmpty}</span> </label> <br /> </>
+                            <> <label>Password <span style={{ color: 'red', fontWeight: '350', fontSize: '12px' }}>{passEmpty}</span> </label> <br /> </>
                         }
-                        <input type="password" placeholder="Password" onChange={onChangePassword}/>
+                        <input 
+                            type="password" 
+                            placeholder="Password" 
+                            onChange={onChangePassword}
+                            value={password}
+                        />
                     </div>
                     
                     {
@@ -104,7 +123,7 @@ function Login () {
                         </div>
                         :
                         <>
-                        <button onClick={loginPersonil}>Login</button>
+                        <button onClick={loginPersonilBtn}>Login</button>
                         <span style={{ color: 'red', marginTop: '2px', fontSize: '12px' }}>{loginMessage}</span>
                         </>
                     }
@@ -117,4 +136,12 @@ function Login () {
 
 }
 
-export default Login
+// const mapStateToProps = (state) => {
+//     return {
+//         nama: state.user.name,
+//         id: state.user.id
+//     }
+// }
+
+// export default connect(mapStateToProps, {})(Login);
+export default Login;
