@@ -77,60 +77,62 @@ function Login () {
 
     return (
         <div className="login-container-01">
-            <div className='login-form-container'>
-                <h4>
-                    Musito Police Report System
-                </h4>
-                <div className='login-form-box'>
+            <div className='login-row-container'>
 
-                    <div className='login-form-input'>
-                        {
-                            nrp
-                            ?
-                            <> <label>NRP</label> <br /> </>
-                            :
-                            <> <label>NRP <span style={{ color: 'red', fontWeight: '350', fontSize: '12px' }}>{nrpEmpty}</span></label> <br /> </>
-                        }
-                        <input 
-                            type="text" 
-                            placeholder='NRP' 
-                            onChange={onChangeNrp}
-                            value={nrp}
-                        />
-                    </div>
-
-                    <div className='login-form-input' style={{marginTop: "15px"}}>
-                        {
-                            password
-                            ?
-                            <> <label>Password</label> <br /> </>
-                            :
-                            <> <label>Password <span style={{ color: 'red', fontWeight: '350', fontSize: '12px' }}>{passEmpty}</span> </label> <br /> </>
-                        }
-                        <input 
-                            type="password" 
-                            placeholder="Password" 
-                            onChange={onChangePassword}
-                            value={password}
-                        />
-                    </div>
-                    
-                    {
-                        loading
-                        ?
-                        <div style={{ marginTop: '30px' }}>
-                        <Loader />
-                        </div>
-                        :
-                        <>
-                        <button onClick={loginPersonilBtn}>Login</button>
-                        <span style={{ color: 'red', marginTop: '2px', fontSize: '12px' }}>{loginMessage}</span>
-                        </>
-                    }
-
+                <div className='login-form-container-left'>
+                    <h4>Musito Police Report System</h4>
                 </div>
-            </div>
 
+                <div className='login-form-container-right'>
+                    <div className='login-form-box'>
+
+                        <div className='login-form-input'>
+                            {
+                                nrp
+                                ?
+                                <> <label>NRP</label> <br /> </>
+                                :
+                                <> <label>NRP <span style={{ color: 'red', fontWeight: '350', fontSize: '12px' }}>{nrpEmpty}</span></label> <br /> </>
+                            }
+                            <input 
+                                type="text" 
+                                onChange={onChangeNrp}
+                                value={nrp}
+                                />
+                        </div>
+
+                        <div className='login-form-input' style={{marginTop: "15px"}}>
+                            {
+                                password
+                                ?
+                                <> <label>Password</label> <br /> </>
+                                :
+                                <> <label>Password <span style={{ color: 'red', fontWeight: '350', fontSize: '12px' }}>{passEmpty}</span> </label> <br /> </>
+                            }
+                            <input 
+                                type="password" 
+                                onChange={onChangePassword}
+                                value={password}
+                                />
+                        </div>
+                        
+                        {
+                            loading
+                            ?
+                            <div style={{ marginTop: '30px' }}>
+                            <Loader />
+                            </div>
+                            :
+                            <>
+                            <button onClick={loginPersonilBtn}>Login</button>
+                            <span style={{ color: 'red', marginTop: '2px', fontSize: '12px' }}>{loginMessage}</span>
+                            </>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     )
 
@@ -138,7 +140,7 @@ function Login () {
 
 // const mapStateToProps = (state) => {
 //     return {
-//         nama: state.user.name,
+    //         nama: state.user.name,
 //         id: state.user.id
 //     }
 // }
