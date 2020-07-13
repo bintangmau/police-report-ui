@@ -23,11 +23,11 @@ export default function RightContentInputB(props) {
         setNRPyangMenerimaLaporan,
         pangkatyangMenerimaLaporan,
         setPangkatyangMenerimaLaporan,
-        tindakanYangDiambil, setTindakanYangDiambil, tindakPidanaAtauPasal, setTindakPidanaAtauPasal, barangBukti, setBarangBukti
+        tindakanYangDiambil, setTindakanYangDiambil, tindakPidanaDanPasal, setTindakPidanaDanPasal, barangBukti, setBarangBukti
     } = props
 
-    const arrayKey = [ tindakanYangDiambil, tindakPidanaAtauPasal, barangBukti ]
-    const fnKey = [ setTindakanYangDiambil, setTindakPidanaAtauPasal, setBarangBukti ]
+    const arrayKey = [ tindakanYangDiambil, tindakPidanaDanPasal, barangBukti ]
+    const fnKey = [ setTindakanYangDiambil, setTindakPidanaDanPasal, setBarangBukti ]
 
     function PlusInput (type) {
         let result = [...arrayKey[type]]
@@ -59,37 +59,65 @@ export default function RightContentInputB(props) {
             
             <div className="input-b-input-box">
                 <label>Mengetahui</label> <br />
-                <input type="text" placeholder="Nama Petugas Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="Nama Petugas Yang Mengetahui"
+                    onChange={(e) => setMengetahui(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Nrp</label> <br />
-                <input type="text" placeholder="NRP Petugas Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="NRP Petugas Yang Mengetahui"
+                    onChange={(e) => setNRPMengetahui(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Pangkat</label> <br />
-                <input type="text" placeholder="Pangkat Petugas Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="Pangkat Petugas Yang Mengetahui"
+                    onChange={(e) => setPangkatMengetahui(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Unit</label> <br />
-                <input type="text" placeholder="Unit Petugas Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="Unit Petugas Yang Mengetahui"
+                    onChange={(e) => setUnitMengetahui(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Yang Menerima Laporan</label> <br />
-                <input type="text" placeholder="Nama Petugas Yang Menerima Laporan"/>
+                <input 
+                    type="text" 
+                    placeholder="Nama Petugas Yang Menerima Laporan"
+                    onChange={(e) => setYangMenerimaLaporan(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>NRP</label> <br />
-                <input type="text" placeholder="NRP Petugas Yang Menerima Laporan"/>
+                <input 
+                    type="text" 
+                    placeholder="NRP Petugas Yang Menerima Laporan"
+                    onChange={(e) => setNRPyangMenerimaLaporan(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Pangkat</label> <br />
-                <input type="text" placeholder="Pangkat Petugas Yang Menerima Laporan"/>
+                <input 
+                    type="text" 
+                    placeholder="Pangkat Petugas Yang Menerima Laporan"
+                    onChange={(e) => setPangkatyangMenerimaLaporan(e.target.value)}    
+                />
             </div>
 
             {
@@ -139,7 +167,7 @@ export default function RightContentInputB(props) {
             }
 
             {
-                tindakPidanaAtauPasal.map((el,index)=>{
+                tindakPidanaDanPasal.map((el,index)=>{
                     var idx = index
                     if(idx < 1) {
                         idx = null
@@ -154,7 +182,7 @@ export default function RightContentInputB(props) {
                                     type="text" 
                                     className="input-a-plus" 
                                     placeholder="Masukkan Tindak Pidana Atau Pasal" 
-                                    value={tindakPidanaAtauPasal[idx]}
+                                    value={tindakPidanaDanPasal[idx]}
                                     onChange={e=>FillValue(1,e.target.value,index)}
                                 />
                                 {
@@ -165,14 +193,14 @@ export default function RightContentInputB(props) {
                                     <></>
                                 }
                                 {
-                                    index === tindakPidanaAtauPasal.length -1 ?
+                                    index === tindakPidanaDanPasal.length -1 ?
                                     <div className="input-a-plus-box" onClick={e=>PlusInput(1)}>
                                         <img src={PlusIcon} />
                                     </div> :
                                     <></>
                                 }
                                 {
-                                    index === 0 && tindakPidanaAtauPasal.length > 1 && 
+                                    index === 0 && tindakPidanaDanPasal.length > 1 && 
                                     <div className="input-a-minus-box">
                                     </div>
                                 }

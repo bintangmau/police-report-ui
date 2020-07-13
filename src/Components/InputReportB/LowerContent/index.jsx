@@ -23,7 +23,7 @@ export default function LowerContentInputB(props) {
         waktuDilaporkanJam,setWaktuDilaporkanJam,
         uraianSingkatKejadian,setUraianSingkatKejadian,
         korban, setKorban, 
-        saksi, setNamaSaksi
+        saksi, setNamaSaksi, BtnInputReportB
     } = props
 
     const arrayKey = [ korban, saksi ]
@@ -62,8 +62,8 @@ export default function LowerContentInputB(props) {
                 <div className="input-b-column-box">
                     <label>Tanggal Kejadian</label> <br />
                     <DatePicker 
-                        // selected={waktuKejadian}
-                        // onChange={date => setWaktuKejadian(date)}
+                        selected={waktuKejadian}
+                        onChange={date => setWaktuKejadian(date)}
                         className="input-b-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -77,14 +77,18 @@ export default function LowerContentInputB(props) {
 
             <div className="input-b-input-box">
                 <label>Tempat Kejadian</label> <br />
-                <input type="text" placeholder="Masukkan Tempat Kejadian"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Tempat Kejadian"
+                    onChange={(e) => setTempatKejadian(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-row-box">
 
             <div className="input-b-column-box">
                 <label>Provinsi</label> <br />
-                <select>
+                <select onChange={(e) => setProvinsiKejadian(e.target.value)}>
                     <option value="" disabled selected>Pilih Provinsi</option>
                     <option value="Banten">Banten</option>
                     <option value="DKI Jakarta">DKI Jakarta</option>
@@ -92,7 +96,7 @@ export default function LowerContentInputB(props) {
             </div>
             <div className="input-b-column-box">
                 <label>Kabupaten/Kota</label> <br />
-                <select>
+                <select onChange={(e) => setKotaKejadian(e.target.value)}>
                     <option value="" disabled selected>Pilih Kabupaten/Kota</option>
                     <option value="Tangerang">Tangerang</option>
                     <option value="Jakarta Pusat">Jakarta Pusat</option>
@@ -105,7 +109,7 @@ export default function LowerContentInputB(props) {
 
             <div className="input-b-column-box">
                 <label>Kecamatan</label> <br />
-                <select>
+                <select onChange={(e) => setKecamatanKejadian(e.target.value)}>
                     <option value="" disabled selected>Pilih Kecamatan</option>
                     <option value="Gambir">Gambir</option>
                     <option value="Kuningan">Kuningan</option>
@@ -113,7 +117,7 @@ export default function LowerContentInputB(props) {
             </div>
             <div className="input-b-column-box">
                 <label>Desa/Kelurahan</label> <br />
-                <select>
+                <select onChange={(e) => setKelurahanKejadian(e.target.value)}>
                     <option value="" disabled selected>Pilih Desa/Kelurahan</option>
                     <option value="Doko">Doko</option>
                     <option value="Tebet">Tebet</option>
@@ -124,12 +128,20 @@ export default function LowerContentInputB(props) {
 
             <div className="input-b-input-box">
                 <label>Apa Yang Terjadi</label> <br />
-                <textarea type="text" placeholder="Tulis Apa Yang Terjadi"/>
+                <textarea 
+                    type="text" 
+                    placeholder="Tulis Apa Yang Terjadi"
+                    onChange={(e) => setApaYangTerjadi(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Terlapor</label> <br />
-                <input type="text" placeholder="Masukkan Nama Terlapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nama Terlapor"
+                    onChange={(e) => setTerlapor(e.target.value)}    
+                />
             </div>
 
             {      
@@ -229,8 +241,8 @@ export default function LowerContentInputB(props) {
                 <div className="input-b-column-box">
                     <label>Tanggal Pelaporan</label> <br />
                     <DatePicker 
-                        // selected={waktuKejadian}
-                        // onChange={date => setWaktuKejadian(date)}
+                        selected={waktuDilaporkan}
+                        onChange={date => setWaktuDilaporkan(date)}
                         className="input-b-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -243,17 +255,16 @@ export default function LowerContentInputB(props) {
             </div>
 
             <div className="input-b-input-box">
-                <label>Uraian Kejadian</label> <br />
-                <textarea type="text" placeholder="Tulis Uraian Kejadian"/>
-            </div>
-
-            <div className="input-b-input-box">
-                <label>Uraian Kejadian</label> <br />
-                <textarea type="text" placeholder="Tulis Uraian Kejadian"/>
+                <label>Uraian Singkat Kejadian</label> <br />
+                <textarea 
+                    type="text" 
+                    placeholder="Tulis Uraian Singkat Kejadian"
+                    onChange={(e) => setUraianSingkatKejadian(e.target.value)}    
+                />
             </div>
 
             <center>
-                <button className='input-a-submit-btn'>Submit</button>
+                <button onClick={BtnInputReportB} className='input-a-submit-btn'>Submit</button>
             </center>
 
         </div>

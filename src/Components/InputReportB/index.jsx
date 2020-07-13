@@ -1,5 +1,9 @@
 // MODULES
 import React, { useState } from 'react'
+import Axios from 'axios'
+
+// API
+import { api } from '../../helper/database'
 
 // CSS
 import './style.css'
@@ -36,7 +40,7 @@ export default function InputReportB() {
     const [NRPyangMenerimaLaporan,setNRPyangMenerimaLaporan] = useState("")
     const [pangkatyangMenerimaLaporan,setPangkatyangMenerimaLaporan] = useState("")
     const [ tindakanYangDiambil, setTindakanYangDiambil ] = useState([''])
-    const [ tindakPidanaAtauPasal, setTindakPidanaAtauPasal ] = useState([''])
+    const [ tindakPidanaDanPasal, setTindakPidanaDanPasal ] = useState([''])
     const [ barangBukti, setBarangBukti ] = useState([''])
 
 
@@ -55,6 +59,55 @@ export default function InputReportB() {
     const [waktuDilaporkan,setWaktuDilaporkan] = useState("")
     const [waktuDilaporkanJam,setWaktuDilaporkanJam] = useState("")
     const [uraianSingkatKejadian,setUraianSingkatKejadian] = useState("")
+
+    const BtnInputReportB = () => {
+        Axios.post(api + 'report/input-report-b', {
+            unitMengetahui,
+            pangkatyangMenerimaLaporan,
+            NRPyangMenerimaLaporan,
+            pangkatMengetahui,
+            NRPMengetahui,
+            nomorLaporanPolisi,
+            pelapor,
+            tempatLahir,
+            tanggalLahir,
+            jenisKelamin,
+            wargaNegara,
+            agama,
+            pekerjaan,
+            alamat,
+            provinsiPelapor,
+            kotaPelapor,
+            kecamataPelapor,
+            kelurahanPelapor,
+            nomorTelpon,
+            waktuKejadian,
+            waktuKejadianJam,
+            tempatKejadian,
+            provinsiKejadian,
+            kotaKejadian,
+            kecamatanKejadian,
+            kelurahanKejadian,
+            apaYangTerjadi,
+            terlapor,
+            korban,
+            saksi,
+            waktuDilaporkan,
+            waktuDilaporkanJam,
+            uraianSingkatKejadian,
+            mengetahui,
+            yangMenerimaLaporan,
+            tindakanYangDiambil,
+            tindakPidanaDanPasal,
+            barangBukti,
+        })
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
     return (
         <div style={{width : "100%" , height : 800 }}>
@@ -111,8 +164,8 @@ export default function InputReportB() {
                     setPangkatyangMenerimaLaporan={setPangkatyangMenerimaLaporan}
                     tindakanYangDiambil={tindakanYangDiambil}
                     setTindakanYangDiambil={setTindakanYangDiambil}
-                    tindakPidanaAtauPasal={tindakPidanaAtauPasal}
-                    setTindakPidanaAtauPasal={setTindakPidanaAtauPasal}
+                    tindakPidanaDanPasal={tindakPidanaDanPasal}
+                    setTindakPidanaDanPasal={setTindakPidanaDanPasal}
                     barangBukti={barangBukti}
                     setBarangBukti={setBarangBukti}
                 />
@@ -121,7 +174,7 @@ export default function InputReportB() {
 
             <Lower 
                 waktuKejadian={waktuKejadian}
-                setWaktuKejadian={setWaktuKejadianJam}
+                setWaktuKejadian={setWaktuKejadian}
                 waktuKejadianJam={waktuKejadianJam}
                 setWaktuKejadianJam={setWaktuKejadianJam}
                 tempatKejadian={tempatKejadian}
@@ -148,6 +201,7 @@ export default function InputReportB() {
                 setWaktuDilaporkanJam={setWaktuDilaporkanJam}
                 uraianSingkatKejadian={uraianSingkatKejadian}
                 setUraianSingkatKejadian={setUraianSingkatKejadian}
+                BtnInputReportB={BtnInputReportB}
             />
             
         </div>

@@ -43,26 +43,38 @@ export default function LeftContentInputB(props) {
 
             <div className="input-b-input-box">
                 <label>Nomor Laporan</label> <br />
-                <input type="text" placeholder="Masukkan Nomor Laporan"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nomor Laporan"
+                    onChange={(e) => setNomorLaporanPolisi(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Nama Pelapor</label> <br />
-                <input type="text" placeholder="Masukkan Nama Pelapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nama Pelapor"
+                    onChange={(e) => setPelapor(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-row-box">
 
                 <div className="input-b-column-box">
                     <label>Tempat Lahir</label> <br />
-                    <input type="text" placeholder="Masukkan Tempat Lahir"/>
+                    <input 
+                        type="text" 
+                        placeholder="Masukkan Tempat Lahir"
+                        onChange={(e) => setTempatLahir(e.target.value)}  
+                    />
                 </div>
 
                 <div className="input-b-column-box">
                     <label>Tanggal Lahir</label>
                     <DatePicker 
-                        // selected={waktuKejadian}
-                        // onChange={date => setWaktuKejadian(date)}
+                        selected={tanggalLahir}
+                        onChange={date => setTanggalLahir(date)}
                         className="input-b-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -73,7 +85,7 @@ export default function LeftContentInputB(props) {
 
             <div className="input-b-input-box">
                 <label>Jenis Kelamin</label> <br />
-                <select>
+                <select onChange={(e) => setJenisKelamin(e.target.value)}>
                     <option value="" disabled selected>Pilih Jenis Kelamin</option>
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
@@ -84,7 +96,7 @@ export default function LeftContentInputB(props) {
 
                 <div className="input-b-column-box">
                     <label>Kewarganegaraan</label> <br />
-                    <select>
+                    <select onChange={(e) => setWargaNegara(e.target.value)}>
                         <option value="" disabled selected>Pilih Kewarganegaraan</option>
                         <option value="WNI">WNI</option>
                         <option value="WNA">WNA</option>
@@ -92,7 +104,7 @@ export default function LeftContentInputB(props) {
                 </div>
                 <div className="input-b-column-box">
                     <label>Agama</label> <br />
-                    <select>
+                    <select onChange={(e) => setAgama(e.target.value)}>
                         <option value="" disabled selected>Pilih Agama</option>
                         <option value="Islam">Islam</option>
                         <option value="Kristen">Kristen</option>
@@ -105,19 +117,27 @@ export default function LeftContentInputB(props) {
             
             <div className="input-b-input-box">
                 <label>Pekerjaan</label> <br />
-                <input type="text" placeholder="Masukkan Pekerjaan Pelapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Pekerjaan Pelapor"
+                    onChange={(e) => setPekerjaan(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-input-box">
                 <label>Alamat</label> <br />
-                <input type="text" placeholder="Masukkan Alamat Pelapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Alamat Pelapor"
+                    onChange={(e) => setAlamat(e.target.value)}    
+                />
             </div>
 
             <div className="input-b-row-box">
 
                 <div className="input-b-column-box">
                     <label>Provinsi</label> <br />
-                    <select>
+                    <select onChange={(e) => setProvinsiPelapor(e.target.value)}>
                         <option value="" disabled selected>Pilih Provinsi</option>
                         <option value="Banten">Banten</option>
                         <option value="DKI Jakarta">DKI Jakarta</option>
@@ -125,7 +145,7 @@ export default function LeftContentInputB(props) {
                 </div>
                 <div className="input-b-column-box">
                     <label>Kabupaten/Kota</label> <br />
-                    <select>
+                    <select onChange={(e) => setKotaPelapor(e.target.value)}>
                         <option value="" disabled selected>Pilih Kabupaten/Kota</option>
                         <option value="Tangerang">Tangerang</option>
                         <option value="Jakarta Pusat">Jakarta Pusat</option>
@@ -138,7 +158,7 @@ export default function LeftContentInputB(props) {
 
                 <div className="input-b-column-box">
                     <label>Kecamatan</label> <br />
-                    <select>
+                    <select onChange={(e) => setKecamataPelapor(e.target.value)}>
                         <option value="" disabled selected>Pilih Kecamatan</option>
                         <option value="Gambir">Gambir</option>
                         <option value="Kuningan">Kuningan</option>
@@ -146,7 +166,7 @@ export default function LeftContentInputB(props) {
                 </div>
                 <div className="input-b-column-box">
                     <label>Desa/Kelurahan</label> <br />
-                    <select>
+                    <select onChange={(e) => setKelurahanPelapor(e.target.value)}>
                         <option value="" disabled selected>Pilih Desa/Kelurahan</option>
                         <option value="Doko">Doko</option>
                         <option value="Tebet">Tebet</option>
@@ -157,7 +177,11 @@ export default function LeftContentInputB(props) {
 
             <div className="input-b-input-box">
                 <label>No Telepon/Fax/Email</label> <br />
-                <input type="text" placeholder="Masukkan No Telepon/Fax/Email"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan No Telepon/Fax/Email"
+                    onChange={(e) => setNomorTelpon(e.target.value)}
+                />
             </div>
 
 
