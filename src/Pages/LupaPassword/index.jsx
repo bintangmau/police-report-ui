@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // COMPONENTS
@@ -19,6 +19,7 @@ export default function LupaPassword() {
     const [ conPassEmpty, setConPassEmpty ] = useState('')
     const [ passMessage, setPassMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
+    const [ passChanged, setPassChanged ] = useState(false)
     
     // GET PARAMS
     const history = useHistory()
@@ -43,6 +44,8 @@ export default function LupaPassword() {
             .then((res) => {
                 setLoading(false)
                 swal('Ok', 'Password Diganti', 'success')
+                setPassChanged(true)
+                history.push('/login')
             })
             .catch((err) => {
                 setLoading(false)
@@ -62,6 +65,12 @@ export default function LupaPassword() {
         setConPassEmpty('')
         setPassMessage('')
     }
+
+    useEffect(() => {
+        if (passChanged) {
+            history.push('/login')
+        }
+    }, [])
 
     return (
         <div className='lupa-password-container'>
