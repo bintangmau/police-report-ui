@@ -1,0 +1,25 @@
+.input-a-right-container {
+    width: 49%;
+    background-color: #e6e6e6;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    margin-bottom: 100px;
+}
+
+.input-a-submit-btn {
+    width: 50%;
+    height: 45px;
+    background-color: #00698C;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.5s;
+    margin-top: 10px;
+}
+
+.input-a-submit-btn:hover {
+    cursor: pointer;
+    background-color: #005470;
+}
