@@ -20,26 +20,27 @@ function InputReportA () {
     const [ kecamatan, setKecamatan ] = useState('')
     const [ kelurahan, setKelurahan ] = useState('')
     const [ apaYangTerjadi, setApaYangTerjadi ] = useState('')
-    const [ pelaku, setPelaku ] = useState('')
-    const [ korban, setKorban ] = useState('')
+    const [ pelaku, setPelaku ] = useState([''])
+    const [ korban, setKorban ] = useState([''])
     const [ waktuDilaporkan, setWaktuDilaporkan ] = useState('')
-    const [ tindakPidanaAtauPasal, setTindakPidanaAtauPasal ] = useState('')
+    const [ tindakPidanaAtauPasal, setTindakPidanaAtauPasal ] = useState([''])
     const [ waktuDilaporkanJam, setWaktuDilaporkanJam ] = useState('')
     const [ sumir, setSumir ] = useState('') 
 
     // RIGHT CONTENT STATE
-    const [ namaSaksi, setNamaSaksi ] = useState('')
-    const [ alamatSaksi, setAlamatSaksi ] = useState('')
+    const [ namaSaksi, setNamaSaksi ] = useState([''])
+    const [ alamatSaksi, setAlamatSaksi ] = useState([''])
     const [ uraianSingkatKejadian, setUraianSingkatKejadian ] = useState('')
-    const [ barangBukti, setBarangBukti ] = useState([])
+    const [ barangBukti, setBarangBukti ] = useState([''])
     const [ mengetahui, setMengetahui ] = useState('')
-    const [ tindakanYangDiambil, setTindakanYangDiambil ] = useState('')
+    const [ tindakanYangDiambil, setTindakanYangDiambil ] = useState([''])
     const [ mengetahuiUnit, setMengetahuiUnit ] = useState('')
     const [ NrpPelapor, setNrpPelapor ] = useState('')
     const [ PangkatPelapor, setPangkatPelapor ] = useState('')
     const [ pelapor, setPelapor ] = useState('')
     const [ pangkat, setPangkat ] = useState('')
     const [ nrp, setNrp ] = useState('')
+
 
     return (
         <div style={{width : "100%" , height : 800 }}>
@@ -48,9 +49,25 @@ function InputReportA () {
             {/* ROW CONTAINER */}
             <div className='input-a-row'>
 
-                <Left />
+                <Left
+                    pelaku={pelaku}
+                    setPelaku={setPelaku}
+                    korban={korban}
+                    setKorban={setKorban}
+                    tindakPidanaAtauPasal={tindakPidanaAtauPasal}
+                    setTindakPidanaAtauPasal={setTindakPidanaAtauPasal}
+                />
 
-                <Right />
+                <Right 
+                    saksi={namaSaksi}
+                    setNamaSaksi={setNamaSaksi}
+                    alamatSaksi={alamatSaksi}
+                    setAlamatSaksi={setAlamatSaksi}
+                    barangBukti={barangBukti}
+                    setBarangBukti={setBarangBukti}
+                    tindakanYangDiambil={tindakanYangDiambil}
+                    setTindakanYangDiambil={setTindakanYangDiambil}
+                />
                  
             </div>
         </div>

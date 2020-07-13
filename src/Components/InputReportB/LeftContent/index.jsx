@@ -94,7 +94,7 @@ export default function LeftContentInputB() {
                 <div className="input-b-column-box">
                     <label>Kabupaten/Kota</label> <br />
                     <select>
-                        <option value="" disabled select>Pilih Kabupaten/Kota</option>
+                        <option value="" disabled selected>Pilih Kabupaten/Kota</option>
                         <option value="Tangerang">Tangerang</option>
                         <option value="Jakarta Pusat">Jakarta Pusat</option>
                     </select>
@@ -115,7 +115,7 @@ export default function LeftContentInputB() {
                 <div className="input-b-column-box">
                     <label>Desa/Kelurahan</label> <br />
                     <select>
-                        <option value="" disabled select>Pilih Desa/Kelurahan</option>
+                        <option value="" disabled selected>Pilih Desa/Kelurahan</option>
                         <option value="Doko">Doko</option>
                         <option value="Tebet">Tebet</option>
                     </select>
