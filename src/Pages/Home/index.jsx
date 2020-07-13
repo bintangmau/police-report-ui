@@ -1,6 +1,9 @@
 import React from 'react'
 import { Switch, Route ,  useHistory } from 'react-router-dom'
 
+// COMPONENTS
+import Navbar from '../../Components/Navbar'
+
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -76,9 +79,7 @@ function Home () {
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
                 {/* NAVBAR DISINI <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, */}
-                <div style={{width : "100%" ,height : 100 , backgroundColor : "black"}}>
-
-                </div>
+                <Navbar />
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders" >
                 <Hidden smUp implementation="css">
