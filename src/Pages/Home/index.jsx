@@ -80,6 +80,12 @@ function Home () {
             className={classes.root} 
         >
             <CssBaseline />
+            <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
+                {/* NAVBAR DISINI <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, */}
+                <div style={{width : "100%" ,height : 100 , backgroundColor : "black"}}>
+
+                </div>
+            </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders" >
                 <Hidden smUp implementation="css">
                     <Drawer
