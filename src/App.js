@@ -4,6 +4,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 // COMPONENTS
 import InputPersonil from './Pages/InputPersonil'
 import LoginPage from './Pages/Login'
+import HomeScreen from './Pages/Home'
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Link to='/input-personil'>Input personil</Link> */}
       <Switch>
         <Route path='/input-personil' component={InputPersonil} />
-        <Route path="/login" component={LoginPage} exact  />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/" component={HomeScreen} exact/>
       </Switch>
     </div>
   )
