@@ -3,6 +3,8 @@ import { Switch, Route ,  useHistory } from 'react-router-dom'
 
 // COMPONENTS
 import Navbar from '../../Components/Navbar'
+import ViewReport from '../../Components/ViewReport'
+import InputReportA from '../../Components/InputReportA'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -29,7 +31,8 @@ function Home () {
 
     const classes = useStyles();
     const theme = useTheme();
-
+    const history = useHistory()
+    const route = history.location.pathname
 
     const drawer = (
         <div >
@@ -37,7 +40,6 @@ function Home () {
             <div className={classes.imgContainer}>
             {/* <img src={logoSgu} className={classes.logosgu} alt="img" /> */}
                 <div style={{marginBottom : 30}}>
-                    {/* <img onClick={()=>{toHome()}} src={logo} style={{ width: 150, cursor: "pointer"}} alt="logo"/> */}
                     <img src={Logo} style={{ width: 120, cursor: "pointer"}} alt="logo"/>
                 </div>
             </div>
@@ -47,25 +49,48 @@ function Home () {
                 <ListItem 
                     button 
                     className={classes.sidebar}
-                    // style={
-                    //         {
-                    //             backgroundColor: cekPathname() ? '#fff9f6' : '',
-                    //             // borderLeft : history.location.pathname === dataRouter[1] ?"4px solid #f16821" : ""
-                    //         }
-                    //     }
-                    // onClick={() => [handleClick(dataRouter[1]), localStorage.setItem('from', dataRouter[1])] }
+                    style={
+                        {
+                            backgroundColor : route === "/" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/') }
                 >
                     <ListItemIcon>
-                        {/* <ContactsIcon  style={{color : cekPathname() ? "#f16821" : "" , marginLeft : "5px" , marginRight : "8px"}}/> */}
-                        <AssignmentIcon />
+                        <AssignmentIcon style={{color : route === "/" ? "white" : null}} />
                     </ListItemIcon>
                     <p 
                         className={classes.sidebarText}
                         // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/" ? 'white' : null }}
                     > 
                         Lihat Laporan
                     </p>
                 </ListItem>
+
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/inputa" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/inputa') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/inputa" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/inputa" ? 'white' : null }}
+                    > 
+                        Input Laporan A
+                    </p>
+                </ListItem>
+
+
 
             </List>
         </div>
@@ -78,7 +103,6 @@ function Home () {
         >
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
-                {/* NAVBAR DISINI <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, */}
                 <Navbar />
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders" >
@@ -115,7 +139,8 @@ function Home () {
             <main className={classes.content}>
                 <div className={classes.toolbar}/>
                 <Switch>
-                    <Route path="/" />
+                    <Route path="/inputa" component={InputReportA}/>
+                    <Route path="/" component={ViewReport} exact />
                 </Switch>
             </main>
 
