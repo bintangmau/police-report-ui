@@ -17,7 +17,10 @@ import PlusIcon from '../../../Images/input/plus.jpg'
 
 export default function LeftContentInputB(props) {
     const {
-        pelaku,setPelaku,korban,setKorban, tindakPidanaAtauPasal, setTindakPidanaAtauPasal
+        pelaku,setPelaku,korban,setKorban, tindakPidanaAtauPasal, setTindakPidanaAtauPasal, nomorLaporanPolisi, setNomorLaporanPolisi,
+        waktuKejadian, setWaktuKejadian, waktuKejadianJam, setWaktuKejadianJam, tempatKejadian, setTempatKejadian, provinsi, setProvinsi,
+        kota, setKota, kecamatan, setKecamatan, kelurahan, setKelurahan, waktuDilaporkan, setWaktuDilaporkan, apaYangTerjadi, setApaYangTerjadi,
+        waktuDilaporkanJam, setWaktuDilaporkanJam, sumir, setSumir
     } = props
 
     const arrayKey = [ pelaku, korban, tindakPidanaAtauPasal ]
@@ -53,7 +56,7 @@ export default function LeftContentInputB(props) {
             
             <div className='input-a-input-box'>
                 <label>Nomor Laporan</label> <br />
-                <input type="text" placeholder="Masukkan Nomor Laporan"/>
+                <input type="text" placeholder="Masukkan Nomor Laporan" onChange={(e) => setNomorLaporanPolisi(e.target.value)}/>
             </div>
 
             <div className='input-a-row-box'>
@@ -61,8 +64,8 @@ export default function LeftContentInputB(props) {
                 <div className='input-a-column-box'>
                     <label>Tanggal Kejadian</label> <br />
                     <DatePicker 
-                        // selected={waktuKejadian}
-                        // onChange={date => setWaktuKejadian(date)}
+                        selected={waktuKejadian}
+                        onChange={date => setWaktuKejadian(date)}
                         className="input-a-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -90,14 +93,14 @@ export default function LeftContentInputB(props) {
 
             <div className='input-a-input-box'>
                 <label>Tempat Kejadian</label> <br />
-                <input type="text" placeholder="Masukkan Tempat Kejadian"/>
+                <input type="text" placeholder="Masukkan Tempat Kejadian" onChange={(e) => setTempatKejadian(e.target.value)}/>
             </div>
 
             <div className="input-a-row-box">
 
                 <div className="input-a-column-box">
                     <label>Provinsi</label> <br />
-                    <select>
+                    <select onChange={(e) => setProvinsi(e.target.value)}>
                         <option value='' disabled selected>Pilih Provinsi</option>
                         <option value="DKI Jakarta">DKI Jakarta</option>
                         <option value="Banten">Banten</option>
@@ -105,7 +108,7 @@ export default function LeftContentInputB(props) {
                 </div>
                 <div className="input-a-column-box">
                     <label>Kabupaten/Kota</label> <br />
-                    <select>
+                    <select onChange={(e) => setKota(e.target.value)}>
                         <option value="" disabled selected>Pilih Kabupaten/Kota</option> <br />
                         <option value="Jakarta Pusat">Jakarta Pusat</option>
                         <option value="Tangerang">Tangerang</option>
@@ -118,7 +121,7 @@ export default function LeftContentInputB(props) {
 
                 <div className="input-a-column-box">
                     <label>Kecamatan</label> <br />
-                    <select>
+                    <select onChange={(e) => setKecamatan(e.target.value)}>
                         <option value="" disabled selected>Pilih Kecamatan</option>
                         <option value="Gambir">Gambir</option>
                         <option value="Kuningan">Kuningan</option>
@@ -126,7 +129,7 @@ export default function LeftContentInputB(props) {
                 </div>
                 <div className="input-a-column-box">
                     <label>Desa/Kelurahan</label> <br />
-                    <select>
+                    <select onChange={(e) => setKelurahan(e.target.value)}>
                         <option value="" disabled selected>Pilih Desa/Kelurahan</option>
                         <option value="Doko">Doko</option>
                         <option value="Jimbaran">Jimbaran</option>
@@ -137,7 +140,7 @@ export default function LeftContentInputB(props) {
 
             <div className="input-a-input-box">
                 <label>Kejadian</label> <br />
-                <textarea placeholder="Tulis Uraian Kejadian" type="text"/>
+                <textarea placeholder="Tulis Uraian Kejadian" type="text" onChange={(e) => setApaYangTerjadi(e.target.value)}/>
             </div>
 
             {
@@ -237,8 +240,8 @@ export default function LeftContentInputB(props) {
                 <div className='input-a-column-box'>
                     <label>Tanggal Dilaporkan</label> <br />
                     <DatePicker 
-                        // selected={waktuKejadian}
-                        // onChange={date => setWaktuKejadian(date)}
+                        selected={waktuDilaporkan}
+                        onChange={date => setWaktuDilaporkan(date)}
                         className="input-a-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -299,7 +302,7 @@ export default function LeftContentInputB(props) {
 
             <div className='input-a-input-box'>
                 <label>Sumir</label> <br />
-                <select>
+                <select onChange={(e) => setSumir(e.target.value)}>
                     <option value="" disabled selected>Pilih Sumir</option>
                     <option value="Ya">Ya</option>
                     <option value="Tidak">Tidak</option>
