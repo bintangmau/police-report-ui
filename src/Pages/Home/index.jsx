@@ -1,4 +1,5 @@
 import React from 'react'
+import { Switch, Route ,  useHistory } from 'react-router-dom'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -9,15 +10,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { useTheme } from "@material-ui/core/styles";
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 
 // MATERIAL UI ICON
-// import DashboardIcon from "@material-ui/icons/Dashboard";
-// import SettingsIcon from "@material-ui/icons/Settings";
-// import ContactsIcon from '@material-ui/icons/Contacts';
-// import AirlineSeatReclineExtraIcon from '@material-ui/icons/AirlineSeatReclineExtra';
-// import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
 // STYLE
@@ -116,6 +110,13 @@ function Home () {
                     </Drawer>
                 </Hidden>
             </nav>
+
+            <main className={classes.content}>
+                <div className={classes.toolbar}/>
+                <Switch>
+                    <Route path="/" />
+                </Switch>
+            </main>
 
         </div>
     )
