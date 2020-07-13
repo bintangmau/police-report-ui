@@ -1,13 +1,55 @@
 // MODULES
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 
 // CSS
 import './style.css'
+import './plus.css'
 import "react-datepicker/dist/react-datepicker.css";
 
+// IMAGE
+import PlusIcon from '../../../Images/input/plus.jpg'
+
 export default function LeftContentInputB() {
+
     const [ waktuKejadian, setWaktuKejadian ] = useState('')
+
+    // INPUT PLUS STATE
+    const [dataPelaku,setDataPelaku] = useState([""])
+
+    function PlusInput (type) {
+        if (type === 0) {
+            let result = [...dataPelaku]
+            result.push("")
+            setDataPelaku(result)
+        }
+    }
+
+    function MinusInput (type,indexV) {
+        if (type === 0 ) {
+            if (indexV > 0 && dataPelaku.length > 0) {
+                let result = [...dataPelaku]
+                result = result.filter((e,index)=> index !== indexV)
+                setDataPelaku(result)
+            }
+        }
+    }
+
+    function FillValue (type,value,indexV) {
+        if (type === 0) {
+            let result = [...dataPelaku]
+            result.forEach((el,index)=>{
+                if (index === indexV) {
+                    result[index] = value
+                }
+            })
+            setDataPelaku(result)
+        }
+    }
+
+    useEffect(()=>{
+        console.log(dataPelaku , ' <<< VALUE DATA PELAKU')
+    },[dataPelaku])
 
     return (
         <div className='input-a-left-container'>
@@ -88,10 +130,45 @@ export default function LeftContentInputB() {
                 <textarea placeholder="Tulis Uraian Kejadian" type="text"/>
             </div>
 
-            <div className='input-a-input-box'>
-                <label>Pelaku</label> <br />
-                <input type="text" placeholder="Masukkan Nama Pelaku"/>
-            </div>
+            {
+                dataPelaku.map((el,index)=>{
+                    return (
+                        <div className='input-a-input-box-plus'>
+                            <label>Pelaku</label> <br />
+                            <div className="input-a-container-box-plus">
+                                <input 
+                                    type="text" 
+                                    className="input-a-plus" 
+                                    placeholder="Masukkan Nama Pelaku" 
+                                    value={dataPelaku[index]}
+                                    onChange={e=>FillValue(0,e.target.value,index)}
+                                />
+                                {
+                                    index !== 0 ?
+                                    <div className="input-a-minus-box"  onClick={e=>MinusInput(0,index)}>
+                                        <img src={PlusIcon} />
+                                    </div> :
+                                    <></>
+                                }
+                                {
+                                    index === dataPelaku.length -1 ?
+                                    <div className="input-a-plus-box" onClick={e=>PlusInput(0)}>
+                                        <img src={PlusIcon} />
+                                    </div> :
+                                    <></>
+                                }
+                                {
+                                    index === 0 && dataPelaku.length > 1 && 
+                                    <div className="input-a-minus-box">
+                                    </div>
+                                }
+                                {/* <div className="input-a-container-plus-minus">
+                                </div> */}
+                            </div>
+                        </div>
+                    )
+                })
+            }
 
             <div className='input-a-input-box'>
                 <label>Korban</label> <br />
