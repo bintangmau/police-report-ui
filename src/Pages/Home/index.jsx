@@ -6,6 +6,7 @@ import Navbar from '../../Components/Navbar'
 import ViewReport from '../../Components/ViewReport'
 import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
+import InputPersonil from '../../Components/InputPersonil'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -113,6 +114,28 @@ function Home () {
                     </p>
                 </ListItem>
 
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/inputpersonil" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/inputpersonil') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/inputpersonil" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/inputpersonil" ? 'white' : null }}
+                    > 
+                        Input Personil
+                    </p>
+                </ListItem>
+
 
 
             </List>
@@ -165,6 +188,7 @@ function Home () {
                     <Route path="/" component={ViewReport} exact />
                     <Route path="/inputa" component={InputReportA}/>
                     <Route path='/inputb' component={InputReportB} />
+                    <Route path="/inputpersonil" component={InputPersonil}/>
                 </Switch>
             </main>
 
