@@ -10,7 +10,20 @@ import PlusIcon from '../../../Images/input/plus.jpg'
 
 export default function LowerContentInputB(props) {
     const {
-        korban, setKorban, saksi, setNamaSaksi
+        waktuKejadian,setWaktuKejadian,
+        waktuKejadianJam,setWaktuKejadianJam,
+        tempatKejadian,setTempatKejadian,
+        provinsiKejadian,setProvinsiKejadian,
+        kotaKejadian,setKotaKejadian,
+        kecamatanKejadian,setKecamatanKejadian,
+        kelurahanKejadian,setKelurahanKejadian,
+        apaYangTerjadi , setApaYangTerjadi,
+        terlapor,setTerlapor,
+        waktuDilaporkan,setWaktuDilaporkan,
+        waktuDilaporkanJam,setWaktuDilaporkanJam,
+        uraianSingkatKejadian,setUraianSingkatKejadian,
+        korban, setKorban, 
+        saksi, setNamaSaksi
     } = props
 
     const arrayKey = [ korban, saksi ]

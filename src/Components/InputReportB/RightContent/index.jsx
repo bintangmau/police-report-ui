@@ -9,6 +9,20 @@ import PlusIcon from '../../../Images/input/plus.jpg'
 
 export default function RightContentInputB(props) {
     const {
+        mengetahui,
+        setMengetahui,
+        NRPMengetahui,
+        setNRPMengetahui,
+        pangkatMengetahui,
+        setPangkatMengetahui,
+        unitMengetahui,
+        setUnitMengetahui,
+        yangMenerimaLaporan,
+        setYangMenerimaLaporan,
+        NRPyangMenerimaLaporan,
+        setNRPyangMenerimaLaporan,
+        pangkatyangMenerimaLaporan,
+        setPangkatyangMenerimaLaporan,
         tindakanYangDiambil, setTindakanYangDiambil, tindakPidanaAtauPasal, setTindakPidanaAtauPasal, barangBukti, setBarangBukti
     } = props
 

@@ -5,7 +5,39 @@ import DatePicker from 'react-datepicker'
 // CSS
 import './style.css'
 
-export default function LeftContentInputB() {
+export default function LeftContentInputB(props) {
+
+    const {
+        nomorLaporanPolisi,
+        setNomorLaporanPolisi, 
+        pelapor,
+        setPelapor,
+        tempatLahir,
+        setTempatLahir,
+        tanggalLahir,
+        setTanggalLahir,
+        jenisKelamin,
+        setJenisKelamin,
+        wargaNegara,
+        setWargaNegara,
+        agama,
+        setAgama,
+        pekerjaan,
+        setPekerjaan,
+        alamat,
+        setAlamat,
+        provinsiPelapor,
+        setProvinsiPelapor,
+        kotaPelapor,
+        setKotaPelapor,
+        kecamataPelapor,
+        setKecamataPelapor,
+        kelurahanPelapor,
+        setKelurahanPelapor,
+        nomorTelpon,
+        setNomorTelpon,
+    } = props
+
     return (
         <div className='input-b-left-container'>
 
