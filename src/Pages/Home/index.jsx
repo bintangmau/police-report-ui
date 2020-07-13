@@ -1,7 +1,10 @@
 import React from 'react'
+import { Switch, Route ,  useHistory } from 'react-router-dom'
 
 // COMPONENTS
 import Navbar from '../../Components/Navbar'
+import ViewReport from '../../Components/ViewReport'
+import InputReportA from '../../Components/InputReportA'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -12,15 +15,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { useTheme } from "@material-ui/core/styles";
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 
 // MATERIAL UI ICON
-// import DashboardIcon from "@material-ui/icons/Dashboard";
-// import SettingsIcon from "@material-ui/icons/Settings";
-// import ContactsIcon from '@material-ui/icons/Contacts';
-// import AirlineSeatReclineExtraIcon from '@material-ui/icons/AirlineSeatReclineExtra';
-// import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
 // STYLE
@@ -35,7 +31,8 @@ function Home () {
 
     const classes = useStyles();
     const theme = useTheme();
-
+    const history = useHistory()
+    const route = history.location.pathname
 
     const drawer = (
         <div >
@@ -43,7 +40,6 @@ function Home () {
             <div className={classes.imgContainer}>
             {/* <img src={logoSgu} className={classes.logosgu} alt="img" /> */}
                 <div style={{marginBottom : 30}}>
-                    {/* <img onClick={()=>{toHome()}} src={logo} style={{ width: 150, cursor: "pointer"}} alt="logo"/> */}
                     <img src={Logo} style={{ width: 120, cursor: "pointer"}} alt="logo"/>
                 </div>
             </div>
@@ -53,25 +49,48 @@ function Home () {
                 <ListItem 
                     button 
                     className={classes.sidebar}
-                    // style={
-                    //         {
-                    //             backgroundColor: cekPathname() ? '#fff9f6' : '',
-                    //             // borderLeft : history.location.pathname === dataRouter[1] ?"4px solid #f16821" : ""
-                    //         }
-                    //     }
-                    // onClick={() => [handleClick(dataRouter[1]), localStorage.setItem('from', dataRouter[1])] }
+                    style={
+                        {
+                            backgroundColor : route === "/" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/') }
                 >
                     <ListItemIcon>
-                        {/* <ContactsIcon  style={{color : cekPathname() ? "#f16821" : "" , marginLeft : "5px" , marginRight : "8px"}}/> */}
-                        <AssignmentIcon />
+                        <AssignmentIcon style={{color : route === "/" ? "white" : null}} />
                     </ListItemIcon>
                     <p 
                         className={classes.sidebarText}
                         // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/" ? 'white' : null }}
                     > 
                         Lihat Laporan
                     </p>
                 </ListItem>
+
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/inputa" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/inputa') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/inputa" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/inputa" ? 'white' : null }}
+                    > 
+                        Input Laporan A
+                    </p>
+                </ListItem>
+
+
 
             </List>
         </div>
@@ -84,7 +103,6 @@ function Home () {
         >
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
-                {/* NAVBAR DISINI <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, */}
                 <Navbar />
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders" >
@@ -117,6 +135,14 @@ function Home () {
                     </Drawer>
                 </Hidden>
             </nav>
+
+            <main className={classes.content}>
+                <div className={classes.toolbar}/>
+                <Switch>
+                    <Route path="/inputa" component={InputReportA}/>
+                    <Route path="/" component={ViewReport} exact />
+                </Switch>
+            </main>
 
         </div>
     )

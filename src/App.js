@@ -15,10 +15,10 @@ function App() {
       <Switch>
         <Route path='/input-personil' component={InputPersonil} />
         <Route path="/login" component={LoginPage} />
-        <Route path='/input-personil' component={InputPersonil} exact />
-        <Route path="/login" component={LoginPage} exact  />
-        <Route path='/lupa-password/:token/:email/:nrp' component={LupaPassword} exact />
-        <Route path="/" component={HomeScreen} exact/>
+        <Route path='/input-personil' component={InputPersonil}  />
+        <Route path="/login" component={LoginPage}   />
+        <Route path='/lupa-password/:token/:email/:nrp' component={LupaPassword}  />
+        <Route path="/" component={HomeScreen} />
       </Switch>
     </div>
   )
