@@ -18,10 +18,14 @@ import Button from '@material-ui/core/Button';
 // import ContactsIcon from '@material-ui/icons/Contacts';
 // import AirlineSeatReclineExtraIcon from '@material-ui/icons/AirlineSeatReclineExtra';
 // import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 // STYLE
 import './style.css'
 import useStyles from './style'
+
+// IMAGE
+import Logo from '../../Images/Sidebar/musito.jpeg'
 
 
 function Home () {
@@ -35,8 +39,9 @@ function Home () {
         <div className={classes.toolbar} />
             <div className={classes.imgContainer}>
             {/* <img src={logoSgu} className={classes.logosgu} alt="img" /> */}
-                <div className="logo-acaraku-img-1">
+                <div style={{marginBottom : 30}}>
                     {/* <img onClick={()=>{toHome()}} src={logo} style={{ width: 150, cursor: "pointer"}} alt="logo"/> */}
+                    <img src={Logo} style={{ width: 120, cursor: "pointer"}} alt="logo"/>
                 </div>
             </div>
 
@@ -55,12 +60,13 @@ function Home () {
                 >
                     <ListItemIcon>
                         {/* <ContactsIcon  style={{color : cekPathname() ? "#f16821" : "" , marginLeft : "5px" , marginRight : "8px"}}/> */}
+                        <AssignmentIcon />
                     </ListItemIcon>
                     <p 
                         className={classes.sidebarText}
                         // style={{color : cekPathname() ? '#f16821' : "#888888"}}
                     > 
-                        Lihat Daftar Undangan 
+                        Lihat Laporan
                     </p>
                 </ListItem>
 
