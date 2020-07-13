@@ -1,11 +1,16 @@
 // MODULES
 import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
+import TimePicker from 'react-time-picker'
+import { MuiPickersUtilsProvider,KeyboardTimePicker } from '@material-ui/pickers';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
 
 // CSS
 import './style.css'
 import './plus.css'
 import "react-datepicker/dist/react-datepicker.css";
+// import TimePicker from 'react-time-picker/dist/entry.nostyle';
 
 // IMAGE
 import PlusIcon from '../../../Images/input/plus.jpg'
@@ -64,8 +69,8 @@ export default function LeftContentInputB() {
                 <div className='input-a-column-box'>
                     <label>Tanggal Kejadian</label> <br />
                     <DatePicker 
-                        selected={waktuKejadian}
-                        onChange={date => setWaktuKejadian(date)}
+                        // selected={waktuKejadian}
+                        // onChange={date => setWaktuKejadian(date)}
                         className="input-a-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -73,7 +78,20 @@ export default function LeftContentInputB() {
                 </div>
 
                 <div className="input-a-column-box">
-                    <label>Waktu Kejadian</label>
+                    <label>Waktu Kejadian</label> <br />
+                    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justify="space-around" style={{borderBottom: 'none'}}>
+                            <KeyboardTimePicker
+                                className="input-Content-1"
+                                style={{padding: "5px 10px", border: '1px solid #c4c5c7'}}
+                                value={waktuKejadianJam}
+                                onChange={time => setWaktuKejadianJam(time)}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change time',
+                                }}
+                            />
+                        </Grid>
+                    </MuiPickersUtilsProvider> */}
                 </div>
 
             </div>
@@ -180,8 +198,8 @@ export default function LeftContentInputB() {
                 <div className='input-a-column-box'>
                     <label>Tanggal Dilaporkan</label> <br />
                     <DatePicker 
-                        selected={waktuKejadian}
-                        onChange={date => setWaktuKejadian(date)}
+                        // selected={waktuKejadian}
+                        // onChange={date => setWaktuKejadian(date)}
                         className="input-a-datepicker"
                         dateFormat="dd-MM-yyyy"
                         placeholderText={"yyyy-mm-dd"}
@@ -197,6 +215,15 @@ export default function LeftContentInputB() {
             <div className='input-a-input-box'>
                 <label>Tindak Pidana/Pasal</label> <br />
                 <input type="text" placeholder="Masukkan Tindak Pidana/Pasal"/>
+            </div>
+
+            <div className='input-a-input-box'>
+                <label>Sumir</label> <br />
+                <select>
+                    <option value="" disabled selected>Pilih Sumir</option>
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                </select>
             </div>
 
         </div>

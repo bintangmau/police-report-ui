@@ -1,5 +1,5 @@
 // MODULES
-import React from 'react'
+import React, { useState } from 'react'
 
 // CSS
 import './style.css'
@@ -10,62 +10,108 @@ export default function RightContentInputA() {
            
             <div className="input-a-input-box">
                 <label>Saksi</label> <br />
-                <input type="text" placeholder="Masukkan Nama Saksi"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nama Saksi"
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Alamat Saksi</label> <br />
-                <input type="text" placeholder="Masukkan Alamat Saksi"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Alamat Saksi"
+                
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Barang Bukti</label> <br />
-                <input type="text" placeholder="Masukkan Barang Bukti"/>
+                <input  
+                    type="text" 
+                    placeholder="Masukkan Barang Bukti"
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Tindakan Yang Diambil</label> <br />
-                <textarea type="text" placeholder="Tulis Tindakan Yang Diambil"/>
+                <textarea 
+                    type="text" 
+                    placeholder="Tulis Tindakan Yang Diambil"
+
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Pelapor</label> <br />
-                <input type="text" placeholder="Masukkan Nama Pelapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nama Pelapor"
+                    
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Pangkat</label> <br />
-                <input type="text" placeholder="Masukkan Pangkat Pelapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Pangkat Pelapor"
+                
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>NRP</label> <br />
-                <input type="text" placeholder="Masukkan NRP Pelapor"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan NRP Pelapor"
+                
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Mengetahui</label> <br />
-                <input type="text" placeholder="Masukkan Nama Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nama Yang Mengetahui"
+                    
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Pangkat</label> <br />
-                <input type="text" placeholder="Masukkan Pangkat Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Pangkat Yang Mengetahui"
+                
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>NRP</label> <br />
-                <input type="text" placeholder="Masukkan NRP Yang Mengetahui"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan NRP Yang Mengetahui"
+                    
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Unit</label> <br />
-                <input type="text" placeholder="Masukkan Nama Unit"/>
+                <input 
+                    type="text" 
+                    placeholder="Masukkan Nama Unit"
+                    
+                />
             </div>
 
             <div className="input-a-input-box">
                 <label>Uraian Singkat Kejadian</label> <br />
-                <textarea type="text" placeholder="Tulis Uraian Singkat Kejadian"/>
+                <textarea 
+                    type="text" 
+                    placeholder="Tulis Uraian Singkat Kejadian"
+                    
+                />
             </div>
             
             <center>
