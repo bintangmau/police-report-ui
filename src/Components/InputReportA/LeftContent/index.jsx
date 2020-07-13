@@ -1,5 +1,5 @@
 // MODULES
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import DatePicker from 'react-datepicker'
 import TimePicker from 'react-time-picker'
 import { MuiPickersUtilsProvider,KeyboardTimePicker } from '@material-ui/pickers';
@@ -15,46 +15,38 @@ import "react-datepicker/dist/react-datepicker.css";
 // IMAGE
 import PlusIcon from '../../../Images/input/plus.jpg'
 
-export default function LeftContentInputB() {
+export default function LeftContentInputB(props) {
+    const {
+        pelaku,setPelaku,korban,setKorban, tindakPidanaAtauPasal, setTindakPidanaAtauPasal
+    } = props
 
-    const [ waktuKejadian, setWaktuKejadian ] = useState('')
-
-    // INPUT PLUS STATE
-    const [dataPelaku,setDataPelaku] = useState([""])
+    const arrayKey = [ pelaku, korban, tindakPidanaAtauPasal ]
+    const fnKey = [ setPelaku, setKorban, setTindakPidanaAtauPasal ]
 
     function PlusInput (type) {
-        if (type === 0) {
-            let result = [...dataPelaku]
-            result.push("")
-            setDataPelaku(result)
-        }
+        let result = [...arrayKey[type]]
+        result.push("")
+        fnKey[type](result)
     }
 
     function MinusInput (type,indexV) {
-        if (type === 0 ) {
-            if (indexV > 0 && dataPelaku.length > 0) {
-                let result = [...dataPelaku]
-                result = result.filter((e,index)=> index !== indexV)
-                setDataPelaku(result)
-            }
+        if (indexV > 0 && arrayKey[type].length > 0) {
+            let result = [...arrayKey[type]]
+            result = result.filter((e,index)=> index !== indexV)
+            // fnKey[type](result)
+            fnKey[type](result)
         }
     }
 
     function FillValue (type,value,indexV) {
-        if (type === 0) {
-            let result = [...dataPelaku]
-            result.forEach((el,index)=>{
-                if (index === indexV) {
-                    result[index] = value
-                }
-            })
-            setDataPelaku(result)
-        }
+        let result = [...arrayKey[type]]
+        result.forEach((el,index)=>{
+            if (index === indexV) {
+                result[index] = value
+            }
+        })
+        fnKey[type](result)
     }
-
-    useEffect(()=>{
-        console.log(dataPelaku , ' <<< VALUE DATA PELAKU')
-    },[dataPelaku])
 
     return (
         <div className='input-a-left-container'>
@@ -149,16 +141,22 @@ export default function LeftContentInputB() {
             </div>
 
             {
-                dataPelaku.map((el,index)=>{
+                pelaku.map((el,index)=>{
+                    var idx = index
+                    if(idx < 1) {
+                        idx = null
+                    } else if(idx > 0) {
+                        idx = idx + 1
+                    }
                     return (
                         <div className='input-a-input-box-plus'>
-                            <label>Pelaku</label> <br />
+                            <label>Pelaku {idx}</label> <br />
                             <div className="input-a-container-box-plus">
                                 <input 
                                     type="text" 
                                     className="input-a-plus" 
                                     placeholder="Masukkan Nama Pelaku" 
-                                    value={dataPelaku[index]}
+                                    value={pelaku[idx]}
                                     onChange={e=>FillValue(0,e.target.value,index)}
                                 />
                                 {
@@ -169,14 +167,14 @@ export default function LeftContentInputB() {
                                     <></>
                                 }
                                 {
-                                    index === dataPelaku.length -1 ?
+                                    index === pelaku.length -1 ?
                                     <div className="input-a-plus-box" onClick={e=>PlusInput(0)}>
                                         <img src={PlusIcon} />
                                     </div> :
                                     <></>
                                 }
                                 {
-                                    index === 0 && dataPelaku.length > 1 && 
+                                    index === 0 && pelaku.length > 1 && 
                                     <div className="input-a-minus-box">
                                     </div>
                                 }
@@ -188,10 +186,51 @@ export default function LeftContentInputB() {
                 })
             }
 
-            <div className='input-a-input-box'>
-                <label>Korban</label> <br />
-                <input type="text" placeholder="Masukkan Nama Korban"/>
-            </div>
+            {
+                korban.map((el,index)=>{
+                    var idx = index
+                    if(idx < 1) {
+                        idx = null
+                    } else if(idx > 0) {
+                        idx = idx + 1
+                    }
+                    return (
+                        <div className='input-a-input-box-plus'>
+                            <label>Korban {idx}</label> <br />
+                            <div className="input-a-container-box-plus">
+                                <input 
+                                    type="text" 
+                                    className="input-a-plus" 
+                                    placeholder="Masukkan Nama Korban" 
+                                    value={korban[idx]}
+                                    onChange={e=>FillValue(1,e.target.value,index)}
+                                />
+                                {
+                                    index !== 0 ?
+                                    <div className="input-a-minus-box"  onClick={e=>MinusInput(1,index)}>
+                                        <img src={PlusIcon} />
+                                    </div> :
+                                    <></>
+                                }
+                                {
+                                    index === korban.length -1 ?
+                                    <div className="input-a-plus-box" onClick={e=>PlusInput(1)}>
+                                        <img src={PlusIcon} />
+                                    </div> :
+                                    <></>
+                                }
+                                {
+                                    index === 0 && korban.length > 1 && 
+                                    <div className="input-a-minus-box">
+                                    </div>
+                                }
+                                {/* <div className="input-a-container-plus-minus">
+                                </div> */}
+                            </div>
+                        </div>
+                    )
+                })
+            }
 
             <div className='input-a-row-box'>
 
@@ -212,10 +251,51 @@ export default function LeftContentInputB() {
 
             </div>
 
-            <div className='input-a-input-box'>
-                <label>Tindak Pidana/Pasal</label> <br />
-                <input type="text" placeholder="Masukkan Tindak Pidana/Pasal"/>
-            </div>
+            {
+                tindakPidanaAtauPasal.map((el,index)=>{
+                    var idx = index
+                    if(idx < 1) {
+                        idx = null
+                    } else if(idx > 0) {
+                        idx = idx + 1
+                    }
+                    return (
+                        <div className='input-a-input-box-plus'>
+                            <label>Tindak Pidana Atau Pasal {idx}</label> <br />
+                            <div className="input-a-container-box-plus">
+                                <input 
+                                    type="text" 
+                                    className="input-a-plus" 
+                                    placeholder="Masukkan Tindak Pidana Atau Pasal" 
+                                    value={tindakPidanaAtauPasal[idx]}
+                                    onChange={e=>FillValue(2,e.target.value,index)}
+                                />
+                                {
+                                    index !== 0 ?
+                                    <div className="input-a-minus-box"  onClick={e=>MinusInput(2,index)}>
+                                        <img src={PlusIcon} />
+                                    </div> :
+                                    <></>
+                                }
+                                {
+                                    index === tindakPidanaAtauPasal.length -1 ?
+                                    <div className="input-a-plus-box" onClick={e=>PlusInput(2)}>
+                                        <img src={PlusIcon} />
+                                    </div> :
+                                    <></>
+                                }
+                                {
+                                    index === 0 && tindakPidanaAtauPasal.length > 1 && 
+                                    <div className="input-a-minus-box">
+                                    </div>
+                                }
+                                {/* <div className="input-a-container-plus-minus">
+                                </div> */}
+                            </div>
+                        </div>
+                    )
+                })
+            }
 
             <div className='input-a-input-box'>
                 <label>Sumir</label> <br />
