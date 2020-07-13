@@ -1,0 +1,79 @@
+
+/* PLUS */
+
+.input-a-input-box-plus {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 20px;
+}
+
+.input-a-input-box-plus input {
+    width: 90%;
+    height: 50px;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: 10px;
+    border-top: 1px solid #c4c4c4;
+    border-left: 1px solid #c4c4c4;
+    border-bottom: 1px solid #c4c4c4;
+    border-right: none;
+    outline: none;
+}
+
+.input-a-plus-box {
+    width: 10%;
+    border-top: 1px solid #c4c4c4;
+    border-right: 1px solid #c4c4c4;
+    border-bottom: 1px solid #c4c4c4;
+    border-left: none;
+    height: 50px;
+    margin-top: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-a-minus-box {
+    width: 10%;
+    border-top: 1px solid #c4c4c4;
+    border-right: none;
+    border-bottom: 1px solid #c4c4c4;
+    border-left: none;
+    height: 50px;
+    margin-top: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-a-plus-box img {
+    width: 30px;
+    height: 30px;
+}
+
+.input-a-minus-box img {
+    width: 20px;
+    height: 20px;
+}
+
+.input-a-container-box-plus {
+    width: 100%;
+    display: flex;
+}
+
+.input-a-container-plus-minus {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+    /* background-color: pink; */
+}
+
+
+/* MINUS */
+
