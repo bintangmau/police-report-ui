@@ -5,6 +5,7 @@ import { Switch, Route ,  useHistory } from 'react-router-dom'
 import Navbar from '../../Components/Navbar'
 import ViewReport from '../../Components/ViewReport'
 import InputReportA from '../../Components/InputReportA'
+import InputReportB from '../../Components/InputReportB'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -90,6 +91,28 @@ function Home () {
                     </p>
                 </ListItem>
 
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/inputb" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/inputb') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/inputb" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/inputb" ? 'white' : null }}
+                    > 
+                        Input Laporan B
+                    </p>
+                </ListItem>
+
 
 
             </List>
@@ -139,8 +162,9 @@ function Home () {
             <main className={classes.content}>
                 <div className={classes.toolbar}/>
                 <Switch>
-                    <Route path="/inputa" component={InputReportA}/>
                     <Route path="/" component={ViewReport} exact />
+                    <Route path="/inputa" component={InputReportA}/>
+                    <Route path='/inputb' component={InputReportB} />
                 </Switch>
             </main>
 
