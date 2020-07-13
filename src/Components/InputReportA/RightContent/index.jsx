@@ -11,10 +11,12 @@ import PlusIcon from '../../../Images/input/plus.jpg'
 export default function RightContentInputA(props) {
 
     const { 
-        saksi, setNamaSaksi, alamatSaksi, setAlamatSaksi, barangBukti, setBarangBukti, tindakanYangDiambil, setTindakanYangDiambil
+        namaSaksi, setNamaSaksi, alamatSaksi, setAlamatSaksi, barangBukti, setBarangBukti, tindakanYangDiambil, setTindakanYangDiambil,
+        uraianSingkatKejadian, setUraianSingkatKejadian, mengetahui, setMengetahui, mengetahuiUnit, setMengetahuiUnit, NrpPelapor,
+        setNrpPelapor, PangkatPelapor, setPangkatPelapor, pelapor, setPelapor, nrp, setNrp, BtnInputReportA, pangkat, setPangkat
     } = props
 
-    const arrayKey = [ saksi, alamatSaksi, barangBukti, tindakanYangDiambil ]
+    const arrayKey = [ namaSaksi, alamatSaksi, barangBukti, tindakanYangDiambil ]
     const fnKey = [ setNamaSaksi, setAlamatSaksi, setBarangBukti, setTindakanYangDiambil ]
 
     function PlusInput (type) {
@@ -46,7 +48,7 @@ export default function RightContentInputA(props) {
         <div className='input-a-right-container'>
            
            {
-                saksi.map((el,index)=>{
+                namaSaksi.map((el,index)=>{
                     var idx = index
                     if(idx < 1) {
                         idx = null
@@ -61,7 +63,7 @@ export default function RightContentInputA(props) {
                                     type="text" 
                                     className="input-a-plus" 
                                     placeholder="Masukkan Nama Saksi" 
-                                    value={saksi[idx]}
+                                    value={namaSaksi[idx]}
                                     onChange={e=>FillValue(0,e.target.value,index)}
                                 />
                                 {
@@ -72,14 +74,14 @@ export default function RightContentInputA(props) {
                                     <></>
                                 }
                                 {
-                                    index === saksi.length -1 ?
+                                    index === namaSaksi.length -1 ?
                                     <div className="input-a-plus-box" onClick={e=>PlusInput(0)}>
                                         <img src={PlusIcon} />
                                     </div> :
                                     <></>
                                 }
                                 {
-                                    index === 0 && saksi.length > 1 && 
+                                    index === 0 && namaSaksi.length > 1 && 
                                     <div className="input-a-minus-box">
                                     </div>
                                 }
@@ -234,7 +236,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan Nama Pelapor"
-                    
+                    onChange={(e) => setPelapor(e.target.value)}
                 />
             </div>
 
@@ -243,7 +245,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan Pangkat Pelapor"
-                
+                    onChange={(e) => setPangkatPelapor(e.target.value)}
                 />
             </div>
 
@@ -252,7 +254,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan NRP Pelapor"
-                
+                    onChange={(e) => setNrpPelapor(e.target.value)}
                 />
             </div>
 
@@ -261,7 +263,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan Nama Yang Mengetahui"
-                    
+                    onChange={(e) => setMengetahui(e.target.value)}  
                 />
             </div>
 
@@ -270,7 +272,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan Pangkat Yang Mengetahui"
-                
+                    onChange={(e) => setPangkat(e.target.value)}
                 />
             </div>
 
@@ -279,7 +281,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan NRP Yang Mengetahui"
-                    
+                    onChange={(e) => setNrp(e.target.value)}
                 />
             </div>
 
@@ -288,7 +290,7 @@ export default function RightContentInputA(props) {
                 <input 
                     type="text" 
                     placeholder="Masukkan Nama Unit"
-                    
+                    onChange={(e) => setMengetahuiUnit(e.target.value)}
                 />
             </div>
 
@@ -297,12 +299,12 @@ export default function RightContentInputA(props) {
                 <textarea 
                     type="text" 
                     placeholder="Tulis Uraian Singkat Kejadian"
-                    
+                    onChange={(e) => setUraianSingkatKejadian(e.target.value)}
                 />
             </div>
             
             <center>
-                <button className='input-a-submit-btn'>Submit</button>
+                <button className='input-a-submit-btn' onClick={BtnInputReportA}>Submit</button>
             </center>
 
         </div>
