@@ -1,6 +1,9 @@
 // MODULES
 import React, { useState } from 'react'
 
+// COMPONENTS
+import Loader from '../../Loader'
+
 // CSS
 import './style.css'
 
@@ -13,7 +16,8 @@ export default function RightContentInputA(props) {
     const { 
         namaSaksi, setNamaSaksi, alamatSaksi, setAlamatSaksi, barangBukti, setBarangBukti, tindakanYangDiambil, setTindakanYangDiambil,
         uraianSingkatKejadian, setUraianSingkatKejadian, mengetahui, setMengetahui, mengetahuiUnit, setMengetahuiUnit, NrpPelapor,
-        setNrpPelapor, PangkatPelapor, setPangkatPelapor, pelapor, setPelapor, nrp, setNrp, BtnInputReportA, pangkat, setPangkat
+        setNrpPelapor, PangkatPelapor, setPangkatPelapor, pelapor, setPelapor, nrp, setNrp, BtnInputReportA, pangkat, setPangkat, emptyMessage, setEmptyMessage,
+        loading
     } = props
 
     const arrayKey = [ namaSaksi, alamatSaksi, barangBukti, tindakanYangDiambil ]
@@ -304,7 +308,23 @@ export default function RightContentInputA(props) {
             </div>
             
             <center>
-                <button className='input-a-submit-btn' onClick={BtnInputReportA}>Submit</button>
+                {
+                    loading
+                    ?
+                    <Loader/>
+                    :
+                    <button 
+                    className='input-a-submit-btn' 
+                    onClick={BtnInputReportA}
+                    style={{
+                        marginBottom: '5px'
+                    }}
+                    >
+                            Submit
+                        </button> 
+                }
+                <br />
+                <span style={{ color: 'red', fontWeight: '200', fontSize: '12px' }}>{emptyMessage}</span>
             </center>
 
         </div>

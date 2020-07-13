@@ -1,6 +1,7 @@
 // MODULE
 import React, { useState } from 'react'
 import Axios from 'axios'
+import swal from 'sweetalert'
 
 // API
 import { api } from '../../helper/database'
@@ -13,6 +14,10 @@ import Left from './LeftContent'
 import Right from './RightContent'
 
 function InputReportA () {
+
+    // STATE
+    const [ emptyMessage, setEmptyMessage ] = useState('')
+    const [ loading, setLoading ] = useState(false)
 
     // LEFT CONTENT STATE
     const [ nomorLaporanPolisi, setNomorLaporanPolisi ] = useState('')
@@ -47,41 +52,95 @@ function InputReportA () {
 
     // TO API
     const BtnInputReportA = () => {
-        Axios.post(api + 'report/input-report-a', {
-            mengetahuiUnit,
-            NrpPelapor,
-            PangkatPelapor,
-            nomorLaporanPolisi,
-            waktuKejadian,
-            waktuKejadianJam,
-            tempatKejadian,
-            provinsi,
-            kota,
-            kecamatan,
-            kelurahan,
-            apaYangTerjadi,
-            pelaku,
-            korban,
-            waktuDilaporkan,  
-            waktuDilaporkanJam,
-            tindakPidanaAtauPasal,
-            sumir,
-            namaSaksi,
-            alamatSaksi,        
-            uraianSingkatKejadian,
-            barangBukti,
-            tindakanYangDiambil,
-            mengetahui,
-            pelapor,    
-            pangkat,
-            nrp 
-        })
-        .then((res) => {
-            console.log(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        if(!nomorLaporanPolisi) {
+            setEmptyMessage('Masukkan Nomor Laporan!')
+        } else if(!waktuKejadian) {
+            setEmptyMessage('Masukkan Tanggal Kejadian!')
+        } else if(!tempatKejadian) {
+            setEmptyMessage('Masukkan Tempat Kejadian!')
+        } else if(!provinsi) {
+            setEmptyMessage('Pilih Provinsi Kejadian!')
+        } else if(!kota) {
+            setEmptyMessage('Pilih Kabupaten/Kota Kejadian')
+        } else if(!kecamatan) {
+            setEmptyMessage('Pilih Kecamatan Kejadian!')
+        } else if(!kelurahan) {
+            setEmptyMessage('Pilih Desa/Kelurahan Kejadian!')
+        } else if(!apaYangTerjadi) {
+            setEmptyMessage('Masukkan Apa Yang Terjadi!')
+        } else if(!pelaku[0]) {
+            setEmptyMessage('Masukkan Nama Pelaku!')
+        } else if(!korban[0]) {
+            setEmptyMessage('Masukkan Nama Korban!')
+        } else if(!waktuDilaporkan) {
+            setEmptyMessage('Masukkan Tanggal Dilaporkan!')
+        } else if(!tindakPidanaAtauPasal[0]) {
+            setEmptyMessage('Masukkan Tindak Pidana Atau Pasal!')
+        } else if(!sumir) {
+            setEmptyMessage('Pilih Sumir!')
+        } else if(!namaSaksi[0]) {
+            setEmptyMessage('Masukkan Nama Saksi!')
+        } else if(!alamatSaksi[0]) {
+            setEmptyMessage('Masukkan Alamat Saksi')
+        } else if(!barangBukti[0]) {
+            setEmptyMessage('Masukkan Barang Bukti!')
+        } else if(!tindakanYangDiambil[0]) {
+            setEmptyMessage('Masukkan Tindakan Yang Diambil!')
+        } else if(!pelapor) {
+            setEmptyMessage("Masukkan Nama Pelapor!")
+        } else if(!PangkatPelapor) {
+            setEmptyMessage("Masukkan Pangkat Pelapor!")
+        } else if(!NrpPelapor) {
+            setEmptyMessage("Masukkan NRP Pelapor!")
+        } else if(!mengetahui) {
+            setEmptyMessage("Masukkan Nama Yang Mengetahui")
+        } else if(!pangkat) {
+            setEmptyMessage("Masukkan Pangkat Yang Mengetahui!")
+        } else if(!nrp) {
+            setEmptyMessage("Masukkan NRP Yang Mengetahui!")
+        } else if(!mengetahuiUnit) {
+            setEmptyMessage("Masukkan Unit Yang Mengetahui!")
+        } else if(!uraianSingkatKejadian) {
+            setEmptyMessage("Masukkan Uraian Singkat Kejadian!")
+        } else {
+            setLoading(true)
+            Axios.post(api + 'report/input-report-a', {
+                mengetahuiUnit,
+                NrpPelapor,
+                PangkatPelapor,
+                nomorLaporanPolisi,
+                waktuKejadian,
+                waktuKejadianJam,
+                tempatKejadian,
+                provinsi,
+                kota,
+                kecamatan,
+                kelurahan,
+                apaYangTerjadi,
+                pelaku,
+                korban,
+                waktuDilaporkan,  
+                waktuDilaporkanJam,
+                tindakPidanaAtauPasal,
+                sumir,
+                namaSaksi,
+                alamatSaksi,        
+                uraianSingkatKejadian,
+                barangBukti,
+                tindakanYangDiambil,
+                mengetahui,
+                pelapor,    
+                pangkat,
+                nrp 
+            })
+            .then((res) => {
+                setLoading(false)
+                swal('Success', 'Input Laporan A Berhasil!', 'success')
+            })
+            .catch((err) => {
+                setLoading(false)
+            })
+        }
     }
 
     return (
@@ -92,6 +151,8 @@ function InputReportA () {
             <div className='input-a-row'>
 
                 <Left
+                    emptyMessage={emptyMessage}
+                    setEmptyMessage={setEmptyMessage}
                     pelaku={pelaku}
                     setPelaku={setPelaku}
                     korban={korban}
@@ -125,6 +186,9 @@ function InputReportA () {
                 />
 
                 <Right 
+                    emptyMessage={emptyMessage}
+                    setEmptyMessage={setEmptyMessage}
+                    loading={loading}
                     namaSaksi={namaSaksi}
                     setNamaSaksi={setNamaSaksi}
                     alamatSaksi={alamatSaksi}
