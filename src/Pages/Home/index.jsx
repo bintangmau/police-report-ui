@@ -1,5 +1,8 @@
 import React from 'react'
 
+// COMPONENTS
+import Navbar from '../../Components/Navbar'
+
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
