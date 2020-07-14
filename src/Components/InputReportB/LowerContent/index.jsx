@@ -2,11 +2,15 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 
+// COMPONENTS
+import Loader from '../../Loader'
+
 // CSS
 import './style.css'
 
 // IMAGE
-import PlusIcon from '../../../Images/input/plus.jpg'
+import PlusIcon from '../../../Images/input/plus.png'
+import MinusIcon from '../../../Images/input/minus.png'
 
 export default function LowerContentInputB(props) {
     const {
@@ -23,7 +27,7 @@ export default function LowerContentInputB(props) {
         waktuDilaporkanJam,setWaktuDilaporkanJam,
         uraianSingkatKejadian,setUraianSingkatKejadian,
         korban, setKorban, 
-        saksi, setNamaSaksi, BtnInputReportB
+        saksi, setNamaSaksi, BtnInputReportB, emptyMessage, loading
     } = props
 
     const arrayKey = [ korban, saksi ]
@@ -66,7 +70,7 @@ export default function LowerContentInputB(props) {
                         onChange={date => setWaktuKejadian(date)}
                         className="input-b-datepicker"
                         dateFormat="dd-MM-yyyy"
-                        placeholderText={"yyyy-mm-dd"}
+                        placeholderText="Masukkan Tanggal Kejadian"
                     />
                 </div>
                 <div className="input-b-column-box">
@@ -166,7 +170,7 @@ export default function LowerContentInputB(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(0,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -212,7 +216,7 @@ export default function LowerContentInputB(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(1,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -245,7 +249,7 @@ export default function LowerContentInputB(props) {
                         onChange={date => setWaktuDilaporkan(date)}
                         className="input-b-datepicker"
                         dateFormat="dd-MM-yyyy"
-                        placeholderText={"yyyy-mm-dd"}
+                        placeholderText="Masukkan Tanggal Pelaporan"
                     />
                 </div>
                 <div className="input-b-column-box">
@@ -264,7 +268,22 @@ export default function LowerContentInputB(props) {
             </div>
 
             <center>
-                <button onClick={BtnInputReportB} className='input-a-submit-btn'>Submit</button>
+                {
+                    loading
+                    ?
+                    <Loader/>
+                    :
+                    <button 
+                    className='input-a-submit-btn' 
+                    onClick={BtnInputReportB}
+                    style={{
+                        marginBottom: '5px'
+                    }}
+                    >
+                        Submit
+                    </button> 
+                } <br />
+                <span style={{ color: 'red', fontWeight: '200', fontSize: '12px' }}>{emptyMessage}</span>
             </center>
 
         </div>

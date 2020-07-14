@@ -5,7 +5,8 @@ import React from 'react'
 import './style.css'
 
 // IMAGE
-import PlusIcon from '../../../Images/input/plus.jpg'
+import PlusIcon from '../../../Images/input/plus.png'
+import MinusIcon from '../../../Images/input/minus.png'
 
 export default function RightContentInputB(props) {
     const {
@@ -142,7 +143,7 @@ export default function RightContentInputB(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(0,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -188,7 +189,7 @@ export default function RightContentInputB(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(1,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -234,7 +235,7 @@ export default function RightContentInputB(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(2,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }

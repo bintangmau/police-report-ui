@@ -1,9 +1,12 @@
 // MODULE
 import React from 'react'
 
+// COMPONENTS
+import Loader from '../../Loader'
+
 function RightContent (props) {
     const {
-        nrp, setNrp, password, setPassword, confirmPassword, setConfirmPassword, inputPersonil
+        nrp, setNrp, password, setPassword, confirmPassword, setConfirmPassword, inputPersonil, emptyMessage, loading
     } = props
     return (
         <div className='input-b-left-container'>
@@ -20,7 +23,7 @@ function RightContent (props) {
             <div className="input-b-input-box">
                 <label>Password</label> <br />
                 <input 
-                    type="text" 
+                    type="password" 
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -29,14 +32,29 @@ function RightContent (props) {
             <div className="input-b-input-box">
                 <label>Ulangi Password</label> <br />
                 <input 
-                    type="text" 
+                    type="password" 
                     placeholder="Ulangi Password"
                     onChange={(e) => setConfirmPassword(e.target.value)}    
                 />
             </div>
 
             <center>
-                <button onClick={inputPersonil} className='input-a-submit-btn'>Submit</button>
+                {
+                    loading
+                    ?
+                    <Loader/>
+                    :
+                    <button 
+                    className='input-a-submit-btn' 
+                    onClick={inputPersonil}
+                    style={{
+                        marginBottom: '5px'
+                    }}
+                    >
+                        Submit
+                    </button> 
+                } <br />
+                <span style={{ color: 'red', fontWeight: '200', fontSize: '12px' }}>{emptyMessage}</span>
             </center>
 
         </div>

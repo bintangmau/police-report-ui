@@ -9,7 +9,8 @@ import './style.css'
 
 
 // IMAGE
-import PlusIcon from '../../../Images/input/plus.jpg'
+import PlusIcon from '../../../Images/input/plus.png'
+import MinusIcon from '../../../Images/input/minus.png'
 
 export default function RightContentInputA(props) {
 
@@ -73,7 +74,7 @@ export default function RightContentInputA(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(0,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -119,7 +120,7 @@ export default function RightContentInputA(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(1,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -165,7 +166,7 @@ export default function RightContentInputA(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(2,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -211,7 +212,7 @@ export default function RightContentInputA(props) {
                                 {
                                     index !== 0 ?
                                     <div className="input-a-minus-box"  onClick={e=>MinusInput(3,index)}>
-                                        <img src={PlusIcon} />
+                                        <img src={MinusIcon} />
                                     </div> :
                                     <></>
                                 }
@@ -320,8 +321,8 @@ export default function RightContentInputA(props) {
                         marginBottom: '5px'
                     }}
                     >
-                            Submit
-                        </button> 
+                        Submit
+                    </button> 
                 }
                 <br />
                 <span style={{ color: 'red', fontWeight: '200', fontSize: '12px' }}>{emptyMessage}</span>

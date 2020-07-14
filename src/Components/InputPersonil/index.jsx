@@ -1,6 +1,7 @@
 // MODULE
 import React, { useState } from 'react'
 import Axios from 'axios'
+import swal from 'sweetalert'
 
 // API
 import { api } from '../../helper/database'
@@ -13,6 +14,9 @@ import Left from './LeftContent'
 import Right from './RightContent'
 
 function InputPersonil () {
+    const [ emptyMessage, setEmptyMessage ] = useState('')
+    const [ loading, setLoading ] = useState(false)
+
     const [ nama, setNama ] = useState('')
     const [ jabatan, setJabatan ] = useState('')
     const [ pangkat, setPangkat ] = useState('')
@@ -26,23 +30,51 @@ function InputPersonil () {
 
     // API BUTTON
     const inputPersonil = () => {
-        Axios.post(api + 'admin/input-personil', {
-            nama,
-            jabatan,
-            pangkat,
-            nrp,
-            unit,
-            submit,
-            nomorHp,
-            email,
-            password
-        })
-        .then((res) => {
-            console.log(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        if(!nama) {
+            setEmptyMessage("Masukkan Nama Personil!")
+        } else if(!jabatan) {
+            setEmptyMessage("Pilih Jabatan Personil!")
+        } else if(!pangkat) {
+            setEmptyMessage("Pilih Pangkat Personil!")
+        } else if(!unit) {
+            setEmptyMessage("Pilih Unit Personil!")
+        } else if(!submit) {
+            setEmptyMessage("Pilih Subnit Personil")
+        } else if(!nomorHp) {
+            setEmptyMessage("Masukkan Nomor HP!")
+        } else if(!email) {
+            setEmptyMessage("Masukkan Email Personil")
+        } else if(!nrp) {
+            setEmptyMessage("Masukkan NRP Personil!")
+        } else if(!password) {
+            setEmptyMessage("Masukkan Password!")
+        } else if(!confirmPassword) {
+            setEmptyMessage("Masukkan Konfirmasi Password!")
+        } else if(password !== confirmPassword) {
+            setEmptyMessage("Konfirmasi Password Tidak Sama!")
+        } else {
+            setEmptyMessage("")
+            setLoading(true)
+            Axios.post(api + 'admin/input-personil', {
+                nama,
+                jabatan,
+                pangkat,
+                nrp,
+                unit,
+                submit,
+                nomorHp,
+                email,
+                password
+            })
+            .then((res) => {
+                setLoading(false)
+                swal('Success', 'Input Personil Berhasil!', 'success')
+            })
+            .catch((err) => {
+                setLoading(false)
+                // console.log(err)
+            })
+        }
     }
 
     return (
@@ -77,6 +109,8 @@ function InputPersonil () {
                     confirmPassword={confirmPassword}
                     setConfirmPassword={setConfirmPassword}
                     inputPersonil={inputPersonil}
+                    emptyMessage={emptyMessage}
+                    loading={loading}
                 />
                  
             </div>

@@ -7,6 +7,7 @@ import ViewReport from '../../Components/ViewReport'
 import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
 import InputPersonil from '../../Components/InputPersonil'
+import Profile from '../Profile'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -189,6 +190,7 @@ function Home () {
                     <Route path="/inputa" component={InputReportA}/>
                     <Route path='/inputb' component={InputReportB} />
                     <Route path="/inputpersonil" component={InputPersonil}/>
+                    <Route path='/profile' component={Profile}/>
                 </Switch>
             </main>
 

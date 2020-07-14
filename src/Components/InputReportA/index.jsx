@@ -103,6 +103,7 @@ function InputReportA () {
         } else if(!uraianSingkatKejadian) {
             setEmptyMessage("Masukkan Uraian Singkat Kejadian!")
         } else {
+            setEmptyMessage("")
             setLoading(true)
             Axios.post(api + 'report/input-report-a', {
                 mengetahuiUnit,

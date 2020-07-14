@@ -71,13 +71,13 @@ export default function LeftContentInputB(props) {
                 </div>
 
                 <div className="input-b-column-box">
-                    <label>Tanggal Lahir</label>
+                    <label>Tanggal Lahir</label> <br />
                     <DatePicker 
                         selected={tanggalLahir}
                         onChange={date => setTanggalLahir(date)}
                         className="input-b-datepicker"
                         dateFormat="dd-MM-yyyy"
-                        placeholderText={"yyyy-mm-dd"}
+                        placeholderText="Masukkan Tanggal Lahir"
                     />
                 </div>
 
