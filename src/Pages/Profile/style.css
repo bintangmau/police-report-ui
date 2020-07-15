@@ -13,6 +13,7 @@
     margin-left: 50px;
 }
 
+
 .profile-info-02 {
     margin-left: 50px;
     width: 100%;
@@ -60,7 +61,24 @@
     color: #2196F3;
 }
 
+.jabatan-input-edit {
+    width: 80%;
+    color: #2196F3;
+    margin-top: -15px;
+}
 
+
+.jabatan-input-edit img {
+    width: 18px;
+    margin-left: 10px;
+    transition: 0.5s;
+    border-radius: 3px;  
+}
+
+.jabatan-input-edit img:hover {
+    background-color: #dbdbdb;
+    cursor: pointer; 
+}
 
 .profile-info-details-column-right img {
     width: 18px;
@@ -91,7 +109,24 @@
     transition: 0.5s;
 }
 
+.edit-button-01 {
+    width: 18px;
+    height: 18px;
+    transition: 0.5s;
+    margin-left: 5px;
+}
+
 .profile-info-details-input-box img:hover {
     background-color: #dbdbdb;
     cursor: pointer;
+}
+
+.edit-button-01:hover {
+    background-color: #dbdbdb;
+    cursor: pointer;    
+}
+
+.jabatan-text {
+    color: #2196F3;
+    margin-top: -15px;
 }

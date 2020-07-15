@@ -105,7 +105,25 @@ export default function Profile() {
                                 Polres Jakarta Pusat
                             </span> 
                         </h1> 
-                        <h4>{jabatan}</h4>
+                        {
+                            showEditOne === 'jabatan'
+                            ?
+                            <h3 className='jabatan-input-edit'>
+                                <input type="text" placeholder={jabatan} onChange={(e) => handleChangeEditOne("jabatan", e.target.value)}/>
+                                <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
+                                <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
+                            </h3>
+                            :
+                            <h3 className="jabatan-text">
+                                {jabatan}
+                                <img 
+                                    src={Pencil} 
+                                    alt="edit-button"
+                                    className="edit-button-01"
+                                    onClick={() => setShowEditOne("jabatan")}
+                                />
+                            </h3>
+                        }
                     </div>
 
                 </div>
