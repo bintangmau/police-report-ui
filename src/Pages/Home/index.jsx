@@ -9,11 +9,8 @@ import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
 import InputPersonil from '../../Components/InputPersonil'
 import Profile from '../Profile'
-<<<<<<< HEAD
 import DetailA from '../../Components/DetailContentA'
-=======
 import Notification from '../../Components/Notification'
->>>>>>> 6b948b524dc940a84fa58f436491c9a467bfaeec
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -215,17 +212,13 @@ function Home () {
             <main className={classes.content}>
                 <div className={classes.toolbar}/>
                 <Switch>
-<<<<<<< HEAD
-=======
                     <Route path="/" component={ViewReport} exact />
                     <Route path="/viewreportb" component={ViewReportB} />
->>>>>>> 6b948b524dc940a84fa58f436491c9a467bfaeec
                     <Route path="/inputa" component={InputReportA}/>
                     <Route path='/inputb' component={InputReportB} />
                     <Route path="/inputpersonil" component={InputPersonil}/>
                     <Route path='/profile' component={Profile}/>
                     <Route path="/detail/a" component={DetailA} /> 
-                    <Route path="/" component={ViewReport} exact />
                 </Switch>
             </main>
 

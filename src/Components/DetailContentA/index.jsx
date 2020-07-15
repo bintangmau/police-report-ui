@@ -8,7 +8,10 @@ function DetailContentA () {
 
     return (
         <div className="detail-a-container">
+            
+            <div>
 
+            </div>
             <div className="detail-a-left">
 
                 <div className="da-title" style={{marginTop : 0}}>
