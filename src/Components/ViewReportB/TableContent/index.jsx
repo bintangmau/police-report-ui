@@ -1,5 +1,6 @@
 // MODULE
 import React , { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 // MATERIAL UI MODULE
 import PropTypes from 'prop-types';
@@ -54,6 +55,7 @@ const useStyles1 = makeStyles(theme => ({
   }));
 
 function TableContent (props) {
+    const history = useHistory()
 
     const classes = useStyles2();
 
@@ -287,11 +289,6 @@ function TableContent (props) {
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.unit ? row.unit : "-" }
-                  </div>
-                </TableCell>
-                <TableCell >
-                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
                     {row.subnit ? row.subnit : "-" }
                   </div>
                 </TableCell>
@@ -303,6 +300,11 @@ function TableContent (props) {
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
                     -
+                  </div>
+                </TableCell>
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    <button onClick={() => history.push(`/detail/b/${row.id}`)}>Details</button>
                   </div>
                 </TableCell>
                 {/* {

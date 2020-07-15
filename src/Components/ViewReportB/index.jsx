@@ -4,6 +4,7 @@ import Axios from 'axios'
 
 // COMPONENT 
 import TableContent from './TableContent'
+import Loader from '../Loader'
 
 // ENDPOINT
 import {api} from '../../helper/database/index'
@@ -36,7 +37,18 @@ function ViewReport () {
 
     return (
         <div className="view-report-container-02">
-            <h1>Lihat Laporan B</h1>
+            <div style={{ display: 'flex', width: '100%' }}>
+                <h1>Lihat Laporan B</h1> 
+                {
+                    !dataReport[0]
+                    ?
+                    <div style={{ marginTop: '24px', marginLeft: '10px' }}>
+                        <Loader />
+                    </div>
+                    :
+                    null
+                }
+            </div>
             <TableContent 
                 getDataReport={getDataReport} 
                 dataReport={dataReport}

@@ -11,6 +11,7 @@ import InputPersonil from '../../Components/InputPersonil'
 import Profile from '../Profile'
 import DetailA from '../../Components/DetailContentA'
 import Notification from '../../Components/Notification'
+import DetailB from '../../Components/DetailContentB'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -218,7 +219,8 @@ function Home () {
                     <Route path='/inputb' component={InputReportB} />
                     <Route path="/inputpersonil" component={InputPersonil}/>
                     <Route path='/profile' component={Profile}/>
-                    <Route path="/detail/a" component={DetailA} /> 
+                    <Route path="/detail/a/:id" component={DetailA} /> 
+                    <Route path="/detail/b/:id" component={DetailB}/>
                 </Switch>
             </main>
 
