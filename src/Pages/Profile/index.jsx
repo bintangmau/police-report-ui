@@ -1,9 +1,13 @@
 // MODULES
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
+import io from 'socket.io-client'
 
 // API
 import { api } from '../../helper/database'
+
+// COMPONENTS
+import Loader from '../../Components/Loader'
 
 // CSS
 import './style.css'
@@ -61,6 +65,7 @@ export default function Profile() {
     }
 
     const editDataPersonilOne = () => {
+        setShowEditOne('')
         Axios.post(api + 'user/edit-data-personil-one', {
             field: fieldEdit, 
             value: valueEdit,
@@ -76,7 +81,21 @@ export default function Profile() {
 
     useEffect(() => {
         getDataProfile()
+        const socket = io(`${api}`)
+        socket.on('edit-personil-one', data => {
+            getDataProfile()
+        })
     }, [])
+
+    if(!nama) {
+        return (
+            <center>
+                <div style={{ marginTop: '50px' }}>
+                    <Loader/>
+                </div>
+            </center>
+        )
+    }
 
     return (
         <div>
