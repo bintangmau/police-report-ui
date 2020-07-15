@@ -4,6 +4,7 @@ import { Switch, Route ,  useHistory } from 'react-router-dom'
 // COMPONENTS
 import Navbar from '../../Components/Navbar'
 import ViewReport from '../../Components/ViewReport'
+import ViewReportB from '../../Components/ViewReportB'
 import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
 import InputPersonil from '../../Components/InputPersonil'
@@ -67,7 +68,29 @@ function Home () {
                         // style={{color : cekPathname() ? '#f16821' : "#888888"}}
                         style={{ color : route === "/" ? 'white' : null }}
                     > 
-                        Lihat Laporan
+                        Lihat Laporan A
+                    </p>
+                </ListItem>
+
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/viewreportb" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/viewreportb') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/viewreportb" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/viewreportb" ? 'white' : null }}
+                    > 
+                        Lihat Laporan B
                     </p>
                 </ListItem>
 
@@ -187,6 +210,7 @@ function Home () {
                 <div className={classes.toolbar}/>
                 <Switch>
                     <Route path="/" component={ViewReport} exact />
+                    <Route path="/viewreportb" component={ViewReportB} />
                     <Route path="/inputa" component={InputReportA}/>
                     <Route path='/inputb' component={InputReportB} />
                     <Route path="/inputpersonil" component={InputPersonil}/>
