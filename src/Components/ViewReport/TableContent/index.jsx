@@ -66,6 +66,13 @@ function TableContent (props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, filteredData().length - page * rowsPerPage);
 
+    const {
+        dataReport,
+        getDataReport,
+        offset,
+        setOffset
+    } = props
+
 
     let showDate = (dateParams) => {
     let date = new Date(dateParams).getDate() 
@@ -148,11 +155,17 @@ function TableContent (props) {
         };
       
         const handleBackButtonClick = event => {
-          onChangePage(event, page - 1);
+            onChangePage(event, page - 1);
+            let offsetV = offset - 5
+            getDataReport(offsetV)
+            setOffset(offset - 5)
         };
       
         const handleNextButtonClick = event => {
-          onChangePage(event, page + 1);
+            onChangePage(event, page + 1);
+            let offsetV = offset + 5
+            getDataReport(offsetV)
+            setOffset(offset + 5)
         };
       
         const handleLastPageButtonClick = event => {
@@ -193,7 +206,6 @@ function TableContent (props) {
         return data
     }
 
-
     return (
         <div className="table-content-45">
         <TableContainer component={Paper} style={{ boxShadow: 'none', marginBottom: '30px' }}>
@@ -207,76 +219,96 @@ function TableContent (props) {
               </TableCell>
               <TableCell >
                 <div className="guest-table-per-col-title-1">
-                  NAMA LENGKAP/KODE
+                  Dilaporkan
                 </div>
               </TableCell>
               <TableCell >
                 <div className="guest-table-per-col-title-1">
-                  ASAL
+                  No Laporan
                 </div>
               </TableCell>
               <TableCell >
                 <div className="guest-table-per-col-title-1">
-                  JENIS UNDANGAN
-                </div>
-              </TableCell>
-              {
-                props.selectedTab === 2 ?
-                <TableCell >
-                  <div className="guest-table-per-col-title-1">
-                    Tanggal CheckIn
-                  </div>
-                </TableCell> : <></>
-              }
-              {
-                 props.selectedTab === 2 ?
-                 <TableCell >
-                   <div className="guest-table-per-col-title-1">
-                     Jam CheckIn
-                   </div>
-                 </TableCell> : <></>
-              }
-              <TableCell >
-                <div className="guest-table-per-col-title-1">
-                  STATUS
+                  Unit
                 </div>
               </TableCell>
               <TableCell >
                 <div className="guest-table-per-col-title-1">
-                  AKSI
+                  Subnit
+                </div>
+              </TableCell>
+              <TableCell >
+                <div className="guest-table-per-col-title-1">
+                  Penyidik
+                </div>
+              </TableCell>
+              <TableCell >
+                <div className="guest-table-per-col-title-1">
+                  Status
+                </div>
+              </TableCell>
+              <TableCell >
+                <div className="guest-table-per-col-title-1">
+                  Detail
                 </div>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
-            (rowsPerPage > 0
-              ? filteredData().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              :  filteredData()
-            ).map((row,index) =>  (
+            // (rowsPerPage > 0
+            //   ? filteredData().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            //   :  filteredData()
+            // ).map((row,index) =>  (
+        //    dataReport.map((row,index) =>  (
+            // (rowsPerPage > 0
+            //   ? dataReport.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            //   :  dataReport
+            // ).map((row,index) =>  (
+               dataReport.map((row,index) =>  (
               <TableRow key={index} className={classes.tableRow} >
                 <TableCell>
                   <div className="guest-table-per-col-1 row-index">
-                    {row.indexNumber + 1}
+                    {index + 1}
                   </div>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  <div style={{display : "flex" ,  flexDirection : "column" ,   justifyContent : "center"}}>
-                    <div className="guest-table-per-col-1">{row.username}</div>
-                    <div className="view-guest-kode-user-1-title">{"0"+row.nomorKode}</div>
+                {/* <TableCell component="th" scope="row"> */}
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    {row.waktuDilaporkan ? showDate(row.waktuDilaporkan) : "-"}
                   </div>
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.asalLembaga ?  row.asalLembaga : "-"}
+                    {row.nomorLaporanPolisi ? row.nomorLaporanPolisi : "-"}
                   </div>
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.jenisUndangan ? row.jenisUndangan : "-" }
+                    {row.unit ? row.unit : "-" }
                   </div>
                 </TableCell>
-                {
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    {row.unit ? row.unit : "-" }
+                  </div>
+                </TableCell>
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    {row.subnit ? row.subnit : "-" }
+                  </div>
+                </TableCell>
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    {row.penyidik ? row.penyidik : "-" }
+                  </div>
+                </TableCell>
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    -
+                  </div>
+                </TableCell>
+                {/* {
                   props.selectedTab === 2 ?
                   <TableCell >
                     <div className="guest-table-per-col-1">
@@ -291,9 +323,9 @@ function TableContent (props) {
                       {showHour(row.waktuCheckIn)}
                     </div>
                   </TableCell> : <></>
-                }
+                } */}
                 
-                <TableCell >
+                {/* <TableCell >
                   <div className="guest-table-per-col-1">
                     {getStatuKehadiran(row.statusKehadiran, row.statusDibuat) }
                   </div>
@@ -307,7 +339,7 @@ function TableContent (props) {
                     Detail
                   </button>
                 </TableCell>
-  
+   */}
               </TableRow>
             ))}
   
@@ -323,8 +355,8 @@ function TableContent (props) {
                 labelDisplayedRows={({ from, to, count }) => `${from}-${to} dari ${count}`}
                 labelRowsPerPage='Tampilan per halaman:'
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={7}
-                count={filteredData().length}
+                colSpan={9}
+                count={dataReport.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
