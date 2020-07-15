@@ -1,0 +1,40 @@
+.detail-a-container {
+    width: 100%;
+    height: auto;
+    /* background-color: pink; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-a-left {
+    width: 60%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #ededed;
+    border-radius: 2px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+.da-title {
+    width: 90%;
+    margin-top: 20px;
+}
+
+.da-text {
+    width: 90%;
+    margin-top: 5px;
+    color: #c4c4c4;
+}
+
+.detail-a-right {
+    width: 35%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #ededed;
+    border-radius: 2px;
+}

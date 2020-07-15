@@ -8,6 +8,7 @@ import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
 import InputPersonil from '../../Components/InputPersonil'
 import Profile from '../Profile'
+import DetailA from '../../Components/DetailContentA'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -186,11 +187,12 @@ function Home () {
             <main className={classes.content}>
                 <div className={classes.toolbar}/>
                 <Switch>
-                    <Route path="/" component={ViewReport} exact />
                     <Route path="/inputa" component={InputReportA}/>
                     <Route path='/inputb' component={InputReportB} />
                     <Route path="/inputpersonil" component={InputPersonil}/>
                     <Route path='/profile' component={Profile}/>
+                    <Route path="/detail/a" component={DetailA} /> 
+                    <Route path="/" component={ViewReport} exact />
                 </Switch>
             </main>
 
