@@ -4,11 +4,16 @@ import { Switch, Route ,  useHistory } from 'react-router-dom'
 // COMPONENTS
 import Navbar from '../../Components/Navbar'
 import ViewReport from '../../Components/ViewReport'
+import ViewReportB from '../../Components/ViewReportB'
 import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
 import InputPersonil from '../../Components/InputPersonil'
 import Profile from '../Profile'
+<<<<<<< HEAD
 import DetailA from '../../Components/DetailContentA'
+=======
+import Notification from '../../Components/Notification'
+>>>>>>> 6b948b524dc940a84fa58f436491c9a467bfaeec
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -40,6 +45,7 @@ function Home () {
 
     const drawer = (
         <div >
+            <Notification />
         <div className={classes.toolbar} />
             <div className={classes.imgContainer}>
             {/* <img src={logoSgu} className={classes.logosgu} alt="img" /> */}
@@ -68,7 +74,29 @@ function Home () {
                         // style={{color : cekPathname() ? '#f16821' : "#888888"}}
                         style={{ color : route === "/" ? 'white' : null }}
                     > 
-                        Lihat Laporan
+                        Lihat Laporan A
+                    </p>
+                </ListItem>
+
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/viewreportb" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/viewreportb') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/viewreportb" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/viewreportb" ? 'white' : null }}
+                    > 
+                        Lihat Laporan B
                     </p>
                 </ListItem>
 
@@ -187,6 +215,11 @@ function Home () {
             <main className={classes.content}>
                 <div className={classes.toolbar}/>
                 <Switch>
+<<<<<<< HEAD
+=======
+                    <Route path="/" component={ViewReport} exact />
+                    <Route path="/viewreportb" component={ViewReportB} />
+>>>>>>> 6b948b524dc940a84fa58f436491c9a467bfaeec
                     <Route path="/inputa" component={InputReportA}/>
                     <Route path='/inputb' component={InputReportB} />
                     <Route path="/inputpersonil" component={InputPersonil}/>
