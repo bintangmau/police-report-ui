@@ -36,6 +36,7 @@ export default function Profile() {
     const [ fieldEdit, setFieldEdit ] = useState('')
 
     const handleChangeEditOne = (field, value) => {
+        console.log(field)
         setFieldEdit(field)
         setValueEdit(value)
     }
@@ -150,8 +151,8 @@ export default function Profile() {
                                     showEditOne ===  "pangkat"
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={pangkat} onChange={(e) => setPangkat(e.target.value)}/>
-                                        <img src={Save} alt="save-btn"/>
+                                        <input type="text" placeholder={pangkat} onChange={(e) => handleChangeEditOne("pangkat", e.target.value)}/>
+                                        <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
                                     :
@@ -168,8 +169,8 @@ export default function Profile() {
                                     showEditOne === 'unit'
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={unit} onChange={((e) => setUnit(e.target.value))}/>
-                                        <img src={Save} alt="save-btn"/>
+                                        <input type="text" placeholder={unit} onChange={(e) => handleChangeEditOne("unit", e.target.value)}/>
+                                        <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
                                     :
@@ -186,8 +187,8 @@ export default function Profile() {
                                     showEditOne === 'subnit'
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={subnit} onChange={(e) => setSubnit(e.target.value)}/>
-                                        <img src={Save} alt="save-btn"/>
+                                        <input type="text" placeholder={subnit} onChange={(e) => handleChangeEditOne("submit", e.target.value)}/>
+                                        <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
                                     :
@@ -204,8 +205,8 @@ export default function Profile() {
                                     showEditOne === 'nomorHp'
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={nomorHp} onChange={((e) => setNomorHp(e.target.value))}/>
-                                        <img src={Save} alt="save-btn"/>
+                                        <input type="text" placeholder={nomorHp} onChange={(e) => handleChangeEditOne("nohp", e.target.value)}/>
+                                        <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
                                     :
@@ -222,8 +223,8 @@ export default function Profile() {
                                     showEditOne === "email"
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={email} onChange={(e) => setEmail(e.target.value)} />
-                                        <img src={Save} alt="save-btn"/>
+                                        <input type="text" placeholder={email} onChange={(e) => handleChangeEditOne("email", e.target.value)} />
+                                        <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne("")}/>
                                     </h3>
                                     :
