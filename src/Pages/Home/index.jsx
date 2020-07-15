@@ -9,6 +9,7 @@ import InputReportA from '../../Components/InputReportA'
 import InputReportB from '../../Components/InputReportB'
 import InputPersonil from '../../Components/InputPersonil'
 import Profile from '../Profile'
+import Notification from '../../Components/Notification'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -40,6 +41,7 @@ function Home () {
 
     const drawer = (
         <div >
+            <Notification />
         <div className={classes.toolbar} />
             <div className={classes.imgContainer}>
             {/* <img src={logoSgu} className={classes.logosgu} alt="img" /> */}
