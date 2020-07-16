@@ -1,5 +1,6 @@
 // MODULE
 import React , { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 // MATERIAL UI MODULE
 import PropTypes from 'prop-types';
@@ -56,7 +57,10 @@ const useStyles1 = makeStyles(theme => ({
     },
   }));
 
+
 function TableContent (props) {
+    
+    const history = useHistory()
 
     const classes = useStyles2();
 
@@ -75,52 +79,52 @@ function TableContent (props) {
 
 
     let showDate = (dateParams) => {
-    let date = new Date(dateParams).getDate() 
-    let monthNumber = new Date(dateParams).getMonth()
-    let month = ''
-    let year = new Date(dateParams).getFullYear()
-    switch (monthNumber) {
-    case 0 :
-        month = 'Januari'
-        break;
-    case 1 :
-        month = 'Februari'
-        break;
-    case 2 :
-        month = 'Maret'
-        break;
-    case 3 :
-        month = 'April'
-        break;
-    case 4 :
-        month = 'mei'
-        break;
-    case 5 :
-        month = 'Juni'
-        break;
-    case 6 :
-        month = 'Juli'
-        break;
-    case 7 :
-        month = 'Agustus'
-        break;
-    case 8 :
-        month = 'September'
-        break;
-    case 9 :
-        month = 'Oktober'
-        break;
-    case 10 :
-        month = 'November'
-        break;
-    case 11 :
-        month = 'desember'
-        break;
-    default:
-        month = 'hehe'
-        break;
-    }
-    return date + ' ' + month  + ' ' + year
+      let date = new Date(dateParams).getDate() 
+      let monthNumber = new Date(dateParams).getMonth()
+      let month = ''
+      let year = new Date(dateParams).getFullYear()
+      switch (monthNumber) {
+      case 0 :
+          month = 'Januari'
+          break;
+      case 1 :
+          month = 'Februari'
+          break;
+      case 2 :
+          month = 'Maret'
+          break;
+      case 3 :
+          month = 'April'
+          break;
+      case 4 :
+          month = 'mei'
+          break;
+      case 5 :
+          month = 'Juni'
+          break;
+      case 6 :
+          month = 'Juli'
+          break;
+      case 7 :
+          month = 'Agustus'
+          break;
+      case 8 :
+          month = 'September'
+          break;
+      case 9 :
+          month = 'Oktober'
+          break;
+      case 10 :
+          month = 'November'
+          break;
+      case 11 :
+          month = 'desember'
+          break;
+      default:
+          month = 'hehe'
+          break;
+      }
+      return date + ' ' + month  + ' ' + year
     }
 
     let showHour = (hourParams) => {
@@ -290,11 +294,6 @@ function TableContent (props) {
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.unit ? row.unit : "-" }
-                  </div>
-                </TableCell>
-                <TableCell >
-                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
                     {row.subnit ? row.subnit : "-" }
                   </div>
                 </TableCell>
@@ -305,7 +304,12 @@ function TableContent (props) {
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    -
+                    {row.status ? row.status : "-"}
+                  </div>
+                </TableCell>
+                <TableCell >
+                  <div className="guest-table-per-col-1" style={{color : "#444444"}}>
+                    <button onClick={() => history.push(`/detail/a/${row.id}`)}>Details</button>
                   </div>
                 </TableCell>
                 {/* {

@@ -1,10 +1,12 @@
 // MODULE
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
+
+// API
 import { api } from '../../helper/database'
 
 // STYLE
-import './style.css'
 
 // COMPONENTS
 import Left from './Left'
@@ -12,11 +14,13 @@ import Right from './Right'
 import Loader from '../Loader'
 
 function DetailContentA (props) {
+
+    const history = useHistory()
     const params = props.match.params.id
-    const [ data, setData ] = useState([])
+    const [ data, setData ] = useState('')
 
     const getDetailsReportA = () => {
-        Axios.get(api + 'report/get-report-a-details/' + params)
+        Axios.get(api + 'report/get-report-b-details/' + params)
         .then((res) => {
             setData(res.data)
         })
@@ -81,7 +85,7 @@ function DetailContentA (props) {
     return (
         <div>
            <div style={{ display: 'flex', width: '100%' }}>
-                <h1>Details Laporan A</h1> 
+                <h1>Details Laporan B</h1> 
                 {
                     data.length === 0
                     ?

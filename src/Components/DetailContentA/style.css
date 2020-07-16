@@ -4,6 +4,7 @@
     /* background-color: pink; */
     display: flex;
     justify-content: space-between;
+    margin-bottom: 50px;
 }
 
 .detail-a-left {
@@ -27,7 +28,7 @@
 .da-text {
     width: 90%;
     margin-top: 5px;
-    color: #c4c4c4;
+    color: #999999;
 }
 
 .detail-a-right {
