@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import io from 'socket.io-client'
+import { useSelector } from 'react-redux'
 
 // API
 import { api } from '../../helper/database'
@@ -18,7 +19,7 @@ import Pencil from '../../Images/Profile/pencil.png'
 import Save from '../../Images/Profile/save.png'
 import Cancel from '../../Images/Profile/cancel.png'
 
-export default function Profile() {
+function Profile() {
     const [ showEditOne, setShowEditOne ] = useState('')
     const [ editNrp, setEditNrp ] = useState(false)
     const [ editPangkat, setEditPangkat ] = useState(false)
@@ -39,6 +40,12 @@ export default function Profile() {
     const [ valueEdit, setValueEdit ] = useState('')
     const [ fieldEdit, setFieldEdit ] = useState('')
 
+    // const id = useSelector((state) => {
+    //     state.id
+    // })
+
+    const id = useSelector(state=>state.user.id)
+
     const handleChangeEditOne = (field, value) => {
         console.log(field)
         setFieldEdit(field)
@@ -46,7 +53,8 @@ export default function Profile() {
     }
 
     const getDataProfile = () => {
-        Axios.get(api + 'user/get-data-profile/13')
+        console.log(id , ' <<< IKI ID JANCOK')
+        Axios.get(api + `user/get-data-profile/${id}`)
         .then((res) => {
             const data = res.data[0]
             setNama(data.nama)
@@ -69,7 +77,7 @@ export default function Profile() {
         Axios.post(api + 'user/edit-data-personil-one', {
             field: fieldEdit, 
             value: valueEdit,
-            id: 13
+            id
         })
         .then((res) => {
             console.log(res.data)
@@ -286,3 +294,5 @@ export default function Profile() {
         </div>
     )
 }
+
+export default Profile;

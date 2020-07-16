@@ -273,7 +273,7 @@ export default function LowerContentInputB(props) {
                 <div className="input-b-column-box">
                     <label>Waktu Pelaporan</label> <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around" className="input-a-time-picker">
+                        <Grid container justify="space-around" className="input-b-time-picker">
                             <KeyboardTimePicker
                                 className="input-Content-1"
                                 style={{padding: "5px 10px", border: '1px solid #c4c5c7', backgroundColor: 'white'}}

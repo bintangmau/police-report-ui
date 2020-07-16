@@ -50,7 +50,7 @@ function Login () {
                     setLoginMessage('')
                     setLoading(false)
                     history.push('/')
-                    loginPersonil(res.data.token, data.email, data.nama, data.id, data.nrp)
+                    loginPersonil(res.data.token, data.email, data.nama, data.id, data.nrp, data.jabatan, data.unit, data.submit)
                 }
             })
             .catch((err) => {

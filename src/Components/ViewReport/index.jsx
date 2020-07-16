@@ -29,6 +29,9 @@ function ViewReport () {
             data : {
                 offset : offsetParams ,
                 limit : 5
+            },
+            headers : {
+                token : localStorage.getItem('token')
             }
         })
         .then(({data})=>{
@@ -41,11 +44,9 @@ function ViewReport () {
         setDataReport([])
         Axios({
             method : "GET",
-            url : `${api}report/search-report-a?keyword=${str.toUpperCase()}`
+            url : `${api}report/search-report-a?keyword=${str}`
         })
         .then(({data})=>{
-            console.log('<<<<<<<<<<<<<<<<<<<<<<<<<')
-            console.log(data , ' <<<<')
             setDataReport(data)
         })
         .catch(err=>{

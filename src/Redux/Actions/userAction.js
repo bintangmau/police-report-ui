@@ -1,4 +1,4 @@
-export const loginPersonil = (token, email, nama, id, nrp) => {
+export const loginPersonil = (token, email, nama, id, nrp, jabatan, unit, submit) => {
     localStorage.setItem('token', token)
     return (dispatch) => {
         dispatch({
@@ -7,8 +7,15 @@ export const loginPersonil = (token, email, nama, id, nrp) => {
                 id: id,
                 name: nama,
                 email: email,
-                nrp: nrp 
+                nrp: nrp,
+                jabatan: jabatan,
+                unit: unit,
+                subnit: submit
             }
         })
     }
 }
+
+// export const dataAuth = () => {
+    
+// }
