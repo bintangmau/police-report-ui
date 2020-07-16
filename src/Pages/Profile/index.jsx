@@ -44,17 +44,21 @@ function Profile() {
     //     state.id
     // })
 
-    const id = useSelector(state=>state.user.id)
+    const id = useSelector(state => state.user.id)
 
     const handleChangeEditOne = (field, value) => {
-        console.log(field)
         setFieldEdit(field)
         setValueEdit(value)
     }
 
     const getDataProfile = () => {
-        console.log(id , ' <<< IKI ID JANCOK')
-        Axios.get(api + `user/get-data-profile/${id}`)
+        Axios({
+            method: "GET",
+            url: api + `user/get-data-profile/33`,
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             const data = res.data[0]
             setNama(data.nama)
@@ -74,13 +78,19 @@ function Profile() {
 
     const editDataPersonilOne = () => {
         setShowEditOne('')
-        Axios.post(api + 'user/edit-data-personil-one', {
-            field: fieldEdit, 
-            value: valueEdit,
-            id
+        Axios({
+            method: "POST",
+            url: api + 'user/edit-data-personil-one',
+            headers: {
+                token: localStorage.getItem('token')
+            },
+            data: {
+                field: fieldEdit, 
+                value: valueEdit
+            }
         })
         .then((res) => {
-            console.log(res.data)
+            return null
         })
         .catch((err) => {
             console.log(err)

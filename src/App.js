@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import Axios from 'axios'
 import { api } from './helper/database'
+import { useDispatch } from 'react-redux'
 
 // COMPONENTS
 import InputPersonil from './Pages/InputPersonil'
@@ -14,6 +15,9 @@ import LupaPassword from './Pages/LupaPassword'
 import { dataAuth } from './Redux/Actions/userAction'
 
 function App() {
+
+  const dispatch = useDispatch()
+
   const getDataAuth = () => {
     Axios({
       method : 'GET',
@@ -23,7 +27,8 @@ function App() {
       }
     })
     .then((res) => {
-      dataAuth(res.data)
+      // dataAuth(res.data)
+      dispatch(dataAuth(res.data))
     })
     .catch((err) => {
       console.log(err)

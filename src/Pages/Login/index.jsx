@@ -46,6 +46,7 @@ function Login () {
                     setLoading(false)
                     setLoginMessage(res.data.message)
                 } else {
+                    console.log(res.data)
                     var data = res.data.data
                     setLoginMessage('')
                     setLoading(false)
