@@ -21,7 +21,6 @@ function DetailContentA (props) {
     const getDetailsReportA = () => {
         Axios.get(api + 'report/get-report-b-details/' + params)
         .then((res) => {
-            console.log(res.data)
             setData(res.data)
         })
         .catch((err) => {

@@ -29,7 +29,6 @@ function ViewReport () {
             }
         })
         .then(({data})=>{
-            console.log(data)
             setDataReport(data)
         })
         .catch(console.log)
