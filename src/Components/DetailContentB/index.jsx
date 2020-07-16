@@ -29,10 +29,6 @@ function DetailContentA (props) {
         })
     }
 
-    useEffect(() => {
-        getDetailsReportA()
-    }, [])
-
     let showDate = (dateParams) => {
         let date = new Date(dateParams).getDate() 
         let monthNumber = new Date(dateParams).getMonth()
@@ -73,7 +69,7 @@ function DetailContentA (props) {
             month = 'November'
             break;
         case 11 :
-            month = 'desember'
+            month = 'Desember'
             break;
         default:
             month = 'hehe'
@@ -81,6 +77,12 @@ function DetailContentA (props) {
         }
         return date + ' ' + month  + ' ' + year
     }
+
+    
+
+    useEffect(() => {
+        getDetailsReportA()
+    }, [])
 
     return (
         <div>
@@ -99,7 +101,10 @@ function DetailContentA (props) {
 
             <div className="detail-a-container">
 
-                <Left data={data}/>
+                <Left 
+                    data={data}
+                    showDate={showDate}    
+                />
 
                 <Right />
 

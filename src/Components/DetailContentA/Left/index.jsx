@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Left(props) {
     const {
-        data
+        data, showDate
     } = props
     return (
         <div className='detail-a-left'>
@@ -87,7 +87,7 @@ export default function Left(props) {
                 </div>
 
                 <div className="da-text">
-                    {data.waktuKejadian}
+                    {data.waktuKejadian && showDate(data.waktuKejadian)}
                 </div>  
                 
                 <div className="da-title">
@@ -95,7 +95,7 @@ export default function Left(props) {
                 </div>
 
                 <div className="da-text">
-                    {data.waktuDilaporkan}
+                    {data.waktuDilaporkan && showDate(data.waktuDilaporkan)}
                 </div>
 
                 <div className="da-title">
