@@ -10,6 +10,9 @@ import LoginPage from './Pages/Login'
 import HomeScreen from './Pages/Home'
 import LupaPassword from './Pages/LupaPassword'
 
+// ACTIONS
+import { dataAuth } from './Redux/Actions/userAction'
+
 function App() {
   const getDataAuth = () => {
     Axios({
@@ -20,7 +23,7 @@ function App() {
       }
     })
     .then((res) => {
-      console.log(res.data)
+      dataAuth(res.data)
     })
     .catch((err) => {
       console.log(err)
