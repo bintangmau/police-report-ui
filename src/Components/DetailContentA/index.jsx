@@ -95,7 +95,10 @@ function DetailContentA (props) {
 
             <div className="detail-a-container">
 
-                <Left data={data}/>
+                <Left 
+                    data={data}
+                    showDate={showDate}    
+                />
 
                 <Right />
 

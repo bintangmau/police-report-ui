@@ -118,7 +118,7 @@ function TableContent (props) {
           month = 'November'
           break;
       case 11 :
-          month = 'desember'
+          month = 'Desember'
           break;
       default:
           month = 'hehe'

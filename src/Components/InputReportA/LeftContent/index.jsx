@@ -1,7 +1,6 @@
 // MODULES
 import React from 'react'
 import DatePicker from 'react-datepicker'
-import TimePicker from 'react-time-picker'
 import { MuiPickersUtilsProvider,KeyboardTimePicker } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -75,19 +74,20 @@ export default function LeftContentInputB(props) {
 
                 <div className="input-a-column-box">
                     <label>Waktu Kejadian</label> <br />
-                    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around" style={{borderBottom: 'none'}}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justify="space-around" className="input-a-time-picker">
                             <KeyboardTimePicker
                                 className="input-Content-1"
-                                style={{padding: "5px 10px", border: '1px solid #c4c5c7'}}
+                                style={{padding: "5px 10px", border: '1px solid #c4c5c7', backgroundColor: 'white'}}
                                 value={waktuKejadianJam}
+                                placeholder="Masukkan Waktu"
                                 onChange={time => setWaktuKejadianJam(time)}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change time',
                                 }}
                             />
                         </Grid>
-                    </MuiPickersUtilsProvider> */}
+                    </MuiPickersUtilsProvider>
                 </div>
 
             </div>
@@ -250,7 +250,21 @@ export default function LeftContentInputB(props) {
                 </div>
 
                 <div className="input-a-column-box">
-                    <label>Waktu Pelaporan</label>
+                    <label>Waktu Pelaporan</label> <br />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justify="space-around" className="input-a-time-picker">
+                            <KeyboardTimePicker
+                                className="input-Content-1"
+                                style={{padding: "5px 10px", border: '1px solid #c4c5c7', backgroundColor: 'white'}}
+                                value={waktuDilaporkanJam}
+                                placeholder="Masukkan Waktu"
+                                onChange={time => setWaktuDilaporkanJam(time) }
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change time',
+                                }}
+                            />
+                        </Grid>
+                    </MuiPickersUtilsProvider>
                 </div>
 
             </div>

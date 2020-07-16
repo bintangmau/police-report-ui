@@ -56,6 +56,8 @@ function InputReportA () {
             setEmptyMessage('Masukkan Nomor Laporan!')
         } else if(!waktuKejadian) {
             setEmptyMessage('Masukkan Tanggal Kejadian!')
+        } else if(!waktuKejadianJam) {
+            setEmptyMessage('Masukkan Waktu Kejadian!')
         } else if(!tempatKejadian) {
             setEmptyMessage('Masukkan Tempat Kejadian!')
         } else if(!provinsi) {
@@ -104,14 +106,15 @@ function InputReportA () {
             setEmptyMessage("Masukkan Uraian Singkat Kejadian!")
         } else {
             setEmptyMessage("")
-            setLoading(true)
+            const jamKejadian = new Date(waktuKejadianJam).getHours() + ':'  + new Date(waktuKejadianJam).getMinutes()
+            const jamPelaporan = new Date(waktuDilaporkanJam).getHours() + ':'  + new Date(waktuDilaporkanJam).getMinutes()
             Axios.post(api + 'report/input-report-a', {
                 mengetahuiUnit,
                 NrpPelapor,
                 PangkatPelapor,
                 nomorLaporanPolisi,
                 waktuKejadian,
-                waktuKejadianJam,
+                waktuKejadianJam: jamKejadian,
                 tempatKejadian,
                 provinsi,
                 kota,
@@ -121,7 +124,7 @@ function InputReportA () {
                 pelaku,
                 korban,
                 waktuDilaporkan,  
-                waktuDilaporkanJam,
+                waktuDilaporkanJam: jamPelaporan,
                 tindakPidanaAtauPasal,
                 sumir,
                 namaSaksi,
