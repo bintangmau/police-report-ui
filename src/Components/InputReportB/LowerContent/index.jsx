@@ -77,7 +77,7 @@ export default function LowerContentInputB(props) {
                         placeholderText="Masukkan Tanggal Kejadian"
                     />
                 </div>
-                <div className="input-b-column-box">
+                <div className="input-a-column-box">
                     <label>Waktu Kejadian</label> <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <Grid container justify="space-around" className="input-a-time-picker">
@@ -270,10 +270,10 @@ export default function LowerContentInputB(props) {
                         placeholderText="Masukkan Tanggal Pelaporan"
                     />
                 </div>
-                <div className="input-b-column-box">
+                <div className="input-a-column-box">
                     <label>Waktu Pelaporan</label> <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around" className="input-b-time-picker">
+                        <Grid container justify="space-around" className="input-a-time-picker">
                             <KeyboardTimePicker
                                 className="input-Content-1"
                                 style={{padding: "5px 10px", border: '1px solid #c4c5c7', backgroundColor: 'white'}}

@@ -12,21 +12,25 @@ import Bell from '../../Images/Profile/bell.png'
 export default function Navbar() {
     return (
         <div className='navbar-container'>
-
-            <Link>
-                <img 
-                    src={Bell} 
-                    alt="profile-icon"
-                    className='profile-icon'
-                />
-            </Link>
-            <Link to='/profile'>
-                <img 
-                    src={IconProfile} 
-                    alt="profile-icon"
-                    className='profile-icon'
-                />
-            </Link>
+            
+            <div className="nav-profile-icon" style={{ marginRight: '10px' }}>
+                <Link>
+                    <img 
+                        src={Bell} 
+                        alt="profile-icon"
+                        className='profile-icon'
+                        />
+                </Link>
+            </div>
+            <div className='nav-profile-icon' style={{ marginRight: '20px' }}>
+                <Link to='/profile'>
+                    <img 
+                        src={IconProfile} 
+                        alt="profile-icon"
+                        className='profile-icon'
+                        />
+                </Link>
+            </div>
         </div>
     )
 }
