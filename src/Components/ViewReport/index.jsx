@@ -37,8 +37,25 @@ function ViewReport () {
         .catch(console.log)
     }
 
+    let searchData = (str) => {
+        setDataReport([])
+        Axios({
+            method : "GET",
+            url : `${api}report/search-report-a?keyword=${str.toUpperCase()}`
+        })
+        .then(({data})=>{
+            console.log('<<<<<<<<<<<<<<<<<<<<<<<<<')
+            console.log(data , ' <<<<')
+            setDataReport(data)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
     return (
         <div className="view-report-container-02">
+
             <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Lihat Laporan A</h1> 
                 {
@@ -51,12 +68,21 @@ function ViewReport () {
                     null
                 }
             </div>
+
+            <input 
+                type="text" 
+                className="search-report-02" 
+                placeholder="Cari Laporan"
+                onChange={e=>searchData(e.target.value)}
+            />
+
             <TableContent 
                 getDataReport={getDataReport} 
                 dataReport={dataReport}
                 offset={offset}
                 setOffset={setOffset}
             />
+
         </div>
     )
 
