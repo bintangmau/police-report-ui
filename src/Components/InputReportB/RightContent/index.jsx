@@ -93,7 +93,7 @@ export default function RightContentInputB(props) {
             <div className="input-b-input-box">
                 <label>Unit</label> <br />
                 <select onChange={(e) => setUnitMengetahui(e.target.value)}>
-                    <option value="" disabled selected>Pilih Pangkat Pelapor</option>
+                    <option value="" disabled selected>Pilih Unit Pelapor</option>
                     {dataUnit.map((val) => {
                         return (
                             <option value={val.unit} key={val.idUnit}>{val.unit}</option>
