@@ -8,6 +8,7 @@ import './style.css'
 // COMPONENT 
 import TableContent from './TableContent'
 import Loader from '../Loader'
+import io from 'socket.io-client'
 
 // ENDPOINT
 import {api} from '../../helper/database/index'
@@ -19,6 +20,10 @@ function ViewReport () {
 
     useEffect(()=>{
         getDataReport(0)
+        const socket = io(`${api}`)
+        socket.on('input-report-a', data => {
+            getDataReport(0)
+        })
     },[])
 
     let getDataReport = (offsetParams) => {

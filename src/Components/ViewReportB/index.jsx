@@ -1,6 +1,7 @@
 // MODULE
 import React , { useEffect , useState } from 'react'
 import Axios from 'axios'
+import io from 'socket.io-client'
 
 // COMPONENT 
 import TableContent from './TableContent'
@@ -16,6 +17,10 @@ function ViewReport () {
 
     useEffect(()=>{
         getDataReport(0)
+        const socket = io(`${api}`)
+        socket.on('input-report-b', data => {
+            getDataReport(0)
+        })
     },[])
 
     let getDataReport = (offsetParams) => {

@@ -16,7 +16,13 @@ function DetailContentA (props) {
     const [ data, setData ] = useState([])
 
     const getDetailsReportA = () => {
-        Axios.get(api + 'report/get-report-a-details/' + params)
+        Axios({
+            method: "GET",
+            url: api + 'report/get-report-a-details/' + params,
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setData(res.data)
         })
