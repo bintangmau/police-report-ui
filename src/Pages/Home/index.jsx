@@ -12,6 +12,11 @@ import Profile from '../Profile'
 import DetailA from '../../Components/DetailContentA'
 import Notification from '../../Components/Notification'
 import DetailB from '../../Components/DetailContentB'
+import Settings from '../../Components/Settings'
+import Jabatan from '../../Components/Settings/Jabatan'
+import Pangkat from '../../Components/Settings/Pangkat'
+import Unit from '../../Components/Settings/Unit'
+import Subnit from '../../Components/Settings/Subnit'
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -164,6 +169,27 @@ function Home () {
                     </p>
                 </ListItem>
 
+                <ListItem 
+                    button 
+                    className={classes.sidebar}
+                    style={
+                        {
+                            backgroundColor : route === "/settings" ? "#00698C" : null
+                        }
+                    }
+                    onClick={() => history.push('/settings') }
+                >
+                    <ListItemIcon>
+                        <AssignmentIcon style={{color : route === "/settings" ? "white" : null}} />
+                    </ListItemIcon>
+                    <p 
+                        className={classes.sidebarText}
+                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                        style={{ color : route === "/settings" ? 'white' : null }}
+                    > 
+                        Pengaturan
+                    </p>
+                </ListItem>
 
 
             </List>
@@ -221,6 +247,11 @@ function Home () {
                     <Route path='/profile' component={Profile}/>
                     <Route path="/detail/a/:id" component={DetailA} /> 
                     <Route path="/detail/b/:id" component={DetailB}/>
+                    <Route path="/settings" component={Settings}/>
+                    <Route path="/jabatan" component={Jabatan}/>
+                    <Route path="/pangkat" component={Pangkat}/>
+                    <Route path="/unit" component={Unit}/>
+                    <Route path="/subnit" component={Subnit}/>
                 </Switch>
             </main>
 
