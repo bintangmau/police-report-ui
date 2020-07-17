@@ -18,7 +18,7 @@ export default function RightContentInputA(props) {
         namaSaksi, setNamaSaksi, alamatSaksi, setAlamatSaksi, barangBukti, setBarangBukti, tindakanYangDiambil, setTindakanYangDiambil,
         uraianSingkatKejadian, setUraianSingkatKejadian, mengetahui, setMengetahui, mengetahuiUnit, setMengetahuiUnit, NrpPelapor,
         setNrpPelapor, PangkatPelapor, setPangkatPelapor, pelapor, setPelapor, nrp, setNrp, BtnInputReportA, pangkat, setPangkat, emptyMessage, setEmptyMessage,
-        loading
+        loading, dataPangkat, dataUnit
     } = props
 
     const arrayKey = [ namaSaksi, alamatSaksi, barangBukti, tindakanYangDiambil ]
@@ -247,11 +247,14 @@ export default function RightContentInputA(props) {
 
             <div className="input-a-input-box">
                 <label>Pangkat</label> <br />
-                <input 
-                    type="text" 
-                    placeholder="Masukkan Pangkat Pelapor"
-                    onChange={(e) => setPangkatPelapor(e.target.value)}
-                />
+                <select onChange={(e) => setPangkatPelapor(e.target.value)}>
+                    <option value="" disabled selected>Pilih Pangkat Pelapor</option>
+                    {dataPangkat.map((val) => {
+                        return (
+                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                        )
+                    })}
+                </select>
             </div>
 
             <div className="input-a-input-box">
@@ -274,11 +277,14 @@ export default function RightContentInputA(props) {
 
             <div className="input-a-input-box">
                 <label>Pangkat</label> <br />
-                <input 
-                    type="text" 
-                    placeholder="Masukkan Pangkat Yang Mengetahui"
-                    onChange={(e) => setPangkat(e.target.value)}
-                />
+                <select onChange={(e) => setPangkat(e.target.value)}>
+                    <option value="" disabled selected>Pilih Pangkat Mengetahui</option>
+                    {dataPangkat.map((val) => {
+                        return (
+                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                        )
+                    })}
+                </select>
             </div>
 
             <div className="input-a-input-box">
@@ -292,11 +298,14 @@ export default function RightContentInputA(props) {
 
             <div className="input-a-input-box">
                 <label>Unit</label> <br />
-                <input 
-                    type="text" 
-                    placeholder="Masukkan Nama Unit"
-                    onChange={(e) => setMengetahuiUnit(e.target.value)}
-                />
+                <select onChange={(e) => setMengetahuiUnit(e.target.value)}>
+                    <option value="" disabled selected>Pilih Unit Mengetahui</option>
+                    {dataUnit.map((val) => {
+                        return (
+                            <option value={val.unit} key={val.idUnit}>{val.unit}</option>
+                        )
+                    })}
+                </select>
             </div>
 
             <div className="input-a-input-box">
