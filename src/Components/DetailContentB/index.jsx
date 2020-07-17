@@ -83,7 +83,6 @@ function DetailContentA (props) {
         }
         return date + ' ' + month  + ' ' + year
     }
-
     
 
     useEffect(() => {
