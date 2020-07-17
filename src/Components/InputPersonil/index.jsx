@@ -1,7 +1,8 @@
 // MODULE
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import swal from 'sweetalert'
+import io from 'socket.io-client'
 
 // API
 import { api } from '../../helper/database'
@@ -17,6 +18,11 @@ function InputPersonil () {
     const [ emptyMessage, setEmptyMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
 
+    const [ dataJabatan, setDataJabatan ] = useState([])
+    const [ dataPangkat, setDataPangkat ] = useState([])
+    const [ dataUnit, setDataUnit ] = useState([])
+    const [ dataSubnit, setDataSubnit ] = useState([])
+
     const [ nama, setNama ] = useState('')
     const [ jabatan, setJabatan ] = useState('')
     const [ pangkat, setPangkat ] = useState('')
@@ -27,6 +33,49 @@ function InputPersonil () {
     const [ password, setPassword ] = useState('')
     const [ nrp, setNrp ] = useState('')
     const [ confirmPassword, setConfirmPassword ] = useState('')
+
+    const getDataJabatan = () => {
+        Axios({
+            method: "GET",
+            url: api + 'admin/get-data-jabatan'
+        })
+        .then((res) => {
+            setDataJabatan(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataPangkat = () => {
+        Axios({ method: "GET", url: api + 'admin/get-data-pangkat'})
+        .then((res) => {
+            setDataPangkat(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataUnit = () => {
+        Axios({ method: "GET", url: api + 'admin/get-data-unit'})
+        .then((res) => {
+            setDataUnit(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataSubnit = () => {
+        Axios({ method: "GET", url: api + 'admin/get-data-subnit'})
+        .then((res) => {
+            setDataSubnit(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
 
     // API BUTTON
     const inputPersonil = () => {
@@ -77,6 +126,26 @@ function InputPersonil () {
         }
     }
 
+    useEffect(() => {
+        getDataJabatan()
+        getDataPangkat()
+        getDataUnit()
+        getDataSubnit()
+        const socket = io(`${api}`)
+        socket.on('input-new-jabatan', data => {
+            getDataJabatan()
+        })
+        socket.on('input-new-pangkat', data => {
+            getDataPangkat()
+        })
+        socket.on('input-new-unit', data => {
+            getDataUnit()
+        })
+        socket.on('input-new-subnit', data => {
+            getDataSubnit()
+        })
+    }, [])
+
     return (
         <div style={{width : "100%" , height : 800 }}>
             <h1>Input Personil</h1>
@@ -99,6 +168,10 @@ function InputPersonil () {
                     setNomorHp={setNomorHp}
                     email={email}
                     setEmail={setEmail}
+                    dataJabatan={dataJabatan}
+                    dataPangkat={dataPangkat}
+                    dataUnit={dataUnit}
+                    dataSubnit={dataSubnit}
                 />
 
                 <Right 

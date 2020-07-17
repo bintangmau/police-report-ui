@@ -2,27 +2,30 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { api } from '../../../helper/database'
+import swal from 'sweetalert'
+import io from 'socket.io-client'
 
-export default function ManageJabatan() {
-    const [ dataJabatan, setDataJabatan ] = useState([])
+export default function ManageUnit() {
+    const [ dataUnit, setDataUnit ] = useState([])
     const [ showAdd, setShowAdd ] = useState(false)
+    const [ newUnit, setNewUnit ] = useState('')
 
-    const getDataJabatan = () => {
-        Axios.get(api + 'admin/get-data-jabatan')
+    const getDataUnit = () => {
+        Axios.get(api + 'admin/get-data-unit')
         .then((res) => {
-            setDataJabatan(res.data)
+            setDataUnit(res.data)
         })
         .catch((err) => {
             console.log(err)
         })
     }
 
-    const renderDataJabatan = () => {
-        return dataJabatan.map((val) => {
+    const renderDataUnit = () => {
+        return dataUnit.map((val) => {
             return (
                 <tr className="manage-table-personil-content">
-                    <td>{val.idJabatan}</td>
-                    <td>{val.jabatan}</td>
+                    <td>{val.idUnit}</td>
+                    <td>{val.unit}</td>
                     <td>
                         <button>Delete</button>
                     </td>
@@ -31,14 +34,44 @@ export default function ManageJabatan() {
         })
     }
 
+    const addNewUnit = () => {
+        if(!newUnit) {
+            return null
+        }
+        Axios({ 
+            method: "POST",
+            url: api + 'admin/add-field-personil',
+            data: {
+                field: 'unit',
+                value: newUnit
+            },
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
+        .then((res) => {
+            setNewUnit('')
+            setShowAdd(false)
+            swal('Success', 'Unit Ditambahkan', 'success')
+        })
+        .catch((err) => {
+            setNewUnit('')
+            setShowAdd(false)
+        })
+    }
+
     useEffect(() => {
-        getDataJabatan()
+        getDataUnit()
+        const socket = io(`${api}`)
+        socket.on('input-new-unit', data => {
+            getDataUnit()
+        })
     }, [])
     
     return (
         <div>
             <div style={{ display: 'flex' }}>
-                <h1>Manage Jabatan</h1>
+                <h1>Manage Unit</h1>
                 <h1>
                     {
                         showAdd
@@ -46,7 +79,7 @@ export default function ManageJabatan() {
                         null
                         :
                         <button className="manage-table-personil-add-btn" onClick={() => setShowAdd(true)}>
-                            Tambah Jabatan +
+                            Tambah Unit +
                         </button>
                     }
                 </h1>
@@ -56,8 +89,8 @@ export default function ManageJabatan() {
                 showAdd
                 ?
                 <div style={{ display: 'flex' }}>
-                    <input type="text" className="manage-table-personil-input" style={{ paddingLeft: '10px' }}/>
-                    <button className="manage-table-personil-btn" style={{backgroundColor: '#00ab2e'}}>Add</button>
+                    <input type="text" className="manage-table-personil-input" style={{ paddingLeft: '10px' }} onChange={(e) => setNewUnit(e.target.value)}/>
+                    <button className="manage-table-personil-btn" style={{backgroundColor: '#00ab2e'}} onClick={addNewUnit}>Add</button>
                     <button className="manage-table-personil-btn" style={{backgroundColor: 'red'}} onClick={() => setShowAdd(false)}>Cancel</button>
                 </div>
                 :
@@ -67,10 +100,10 @@ export default function ManageJabatan() {
             <table className="manage-table-personil">
                <tr className="manage-table-personil-header">
                    <th>Id</th>
-                   <th>Jabatan</th>
+                   <th>Unit</th>
                    <th>Delete</th>
                </tr>
-               {renderDataJabatan()}
+               {renderDataUnit()}
             </table>
         </div>
     )

@@ -1,7 +1,8 @@
 // MODULES
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import swal from 'sweetalert'
+import io from 'socket.io-client'
 
 // API
 import { api } from '../../helper/database'
@@ -18,6 +19,8 @@ export default function InputReportB() {
     // STATE
     const [ emptyMessage, setEmptyMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
+    const [ dataPangkat, setDataPangkat ] = useState([])
+    const [ dataUnit, setDataUnit ] = useState([])
 
     // LEFT CONTENT STATE
     const [nomorLaporanPolisi,setNomorLaporanPolisi] = useState("") 
@@ -193,6 +196,38 @@ export default function InputReportB() {
         }
     }
 
+    const getDataPangkat = () => {
+        Axios({ method: "GET", url: api + 'admin/get-data-pangkat'})
+        .then((res) => {
+            setDataPangkat(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataUnit = () => {
+        Axios({ method: "GET", url: api + 'admin/get-data-unit'})
+        .then((res) => {
+            setDataUnit(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    useEffect(() => {
+        getDataPangkat()
+        getDataUnit()
+        const socket = io(`${api}`)
+        socket.on('input-new-unit', data => {
+            getDataUnit()
+        })
+        socket.on('input-new-pangkat', data => {
+            getDataPangkat()
+        })
+    }, [])
+
     return (
         <div style={{width : "100%" , height : 800 }}>
            <h1>Input Report B</h1>
@@ -252,6 +287,8 @@ export default function InputReportB() {
                     setTindakPidanaDanPasal={setTindakPidanaDanPasal}
                     barangBukti={barangBukti}
                     setBarangBukti={setBarangBukti}
+                    dataPangkat={dataPangkat}
+                    dataUnit={dataUnit}
                 />
 
            </div>

@@ -2,10 +2,13 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { api } from '../../../helper/database'
+import swal from 'sweetalert'
+import io from 'socket.io-client'
 
 export default function ManageJabatan() {
     const [ dataJabatan, setDataJabatan ] = useState([])
     const [ showAdd, setShowAdd ] = useState(false)
+    const [ newJabatan, setNewJabatan ] = useState('')
 
     const getDataJabatan = () => {
         Axios.get(api + 'admin/get-data-jabatan')
@@ -31,8 +34,40 @@ export default function ManageJabatan() {
         })
     }
 
+    const addJabatan = () => {
+        if(!newJabatan) {
+            return null 
+        } else {
+            Axios({
+                method: "post",
+                url: api + 'admin/add-field-personil',
+                data: {
+                    field: 'jabatan',
+                    value: newJabatan
+                },
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            .then((res) => {
+                setNewJabatan('')
+                setShowAdd(false)
+                swal('Success', 'Jabatan Ditambahkan', 'success')
+            })
+            .catch((err) => {
+                setShowAdd(false)
+                setNewJabatan('')
+                // console.log(err)
+            })
+        }
+    }
+
     useEffect(() => {
         getDataJabatan()
+        const socket = io(`${api}`)
+        socket.on('input-new-jabatan', data => {
+            getDataJabatan()
+        })
     }, [])
     
     return (
@@ -56,8 +91,14 @@ export default function ManageJabatan() {
                 showAdd
                 ?
                 <div style={{ display: 'flex' }}>
-                    <input type="text" className="manage-table-personil-input" style={{ paddingLeft: '10px' }}/>
-                    <button className="manage-table-personil-btn" style={{backgroundColor: '#00ab2e'}}>Add</button>
+                    <input type="text" className="manage-table-personil-input" style={{ paddingLeft: '10px' }} onChange={(e) => setNewJabatan(e.target.value)}/>
+                    <button     
+                        className="manage-table-personil-btn" 
+                        style={{backgroundColor: '#00ab2e'}}
+                        onClick={addJabatan}
+                    >
+                            Add
+                    </button>
                     <button className="manage-table-personil-btn" style={{backgroundColor: 'red'}} onClick={() => setShowAdd(false)}>Cancel</button>
                 </div>
                 :
