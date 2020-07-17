@@ -140,6 +140,8 @@ export default function InputReportB() {
         } else {
             setEmptyMessage('')
             setLoading(true)
+            const jamKejadian = new Date(waktuKejadianJam).getHours() + ':'  + new Date(waktuKejadianJam).getMinutes()
+            const jamPelaporan = new Date(waktuDilaporkanJam).getHours() + ':'  + new Date(waktuDilaporkanJam).getMinutes()
             Axios.post(api + 'report/input-report-b', {
                 unitMengetahui,
                 pangkatyangMenerimaLaporan,
@@ -161,7 +163,7 @@ export default function InputReportB() {
                 kelurahanPelapor,
                 nomorTelpon,
                 waktuKejadian,
-                waktuKejadianJam,
+                waktuKejadianJam: jamKejadian,
                 tempatKejadian,
                 provinsiKejadian,
                 kotaKejadian,
@@ -172,7 +174,7 @@ export default function InputReportB() {
                 korban,
                 saksi,
                 waktuDilaporkan,
-                waktuDilaporkanJam,
+                waktuDilaporkanJam: jamPelaporan,
                 uraianSingkatKejadian,
                 mengetahui,
                 yangMenerimaLaporan,
