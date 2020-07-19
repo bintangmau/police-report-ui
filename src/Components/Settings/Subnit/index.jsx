@@ -33,7 +33,7 @@ export default function ManageSubnit() {
                     <td>{val.idSubnit}</td>
                     <td>{val.subnit}</td>
                     <td>
-                        <button>Delete</button>
+                        <button onClick={() => deleteSubnit(val.idSubnit)}>Delete</button>
                     </td>
                 </tr>
             )
@@ -66,12 +66,38 @@ export default function ManageSubnit() {
         })
     }
 
+    const deleteSubnit = (id) => {
+        if(window.confirm('Anda yakin menghapus field ini? sangat beresiko untuk jalannya aplikasi')) {
+            Axios({
+                method: "POST",
+                url: api + 'admin/delete-field-personil',
+            data: {
+                field: 'subnit',
+                idName: "idSubnit",
+                id
+            },
+            headers: {
+                token: localStorage.getItem('token')
+            }
+            })
+            .then((res) => {
+                swal('Deleted', 'Subnit Dihapus', 'success')
+            })
+            .catch(() => {
+                
+            })
+        }
+    }
+
     useEffect(() => {
         getDataSubnit()
         const socket = io(`${api}`)
         socket.on('input-new-subnit', data => {
             getDataSubnit()
         })
+        socket.on('delete-field-subnit', data => [
+            getDataSubnit()
+        ])
     }, [])
     
     return (

@@ -197,7 +197,13 @@ export default function InputReportB() {
     }
 
     const getDataPangkat = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-pangkat'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-pangkat',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataPangkat(res.data)
         })
@@ -207,7 +213,13 @@ export default function InputReportB() {
     }
 
     const getDataUnit = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-unit'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-unit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataUnit(res.data)
         })

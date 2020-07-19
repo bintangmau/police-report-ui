@@ -37,7 +37,10 @@ function InputPersonil () {
     const getDataJabatan = () => {
         Axios({
             method: "GET",
-            url: api + 'admin/get-data-jabatan'
+            url: api + 'admin/get-data-jabatan',
+            headers: {
+                token: localStorage.getItem('token')
+            }
         })
         .then((res) => {
             setDataJabatan(res.data)
@@ -48,7 +51,13 @@ function InputPersonil () {
     }
 
     const getDataPangkat = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-pangkat'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-pangkat',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataPangkat(res.data)
         })
@@ -58,7 +67,13 @@ function InputPersonil () {
     }
 
     const getDataUnit = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-unit'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-unit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataUnit(res.data)
         })
@@ -68,7 +83,12 @@ function InputPersonil () {
     }
 
     const getDataSubnit = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-subnit'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-subnit',
+            headers: {
+                token: localStorage.getItem('token')
+            }})
         .then((res) => {
             setDataSubnit(res.data)
         })

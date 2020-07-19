@@ -33,7 +33,7 @@ export default function ManagePangkat() {
                     <td>{val.idPangkat}</td>
                     <td>{val.pangkat}</td>
                     <td>
-                        <button>Delete</button>
+                        <button onClick={() => deletePangkat(val.idPangkat)}>Delete</button>
                     </td>
                 </tr>
             )
@@ -66,10 +66,36 @@ export default function ManagePangkat() {
         })
     }
 
+    const deletePangkat = (id) => {
+        if(window.confirm('Anda yakin menghapus field ini? sangat beresiko untuk jalannya aplikasi')) {
+            Axios({
+                method: "POST",
+                url: api + 'admin/delete-field-personil',
+                data: {
+                    field: 'pangkat',
+                    idName: 'idPangkat',
+                    id
+                },
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            .then((res) => {
+                swal('Deleted', 'Pangkat Dihapus', 'success')
+            })
+            .catch((err) => {
+                return null
+            })
+        }
+    }
+
     useEffect(() => {
         getDataPangkat()
         const socket = io(`${api}`)
         socket.on('input-new-pangkat', data => {
+            getDataPangkat()
+        })
+        socket.on('delete-field-pangkat', data => {
             getDataPangkat()
         })
     }, [])

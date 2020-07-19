@@ -65,11 +65,10 @@ function Profile() {
             setJabatan(data.jabatan)
             setNrp(data.nrp)
             setPangkat(data.pangkat)
-            setUnit(data.unit)
-            setSubnit(data.submit)
+            setUnit('UNIT ' + data.unit)
+            setSubnit('SUBNIT ' + data.subnit)
             setNomorHp(data.nohp)
             setEmail(data.email)
-             
         })
         .catch((err) => {
             console.log(err)

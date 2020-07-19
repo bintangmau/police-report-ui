@@ -12,8 +12,13 @@ import Right from './Right'
 import Loader from '../Loader'
 
 function DetailContentA (props) {
+
     const params = props.match.params.id
     const [ data, setData ] = useState([])
+    const [dataMember ,setDataMember] = useState([])
+
+    // FOR CHILDREN
+    const [selectedUnit,setSelectedUnit] = useState(null)
 
     const getDetailsReportA = () => {
         Axios({
@@ -24,7 +29,12 @@ function DetailContentA (props) {
             }
         })
         .then((res) => {
-            setData(res.data)
+            setDataMember(res.data.dataMember)
+            setData(res.data.dataLaporan)
+
+            if (res.data.dataLaporan.unit) {
+                setSelectedUnit(res.data.dataLaporan.unit )
+            }
         })
         .catch((err) => {
             console.log(err)
@@ -84,6 +94,24 @@ function DetailContentA (props) {
         return date + ' ' + month  + ' ' + year
     }
 
+    let disposisiKanitUnit = () => {
+        Axios({
+            method : "POST",
+            url : `${api}report/update-report-status-disposisi`,
+            data : {
+                value : selectedUnit,
+                idReport : params
+            },
+            headers : {
+                token : localStorage.getItem('token')
+            }
+        })
+        .then(({data})=>{
+            alert('SUKSES')
+        })
+        .catch(err=>console.log(err , ' << ERROR CUK'))
+    }
+
     return (
         <div>
            <div style={{ display: 'flex', width: '100%' }}>
@@ -106,7 +134,12 @@ function DetailContentA (props) {
                     showDate={showDate}    
                 />
 
-                <Right />
+                <Right 
+                    dataMember={dataMember}
+                    selectedUnit={selectedUnit}
+                    setSelectedUnit={setSelectedUnit}
+                    disposisiKanitUnit={disposisiKanitUnit}
+                />
 
             </div>
 
