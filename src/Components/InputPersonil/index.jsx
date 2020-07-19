@@ -97,6 +97,27 @@ function InputPersonil () {
         })
     }
 
+    const register = () => {
+        Axios.post(api + 'admin/input-personil', {
+            nama,
+            jabatan,
+            pangkat,
+            nrp,
+            unit,
+            submit,
+            nomorHp,
+            email,
+            password
+        })
+        .then((res) => {
+            setLoading(false)
+            swal('Success', 'Input Personil Berhasil!', 'success')
+        })
+        .catch((err) => {
+            setLoading(false)
+        })
+    }
+
     // API BUTTON
     const inputPersonil = () => {
         if(!nama) {
@@ -124,24 +145,23 @@ function InputPersonil () {
         } else {
             setEmptyMessage("")
             setLoading(true)
-            Axios.post(api + 'admin/input-personil', {
-                nama,
-                jabatan,
-                pangkat,
-                nrp,
-                unit,
-                submit,
-                nomorHp,
-                email,
-                password
+            Axios({
+                method: "GET",
+                url: api + 'user/cek-nrp-login/' + nrp,
+                headers: {
+                    token: localStorage.getItem('token')
+                }
             })
             .then((res) => {
-                setLoading(false)
-                swal('Success', 'Input Personil Berhasil!', 'success')
+                if(res.data.message === 'nrp used') {
+                    setEmptyMessage('Nrp Telah Terdaftar!')
+                    setLoading(false)
+                } else {
+                    register()
+                }
             })
             .catch((err) => {
-                setLoading(false)
-                // console.log(err)
+                console.log(err)
             })
         }
     }

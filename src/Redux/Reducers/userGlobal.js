@@ -37,9 +37,8 @@ export default (state = INITIAL_STATE, action) => {
                 email: action.payload.email,
             }
         case 'LOG_OUT' :
-            return {...INITIAL_STATE, loading: false }
-    
-    
+            return {...INITIAL_STATE}
+            
             default : 
         return state
         }
