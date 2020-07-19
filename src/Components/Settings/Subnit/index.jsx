@@ -11,7 +11,13 @@ export default function ManageSubnit() {
     const [ newSubnit, setNewSubnit ] = useState('')
 
     const getDataSubnit = () => {
-        Axios.get(api + 'admin/get-data-subnit')
+        Axios({ 
+            method: "GET",
+            url: api + 'admin/get-data-subnit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataSubnit(res.data)
         })

@@ -11,7 +11,13 @@ export default function ManagePangkat() {
     const [ newPangkat, setNewPangkat ] = useState('')
 
     const getDataPangkat = () => {
-        Axios.get(api + 'admin/get-data-pangkat')
+        Axios({
+            method: "GET",
+            url: api + 'admin/get-data-pangkat',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataPangkat(res.data)
         })

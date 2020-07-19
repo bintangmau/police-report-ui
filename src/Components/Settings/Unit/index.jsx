@@ -11,7 +11,13 @@ export default function ManageUnit() {
     const [ newUnit, setNewUnit ] = useState('')
 
     const getDataUnit = () => {
-        Axios.get(api + 'admin/get-data-unit')
+        Axios({
+            method: "GET",
+            url: api + 'admin/get-data-unit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataUnit(res.data)
         })

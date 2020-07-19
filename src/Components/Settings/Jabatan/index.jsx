@@ -11,7 +11,13 @@ export default function ManageJabatan() {
     const [ newJabatan, setNewJabatan ] = useState('')
 
     const getDataJabatan = () => {
-        Axios.get(api + 'admin/get-data-jabatan')
+        Axios({
+            method: 'GET',
+            url: api + 'admin/get-data-jabatan',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataJabatan(res.data)
         })
