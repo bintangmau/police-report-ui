@@ -32,6 +32,8 @@ function DetailContentA (props) {
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
 
+            console.log(res.data.dataMember , ' <<< FIX >>>')
+
             if (res.data.dataLaporan.unit) {
                 setSelectedUnit(res.data.dataLaporan.unit )
             }

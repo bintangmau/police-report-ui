@@ -15,7 +15,7 @@ export default function Right(props) {
 
             {
                 dataMember.map((el,index)=>{
-                    console.log( typeof el.id , ' <<< ID PER LAPORAN')
+                    console.log( typeof el.idUnit , ' <<< ID PER LAPORAN')
                     console.log(selectedUnit , ' <<< SELECTED UNIT')
                     return (
                         <div 
@@ -23,10 +23,10 @@ export default function Right(props) {
                             style={
                                     {
                                         marginTop : index === 0 ? 0 : null,
-                                        backgroundColor : el.id === selectedUnit ? "#00698C" : null,
-                                        color : el.id === selectedUnit ? "white" : null
+                                        backgroundColor : el.idUnit === selectedUnit ? "#00698C" : null,
+                                        color : el.idUnit === selectedUnit ? "white" : null
                                     }}
-                            onClick={e=>setSelectedUnit(el.id)}
+                            onClick={e=>setSelectedUnit(el.idUnit)}
                         >
                             {el.jabatan + " " + el.unit}
                         </div>
