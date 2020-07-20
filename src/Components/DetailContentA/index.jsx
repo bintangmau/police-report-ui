@@ -61,7 +61,9 @@ function DetailContentA (props) {
     }
 
     useEffect(() => {
-        getDetailsReportA()
+        if (jabatanState ) {
+            getDetailsReportA()
+        }
     }, [jabatanState])
     
     let fillPenyidik = (id) => {
@@ -158,20 +160,27 @@ function DetailContentA (props) {
 
             <div className="detail-a-container">
 
-                <Left 
-                    data={data}
-                    showDate={showDate}    
-                />
+                {
+                    data &&
+                    <Left 
+                        data={data}
+                        showDate={showDate}    
+                    />
+                }
 
-                <Right 
-                    dataMember={dataMember}
-                    selectedUnit={selectedUnit}
-                    setSelectedUnit={setSelectedUnit}
-                    disposisiKanitUnit={disposisiKanitUnit}
-                    fillPenyidik={fillPenyidik}
-                    selectedPenyidik={selectedPenyidik}
-                    setSelectedPenyidik={setSelectedPenyidik}
-                />=
+                {
+                    jabatanState && jabatanState !== "PENYIDIK" &&
+                    <Right 
+                        dataMember={dataMember}
+                        selectedUnit={selectedUnit}
+                        setSelectedUnit={setSelectedUnit}
+                        disposisiKanitUnit={disposisiKanitUnit}
+                        fillPenyidik={fillPenyidik}
+                        selectedPenyidik={selectedPenyidik}
+                        setSelectedPenyidik={setSelectedPenyidik}
+                    />
+                }
+
 
             </div>
 
