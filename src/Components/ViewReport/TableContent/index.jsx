@@ -31,32 +31,31 @@ const useStyles1 = makeStyles(theme => ({
       flexShrink: 0,
       marginLeft: theme.spacing(2.5),
     },
-  }));
+}));
 
-  const useStyles2 = makeStyles(theme => ({
-    table: {
-      minWidth: 500,
+const useStyles2 = makeStyles(theme => ({
+  table: {
+    minWidth: 500,
+  },
+  tableRow : {
+    "&:hover": {
+      backgroundColor: "#fafafa !important",
+      borderLeft: '8px solid #f16821',
+      '& .row-index': {
+        marginLeft: '-4px'
+      }
     },
-    tableRow : {
-      "&:hover": {
-        backgroundColor: "#fafafa !important",
-        borderLeft: '8px solid #f16821',
-        '& .row-index': {
-          marginLeft: '-4px'
-        }
-      },
-      cursor : "pointer"
-    },
-    paper: {
-      borderRadius: 4,
-      position: 'absolute',
-      width: 500,
-      height : "auto",
-      backgroundColor: theme.palette.background.paper,
-      outline: 'none',
-    },
-  }));
-
+    cursor : "pointer"
+  },
+  paper: {
+    borderRadius: 4,
+    position: 'absolute',
+    width: 500,
+    height : "auto",
+    backgroundColor: theme.palette.background.paper,
+    outline: 'none',
+  },
+}));
 
 function TableContent (props) {
     
@@ -358,7 +357,7 @@ function TableContent (props) {
               <TablePagination
                 labelDisplayedRows={({ from, to, count }) => `${from}-${to} dari ${count}`}
                 labelRowsPerPage='Tampilan per halaman:'
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                rowsPerPageOptions={[6, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={9}
                 count={dataReport.length}
                 rowsPerPage={rowsPerPage}

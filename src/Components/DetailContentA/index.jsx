@@ -23,8 +23,9 @@ function DetailContentA (props) {
                 token: localStorage.getItem('token')
             }
         })
-        .then((res) => {
-            setData(res.data)
+        .then(({data}) => {
+            console.log(data , ' << VALUE DATA ANJING')
+            // setData(data.dataLaporan)
         })
         .catch((err) => {
             console.log(err)

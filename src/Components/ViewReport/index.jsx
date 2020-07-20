@@ -24,7 +24,7 @@ function ViewReport () {
         socket.on('input-report-a', data => {
             getDataReport(0)
         })
-    },[])
+    },[])   
 
     let getDataReport = (offsetParams) => {
         setDataReport([])
@@ -33,7 +33,7 @@ function ViewReport () {
             url : `${api}report/get-data-report`,
             data : {
                 offset : offsetParams ,
-                limit : 5
+                limit : 10
             },
             headers : {
                 token : localStorage.getItem('token')
