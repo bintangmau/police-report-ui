@@ -26,6 +26,11 @@ import Cancel from '../../Images/Profile/cancel.png'
 function Profile() {
     const history = useHistory()
 
+    const [ dataJabatan, setDataJabatan ] = useState([])
+    const [ dataPangkat, setDataPangkat ] = useState([])
+    const [ dataUnit, setDataUnit ] = useState([])
+    const [ dataSubnit, setDataSubnit ] = useState([])
+
     const [ showEditOne, setShowEditOne ] = useState('')
     const [ editNrp, setEditNrp ] = useState(false)
     const [ editPangkat, setEditPangkat ] = useState(false)
@@ -81,6 +86,69 @@ function Profile() {
         })
     }
 
+    const getDataJabatan = () => {
+        Axios({
+            method: "GET",
+            url: api + 'admin/get-data-jabatan',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
+        .then((res) => {
+            setDataJabatan(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataPangkat = () => {
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-pangkat',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
+        .then((res) => {
+            setDataPangkat(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataUnit = () => {
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-unit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
+        .then((res) => {
+            setDataUnit(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
+    const getDataSubnit = () => {
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-subnit',
+            headers: {
+                token: localStorage.getItem('token')
+            }})
+        .then((res) => {
+            setDataSubnit(res.data)
+        })
+        .catch((err) => {
+            return null
+        })
+    }
+
     const editDataPersonilOne = () => {
         setShowEditOne('')
         Axios({
@@ -113,9 +181,25 @@ function Profile() {
             history.push('/login')
         }
         getDataProfile()
+        getDataJabatan()
+        getDataPangkat()
+        getDataUnit()
+        getDataSubnit()
         const socket = io(`${api}`)
         socket.on('edit-personil-one', data => {
             getDataProfile()
+        })
+        socket.on('input-new-jabatan', data => {
+            getDataJabatan()
+        })
+        socket.on('input-new-pangkat', data => {
+            getDataPangkat()
+        })
+        socket.on('input-new-unit', data => {
+            getDataUnit()
+        })
+        socket.on('input-new-subnit', data => {
+            getDataSubnit()
         })
     }, [])
 
@@ -162,7 +246,14 @@ function Profile() {
                             showEditOne === 'jabatan'
                             ?
                             <h3 className='jabatan-input-edit'>
-                                <input type="text" placeholder={jabatan} onChange={(e) => handleChangeEditOne("jabatan", e.target.value)}/>
+                                <select onChange={(e) => handleChangeEditOne("jabatan", e.target.value)}>
+                                    <option value="" disabled selected>Pilih Jabatan</option>
+                                    {dataJabatan.map((val) => {
+                                        return (
+                                            <option value={val.idJabatan} key={val.idJabatan}>{val.jabatan}</option>
+                                        )
+                                    })}
+                                </select>
                                 <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                 <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                             </h3>
@@ -222,7 +313,14 @@ function Profile() {
                                     showEditOne ===  "pangkat"
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={pangkat} onChange={(e) => handleChangeEditOne("pangkat", e.target.value)}/>
+                                        <select onChange={(e) => handleChangeEditOne("pangkat", e.target.value)}>
+                                            <option value="" disabled selected>Pilih Pangkat</option>
+                                            {dataPangkat.map((val) => {
+                                                return (
+                                                    <option value={val.idPangkat} key={val.idPangkat}>{val.pangkat}</option>
+                                                )
+                                            })}
+                                        </select>
                                         <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
@@ -240,7 +338,14 @@ function Profile() {
                                     showEditOne === 'unit'
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={unit} onChange={(e) => handleChangeEditOne("unit", e.target.value)}/>
+                                        <select onChange={(e) => handleChangeEditOne("unit", e.target.value)}>
+                                            <option value="" disabled selected>Pilih Unit</option>
+                                            {dataUnit.map((val) => {
+                                                return (
+                                                    <option value={val.idUnit} key={val.idUnit}>{val.unit}</option>
+                                                )
+                                            })}
+                                        </select>
                                         <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
@@ -258,7 +363,14 @@ function Profile() {
                                     showEditOne === 'subnit'
                                     ?
                                     <h3 className='profile-info-details-input-box'>
-                                        <input type="text" placeholder={subnit} onChange={(e) => handleChangeEditOne("submit", e.target.value)}/>
+                                        <select onChange={(e) => handleChangeEditOne("submit", e.target.value)}>
+                                            <option value="" disabled selected>Pilih Subnit</option>
+                                            {dataSubnit.map((val) => {
+                                                return (
+                                                    <option value={val.idSubnit} key={val.idUnit}>{val.subnit}</option>
+                                                )
+                                            })}
+                                        </select>
                                         <img src={Save} alt="save-btn" onClick={editDataPersonilOne}/>
                                         <img src={Cancel} alt="cancel-btn" onClick={() => setShowEditOne('')}/>
                                     </h3>
