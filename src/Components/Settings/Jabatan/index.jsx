@@ -11,7 +11,13 @@ export default function ManageJabatan() {
     const [ newJabatan, setNewJabatan ] = useState('')
 
     const getDataJabatan = () => {
-        Axios.get(api + 'admin/get-data-jabatan')
+        Axios({
+            method: 'GET',
+            url: api + 'admin/get-data-jabatan',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataJabatan(res.data)
         })
@@ -27,7 +33,7 @@ export default function ManageJabatan() {
                     <td>{val.idJabatan}</td>
                     <td>{val.jabatan}</td>
                     <td>
-                        <button>Delete</button>
+                        <button onClick={() => deleteJabatan(val.idJabatan)}>Delete</button>
                     </td>
                 </tr>
             )
@@ -62,10 +68,35 @@ export default function ManageJabatan() {
         }
     }
 
+    const deleteJabatan = (id) => {
+        if(window.confirm('Anda yakin menghapus field ini? sangat beresiko untuk jalannya aplikasi')) {
+            Axios({
+                method: "POST",
+                url: api + 'admin/delete-field-personil',
+                data: {
+                    field: 'jabatan',
+                    idName: 'idJabatan',
+                    id
+                },
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            .then((res) => {
+                swal('Deleted', 'Jabatan Dihapus', 'success')
+            })
+            .catch((err) => {
+                return null
+            })
+        }
+    }
     useEffect(() => {
         getDataJabatan()
         const socket = io(`${api}`)
         socket.on('input-new-jabatan', data => {
+            getDataJabatan()
+        })
+        socket.on('delete-field-jabatan', data => {
             getDataJabatan()
         })
     }, [])

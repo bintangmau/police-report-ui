@@ -54,7 +54,13 @@ function InputReportA () {
     const [ nrp, setNrp ] = useState('')
 
     const getDataPangkat = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-pangkat'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-pangkat',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataPangkat(res.data)
         })
@@ -64,7 +70,13 @@ function InputReportA () {
     }
 
     const getDataUnit = () => {
-        Axios({ method: "GET", url: api + 'admin/get-data-unit'})
+        Axios({ 
+            method: "GET", 
+            url: api + 'admin/get-data-unit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataUnit(res.data)
         })

@@ -1,6 +1,6 @@
 // MODULES
 import React, { useEffect } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { api } from './helper/database'
 import { useDispatch } from 'react-redux'
@@ -17,7 +17,7 @@ import { dataAuth } from './Redux/Actions/userAction'
 function App() {
 
   const dispatch = useDispatch()
-
+  const history = useHistory()
   const getDataAuth = () => {
     Axios({
       method : 'GET',
@@ -38,8 +38,12 @@ function App() {
   useEffect(() => {
     if(localStorage.getItem('token')) {
       getDataAuth()
+    } else if(!localStorage.getItem('token')) {
+      history.push('/login')
     }
   }, [])
+
+
   return (
     <div style={{width : "100%"}}>
       {/* <h1>Musito Product Police Report</h1>

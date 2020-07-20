@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import io from 'socket.io-client'
 import { useSelector } from 'react-redux'
+import { useHistory  } from 'react-router-dom'
 
 // API
 import { api } from '../../helper/database'
 
 // COMPONENTS
 import Loader from '../../Components/Loader'
+
+// ACTIONS
+import { logOut } from '../../Redux/Actions/userAction'
 
 // CSS
 import './style.css'
@@ -20,6 +24,8 @@ import Save from '../../Images/Profile/save.png'
 import Cancel from '../../Images/Profile/cancel.png'
 
 function Profile() {
+    const history = useHistory()
+
     const [ showEditOne, setShowEditOne ] = useState('')
     const [ editNrp, setEditNrp ] = useState(false)
     const [ editPangkat, setEditPangkat ] = useState(false)
@@ -65,11 +71,10 @@ function Profile() {
             setJabatan(data.jabatan)
             setNrp(data.nrp)
             setPangkat(data.pangkat)
-            setUnit(data.unit)
-            setSubnit(data.submit)
+            setUnit('UNIT ' + data.unit)
+            setSubnit('SUBNIT ' + data.subnit)
             setNomorHp(data.nohp)
             setEmail(data.email)
-             
         })
         .catch((err) => {
             console.log(err)
@@ -97,7 +102,16 @@ function Profile() {
         })
     }
 
+    const logOutBtn = () => {
+        if(window.confirm('Yakin untuk keluar?')) {
+            logOut()
+        }
+    }
+
     useEffect(() => {
+        if(!localStorage.getItem('token')) {
+            history.push('/login')
+        }
         getDataProfile()
         const socket = io(`${api}`)
         socket.on('edit-personil-one', data => {
@@ -113,6 +127,8 @@ function Profile() {
                 </div>
             </center>
         )
+    } else if(!localStorage.getItem('token')) {
+        history.push('/login')
     }
 
     return (
@@ -296,10 +312,11 @@ function Profile() {
                         </div>
 
                     </div>
-                    
                 </div>
 
+
             </div>
+                <button className="log-out-btn" onClick={logOutBtn}>Log Out</button>
 
         </div>
     )

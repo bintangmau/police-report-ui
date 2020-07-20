@@ -79,24 +79,24 @@ export default function RightContentInputB(props) {
             </div>
 
             <div className="input-b-input-box">
-                <label>Pangkat</label> <br />
+                <label>Pangkat Yang Mengetahui</label> <br />
                 <select onChange={(e) => setPangkatMengetahui(e.target.value)}>
                     <option value="" disabled selected>Pilih Pangkat Mengetahui</option>
                     {dataPangkat.map((val) => {
                         return (
-                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                            <option value={val.idPangkat} key={val.idPangkat}>{val.pangkat}</option>
                         )
                     })}
                 </select>
             </div>
 
             <div className="input-b-input-box">
-                <label>Unit</label> <br />
+                <label>Unit Yang Mengetahui</label> <br />
                 <select onChange={(e) => setUnitMengetahui(e.target.value)}>
-                    <option value="" disabled selected>Pilih Pangkat Pelapor</option>
+                    <option value="" disabled selected>Pilih Unit Pelapor</option>
                     {dataUnit.map((val) => {
                         return (
-                            <option value={val.unit} key={val.idUnit}>{val.unit}</option>
+                            <option value={val.idUnit} key={val.idUnit}>{val.unit}</option>
                         )
                     })}
                 </select>
@@ -121,12 +121,12 @@ export default function RightContentInputB(props) {
             </div>
 
             <div className="input-b-input-box">
-                <label>Pangkat</label> <br />
+                <label>Pangkat Yang Menerima Laporan</label> <br />
                 <select onChange={(e) => setPangkatyangMenerimaLaporan(e.target.value)}>
                     <option value="" disabled selected>Pilih Pangkat Penerima Laporan</option>
                     {dataPangkat.map((val) => {
                         return (
-                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                            <option value={val.idPangkat} key={val.idPangkat}>{val.pangkat}</option>
                         )
                     })}
                 </select>

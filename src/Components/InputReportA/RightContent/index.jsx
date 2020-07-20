@@ -251,7 +251,7 @@ export default function RightContentInputA(props) {
                     <option value="" disabled selected>Pilih Pangkat Pelapor</option>
                     {dataPangkat.map((val) => {
                         return (
-                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                            <option value={val.idPangkat} key={val.idPangkat}>{val.pangkat}</option>
                         )
                     })}
                 </select>
@@ -281,7 +281,7 @@ export default function RightContentInputA(props) {
                     <option value="" disabled selected>Pilih Pangkat Mengetahui</option>
                     {dataPangkat.map((val) => {
                         return (
-                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                            <option value={val.idPangkat} key={val.idPangkat}>{val.pangkat}</option>
                         )
                     })}
                 </select>
@@ -302,7 +302,7 @@ export default function RightContentInputA(props) {
                     <option value="" disabled selected>Pilih Unit Mengetahui</option>
                     {dataUnit.map((val) => {
                         return (
-                            <option value={val.unit} key={val.idUnit}>{val.unit}</option>
+                            <option value={val.idUnit} key={val.idUnit}>{val.unit}</option>
                         )
                     })}
                 </select>

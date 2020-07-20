@@ -24,7 +24,7 @@ function LeftContent (props) {
                     <option value="" disabled selected>Pilih Jabatan</option>
                     {dataJabatan.map((val) => {
                         return (
-                            <option value={val.jabatan} key={val.idJabatan}>{val.jabatan}</option>
+                            <option value={val.idJabatan} key={val.idJabatan}>{val.jabatan}</option>
                         )
                     })}
                 </select>
@@ -37,7 +37,7 @@ function LeftContent (props) {
                     <option value="" disabled selected>Pilih Pangkat</option>
                     {dataPangkat.map((val) => {
                         return (
-                            <option value={val.pangkat} key={val.idPangkat}>{val.pangkat}</option>
+                            <option value={val.idPangkat} key={val.idPangkat}>{val.pangkat}</option>
                         )
                     })}
                 </select>
@@ -49,7 +49,7 @@ function LeftContent (props) {
                     <option value="" disabled selected>Pilih Unit</option>
                     {dataUnit.map((val) => {
                         return (
-                            <option value={val.unit} key={val.idUnit}>{val.unit}</option>
+                            <option value={val.idUnit} key={val.idUnit}>{val.unit}</option>
                         )
                     })}
                 </select>
@@ -61,7 +61,7 @@ function LeftContent (props) {
                     <option value="" disabled selected>Pilih Subnit</option>
                     {dataSubnit.map((val) => {
                         return (
-                            <option value={val.subnit} key={val.idUnit}>{val.subnit}</option>
+                            <option value={val.idSubnit} key={val.idUnit}>{val.subnit}</option>
                         )
                     })}
                 </select>

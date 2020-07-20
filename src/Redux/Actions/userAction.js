@@ -32,3 +32,12 @@ export const dataAuth = (data) => {
         })
     }
 }
+
+export const logOut = () => {
+    localStorage.removeItem('token')
+    return (dispatch) => {
+        dispatch({
+            type: "LOG_OUT"
+        })
+    }
+}

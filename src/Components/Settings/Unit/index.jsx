@@ -11,7 +11,13 @@ export default function ManageUnit() {
     const [ newUnit, setNewUnit ] = useState('')
 
     const getDataUnit = () => {
-        Axios.get(api + 'admin/get-data-unit')
+        Axios({
+            method: "GET",
+            url: api + 'admin/get-data-unit',
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        })
         .then((res) => {
             setDataUnit(res.data)
         })
@@ -27,7 +33,7 @@ export default function ManageUnit() {
                     <td>{val.idUnit}</td>
                     <td>{val.unit}</td>
                     <td>
-                        <button>Delete</button>
+                        <button onClick={() => deleteUnit(val.idUnit)}>Delete</button>
                     </td>
                 </tr>
             )
@@ -60,10 +66,36 @@ export default function ManageUnit() {
         })
     }
 
+    const deleteUnit = (id) => {
+        if(window.confirm('Anda yakin menghapus field ini? sangat beresiko untuk jalannya aplikasi')) {
+            Axios({
+                method: "POST",
+                url: api + 'admin/delete-field-personil',
+                data: {
+                    field: "unit",
+                    idName: "idUnit",
+                    id
+                },
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            .then((res) => {
+                swal('Deleted', 'Unit Dihapus', 'success')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    }
+
     useEffect(() => {
         getDataUnit()
         const socket = io(`${api}`)
         socket.on('input-new-unit', data => {
+            getDataUnit()
+        })
+        socket.on('delete-field-unit', data => {
             getDataUnit()
         })
     }, [])
