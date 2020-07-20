@@ -17,6 +17,7 @@ function ViewReport () {
 
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
+    const [ searchMessage, setSearchMessage ] = useState('')
 
     useEffect(()=>{
         getDataReport(0)
@@ -52,6 +53,10 @@ function ViewReport () {
             url : `${api}report/search-report-a?keyword=${str}`
         })
         .then(({data})=>{
+            if(data.length < 1) {
+                setSearchMessage("Hasil Pencarian Tidak Ditemukan")
+            }
+            // setSearchMessage('')
             setDataReport(data)
         })
         .catch(err=>{
@@ -81,7 +86,7 @@ function ViewReport () {
                 placeholder="Cari Laporan"
                 onChange={e=>searchData(e.target.value)}
             />
-
+            {searchMessage}
             <TableContent 
                 getDataReport={getDataReport} 
                 dataReport={dataReport}

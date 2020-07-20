@@ -143,34 +143,41 @@ function InputReportA () {
             setEmptyMessage("")
             const jamKejadian = new Date(waktuKejadianJam).getHours() + ':'  + new Date(waktuKejadianJam).getMinutes()
             const jamPelaporan = new Date(waktuDilaporkanJam).getHours() + ':'  + new Date(waktuDilaporkanJam).getMinutes()
-            Axios.post(api + 'report/input-report-a', {
-                mengetahuiUnit,
-                NrpPelapor,
-                PangkatPelapor,
-                nomorLaporanPolisi,
-                waktuKejadian,
-                waktuKejadianJam: jamKejadian,
-                tempatKejadian,
-                provinsi,
-                kota,
-                kecamatan,
-                kelurahan,
-                apaYangTerjadi,
-                pelaku,
-                korban,
-                waktuDilaporkan,  
-                waktuDilaporkanJam: jamPelaporan,
-                tindakPidanaAtauPasal,
-                sumir,
-                namaSaksi,
-                alamatSaksi,        
-                uraianSingkatKejadian,
-                barangBukti,
-                tindakanYangDiambil,
-                mengetahui,
-                pelapor,    
-                pangkat,
-                nrp 
+            Axios({
+                method: "POST",
+                url: api + 'report/input-report-a',
+                data: {
+                    mengetahuiUnit,
+                    NrpPelapor,
+                    PangkatPelapor,
+                    nomorLaporanPolisi,
+                    waktuKejadian,
+                    waktuKejadianJam: jamKejadian,
+                    tempatKejadian,
+                    provinsi,
+                    kota,
+                    kecamatan,
+                    kelurahan,
+                    apaYangTerjadi,
+                    pelaku,
+                    korban,
+                    waktuDilaporkan,  
+                    waktuDilaporkanJam: jamPelaporan,
+                    tindakPidanaAtauPasal,
+                    sumir,
+                    namaSaksi,
+                    alamatSaksi,        
+                    uraianSingkatKejadian,
+                    barangBukti,
+                    tindakanYangDiambil,
+                    mengetahui,
+                    pelapor,    
+                    pangkat,
+                    nrp 
+                },
+                headers: {
+                    token: localStorage.getItem('token')
+                }
             })
             .then((res) => {
                 setLoading(false)
