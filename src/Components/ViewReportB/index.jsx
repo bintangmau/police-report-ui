@@ -31,6 +31,9 @@ function ViewReport () {
             data : {
                 offset : offsetParams ,
                 limit : 5
+            },
+            headers: {
+                token: localStorage.getItem('token')
             }
         })
         .then(({data})=>{
