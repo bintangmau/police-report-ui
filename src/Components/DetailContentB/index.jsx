@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
+import { useSelector } from 'react-redux'
+
 
 // API
 import { api } from '../../helper/database'
@@ -19,6 +21,13 @@ function DetailContentA (props) {
     const params = props.match.params.id
     const [ data, setData ] = useState('')
 
+    const [dataMember ,setDataMember] = useState([])
+
+    // FOR CHILDREN
+    const [selectedUnit,setSelectedUnit] = useState(null)
+    const [selectedPenyidik,setSelectedPenyidik] = useState([])
+    const [penyidikState,setPenyidikState] = useState("")
+
     const getDetailsReportA = () => {
         Axios({
             method: "GET",
@@ -27,12 +36,24 @@ function DetailContentA (props) {
                 token: localStorage.getItem('token')
             }
         })
-        .then((res) => {
-            setData(res.data)
+        .then((res) => {            
+            setDataMember(res.data.dataMember)
+            setData(res.data.dataLaporan)
+            // setData(res.data)
         })
         .catch((err) => {
             console.log(err)
         })
+    }
+
+    let fillPenyidik = (id) => {
+        let arr = [...selectedPenyidik]
+        if (selectedPenyidik.filter(e=>e === id).length > 0) {
+            arr = arr.filter(e=>e !== id)
+        }else {
+            arr.push(id)
+        }
+        setSelectedPenyidik(arr)
     }
 
     let showDate = (dateParams) => {
@@ -75,7 +96,7 @@ function DetailContentA (props) {
             month = 'November'
             break;
         case 11 :
-            month = 'Desember'
+            month = 'desember'
             break;
         default:
             month = 'hehe'
@@ -83,8 +104,46 @@ function DetailContentA (props) {
         }
         return date + ' ' + month  + ' ' + year
     }
-    
 
+    let disposisiKanitUnit = () => {
+        Axios({
+            method : "POST",
+            url : `${api}report/update-report-status-disposisi-b`,
+            data : {
+                value : jabatanState !== "KASUBNIT" ? selectedUnit : selectedPenyidik,
+                idReport : params
+            },
+            headers : {
+                token : localStorage.getItem('token')
+            }
+        })
+        .then(({data})=>{
+            alert('SUKSES')
+        })
+        .catch(err=>console.log(err , ' << ERROR CUK'))
+    }
+
+    let updatePenyidik = () =>  {
+        Axios({
+            method : 'POST',
+            data : {
+                idLaporan : params,
+                value : penyidikState
+            },
+            headers : {
+                token : localStorage.getItem('token')
+            },
+            url : `${api}report/update-perkembangan-laporan-b`
+        })
+        .then(({data})=>{
+            alert('BERHASIL INPUT')
+        })
+        .catch(console.log)
+    }
+
+    // REDUX
+    const jabatanState = useSelector(state=>state.user.jabatan) 
+    
     useEffect(() => {
         getDetailsReportA()
     }, [])
@@ -106,12 +165,29 @@ function DetailContentA (props) {
 
             <div className="detail-a-container">
 
-                <Left 
-                    data={data}
-                    showDate={showDate}    
-                />
+                {
+                    data &&
+                    <Left 
+                        data={data}
+                        showDate={showDate}    
+                    />
+                }
 
-                <Right />
+                {
+                    data && jabatanState &&
+                    <Right 
+                        dataMember={dataMember}
+                        selectedUnit={selectedUnit}
+                        setSelectedUnit={setSelectedUnit}
+                        disposisiKanitUnit={disposisiKanitUnit}
+                        fillPenyidik={fillPenyidik}
+                        selectedPenyidik={selectedPenyidik}
+                        setSelectedPenyidik={setSelectedPenyidik}
+                        penyidikState={penyidikState}
+                        setPenyidikState={setPenyidikState}
+                        updatePenyidik={updatePenyidik}
+                    />
+                }
 
             </div>
 

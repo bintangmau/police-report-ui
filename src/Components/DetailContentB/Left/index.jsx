@@ -65,7 +65,7 @@ export default function Left(props) {
                 </div>
 
                 {
-                   data && data.tindakPidanaDanPasal.map((val) => {
+                   data.tindakPidanaDanPasal && data.tindakPidanaDanPasal.map((val) => {
                         return (
                             <div className="da-text">
                                 {val}
