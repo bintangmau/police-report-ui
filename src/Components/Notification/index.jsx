@@ -43,6 +43,15 @@ function Notification(){
                     }
                 })
                 socket.on('update-status-disposisi-unit', data => {
+                    // console.log(idUnit)
+                    // console.log(data.idUnitOrSubnit)
+                    if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
+                        disposisiKanitNotif()
+                    }
+                })
+                socket.on('update-status-disposisi-b-unit', data => {
+                    // console.log(idUnit)
+                    // console.log(data.idUnitOrSubnit)
                     if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
                         disposisiKanitNotif()
                     }

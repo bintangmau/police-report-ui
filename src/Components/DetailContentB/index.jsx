@@ -39,6 +39,18 @@ function DetailContentA (props) {
         .then((res) => {            
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
+            if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
+                setSelectedUnit(res.data.dataLaporan.unit )
+            }
+
+            if (res.data.dataLaporan.subnit && jabatanState === "KANIT") {
+                setSelectedUnit(res.data.dataLaporan.subnit)
+            }
+            
+            if (res.data.dataLaporan.penyidik && jabatanState === "KASUBNIT") {
+                
+                setSelectedPenyidik(res.data.dataLaporan.penyidik)
+            }
             // setData(res.data)
         })
         .catch((err) => {
