@@ -3,7 +3,7 @@ const INITIAL_STATE = {
     name: '',
     email: '',
     nrp: '',
-    jabatan: '',
+    jabatan: null,
     unit: '',
     subnit: ''
 }

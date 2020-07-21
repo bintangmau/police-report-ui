@@ -1,4 +1,6 @@
+// MODULE
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function Right(props) {
 
@@ -6,17 +8,30 @@ export default function Right(props) {
         dataMember,
         selectedUnit,
         setSelectedUnit,
-        disposisiKanitUnit
+        disposisiKanitUnit,
+        fillPenyidik,
+        selectedPenyidik,
+        setSelectedPenyidik
     } = props
+
+    const jabatanState = useSelector(state=>state.user.jabatan) 
+
+    let getUnitSubnit = () => {
+
+        if (jabatanState === "KANIT") {
+            return "subnit"
+        }else {
+            return "unit"
+        }
+
+    } 
 
     return (
         <div className="detail-a-right">
             <h3>Disposisi</h3>
 
             {
-                dataMember.map((el,index)=>{
-                    console.log( typeof el.idUnit , ' <<< ID PER LAPORAN')
-                    console.log(selectedUnit , ' <<< SELECTED UNIT')
+                jabatanState === "WAKASAT" && dataMember.map((el,index)=>{
                     return (
                         <div 
                             className="detail-disposisi-box" 
@@ -29,6 +44,46 @@ export default function Right(props) {
                             onClick={e=>setSelectedUnit(el.idUnit)}
                         >
                             {el.jabatan + " " + el.unit}
+                        </div>
+                    )
+                })
+            }
+
+            {
+                jabatanState === "KANIT" && dataMember.map((el,index)=>{
+
+                    return (
+                        <div 
+                            className="detail-disposisi-box" 
+                            style={
+                                    {
+                                        marginTop : index === 0 ? 0 : null,
+                                        backgroundColor : el.idSubmit === selectedUnit ? "#00698C" : null,
+                                        color : el.idSubmit === selectedUnit ? "white" : null
+                                    }}
+                            onClick={e=>setSelectedUnit(el.idSubmit)}
+                        >
+                            {el.jabatan + " " + el.submit}
+                        </div>
+                    )
+                })
+            }
+
+            {
+                jabatanState === "KASUBNIT" && dataMember.map((el,index)=>{
+
+                    return (
+                        <div 
+                            className="detail-disposisi-box" 
+                            style={
+                                    {
+                                        marginTop : index === 0 ? 0 : null,
+                                        backgroundColor : selectedPenyidik.filter(e=>e === el.id).length > 0 ? "#00698C" : null,
+                                        color : selectedPenyidik.filter(e=>e === el.id).length > 0 ? "white" : null
+                                    }}
+                            onClick={e=>fillPenyidik(el.id)}
+                        >
+                            {el.pangkat + " " + el.nama}
                         </div>
                     )
                 })

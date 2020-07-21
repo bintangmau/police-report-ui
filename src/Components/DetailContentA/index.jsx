@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { api } from '../../helper/database'
+import { useSelector } from 'react-redux'
+
 
 // STYLE
 import './style.css'
@@ -19,6 +21,10 @@ function DetailContentA (props) {
 
     // FOR CHILDREN
     const [selectedUnit,setSelectedUnit] = useState(null)
+    const [selectedPenyidik,setSelectedPenyidik] = useState([])
+
+    // REDUX
+    const jabatanState = useSelector(state=>state.user.jabatan) 
 
     const getDetailsReportA = () => {
         Axios({
@@ -34,9 +40,20 @@ function DetailContentA (props) {
 
             console.log(res.data.dataMember , ' <<< FIX >>>')
 
-            if (res.data.dataLaporan.unit) {
+            if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
                 setSelectedUnit(res.data.dataLaporan.unit )
             }
+
+            if (res.data.dataLaporan.subnit && jabatanState === "KANIT") {
+                setSelectedUnit(res.data.dataLaporan.subnit)
+            }
+            
+            if (res.data.dataLaporan.penyidik && jabatanState === "KASUBNIT") {
+                
+                setSelectedPenyidik(res.data.dataLaporan.penyidik)
+            }
+
+            console.log(res.data.dataLaporan , ' <<< DATA LAPORAN >>>>')
         })
         .catch((err) => {
             console.log(err)
@@ -45,7 +62,17 @@ function DetailContentA (props) {
 
     useEffect(() => {
         getDetailsReportA()
-    }, [])
+    }, [jabatanState])
+    
+    let fillPenyidik = (id) => {
+        let arr = [...selectedPenyidik]
+        if (selectedPenyidik.filter(e=>e === id).length > 0) {
+            arr = arr.filter(e=>e !== id)
+        }else {
+            arr.push(id)
+        }
+        setSelectedPenyidik(arr)
+    }
 
     let showDate = (dateParams) => {
         let date = new Date(dateParams).getDate() 
@@ -101,7 +128,7 @@ function DetailContentA (props) {
             method : "POST",
             url : `${api}report/update-report-status-disposisi`,
             data : {
-                value : selectedUnit,
+                value : jabatanState !== "KASUBNIT" ? selectedUnit : selectedPenyidik,
                 idReport : params
             },
             headers : {
@@ -141,7 +168,10 @@ function DetailContentA (props) {
                     selectedUnit={selectedUnit}
                     setSelectedUnit={setSelectedUnit}
                     disposisiKanitUnit={disposisiKanitUnit}
-                />
+                    fillPenyidik={fillPenyidik}
+                    selectedPenyidik={selectedPenyidik}
+                    setSelectedPenyidik={setSelectedPenyidik}
+                />=
 
             </div>
 
