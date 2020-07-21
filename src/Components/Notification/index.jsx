@@ -11,6 +11,8 @@ import { api } from '../../helper/database'
 function Notification(){
         // REDUX
         const jabatanState = useSelector(state=>state.user.jabatan) 
+        const idUnit = useSelector(state => state.user.idUnit)
+        const idSubnit = useSelector(state => state.user.idSubnit)
 
         const style = {
             position: "top-right",
@@ -24,6 +26,8 @@ function Notification(){
         const notify = () => toast(`🦄 ${jabatanState}`, style);
 
         const inputLaporanANotif = () => toast("Laporan baru telah masuk", style)
+        const disposisiKanitNotif = () => toast("Disposisi dari Wakasat telah masuk", style)
+        const disposisiKasubnitNotif = () => toast("Disposisi dari Kanit telah masuk", style)
 
         useEffect(() => {
             if (jabatanState ) {
@@ -36,6 +40,16 @@ function Notification(){
                 socket.on('input-report-b', data => {
                     if(jabatanState === "WAKASAT") {
                         inputLaporanANotif()
+                    }
+                })
+                socket.on('update-status-disposisi-unit', data => {
+                    if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
+                        disposisiKanitNotif()
+                    }
+                })
+                socket.on('update-status-disposisi-subnit', data => {
+                    if(jabatanState === "KASUBNIT" && idSubnit == data.idUnitOrSubnit) {
+                        disposisiKasubnitNotif()
                     }
                 })
 
