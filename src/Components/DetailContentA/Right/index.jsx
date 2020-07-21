@@ -11,7 +11,10 @@ export default function Right(props) {
         disposisiKanitUnit,
         fillPenyidik,
         selectedPenyidik,
-        setSelectedPenyidik
+        setSelectedPenyidik,
+        penyidikState,
+        setPenyidikState,
+        updatePenyidik
     } = props
 
     const jabatanState = useSelector(state=>state.user.jabatan) 
@@ -28,7 +31,13 @@ export default function Right(props) {
 
     return (
         <div className="detail-a-right">
-            <h3>Disposisi</h3>
+
+            {
+                jabatanState !== "PENYIDIK" ?
+                <h3>Disposisi</h3> :
+                <h3>Update Perkembangan</h3>
+
+            }
 
             {
                 jabatanState === "WAKASAT" && dataMember.map((el,index)=>{
@@ -89,7 +98,19 @@ export default function Right(props) {
                 })
             }
 
-            <div className="detail-disposisi-button" onClick={e=>disposisiKanitUnit()}>
+            {
+                jabatanState === "PENYIDIK" && 
+                <textarea 
+                    className="input-penyidik"
+                    onChange={e=>setPenyidikState(e.target.value)}
+                    required={true}
+                    value={penyidikState}
+                >
+
+                </textarea>
+            }
+
+            <div className="detail-disposisi-button" onClick={e=> jabatanState !== "PENYIDIK" ? disposisiKanitUnit() :  updatePenyidik()}>
                 Simpan
             </div>
 

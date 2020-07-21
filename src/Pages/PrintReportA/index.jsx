@@ -239,29 +239,34 @@ class PrintReportA extends Component {
     }
 
     renderBarangBukti = (arr) => {
-        return arr.map((el,index)=>{
-            return (
-                <div style={{width: "100%" , display: "flex" , flexDirection: "row"}}>
-                    <div>
-                        -
-                    </div> 
-                    <div style={{marginLeft: "7%"}}>
-                        {el}
+        // if (arr) {
+            return arr.map((el,index)=>{
+                return (
+                    <div style={{width: "100%" , display: "flex" , flexDirection: "row"}}>
+                        <div>
+                            -
+                        </div> 
+                        <div style={{marginLeft: "7%"}}>
+                            {el}
+                        </div>
                     </div>
-                </div>
-            )
-        })
+                )
+            })
+        // }
     }
 
     renderSaksi = (arr) => {
-        return arr.map((el,index)=>{
-            return (
-                <div style={{display: "flex" , flexDirection: "row" ,  width: "100%"}}>
-                    <div style={{marginRight: "2%"}}>{index + 1}.</div>
-                    <div>{el}</div>
-                </div>
-            )
-        })
+        if (arr) {
+
+            return arr.map((el,index)=>{
+                return (
+                    <div style={{display: "flex" , flexDirection: "row" ,  width: "100%"}}>
+                        <div style={{marginRight: "2%"}}>{index + 1}.</div>
+                        <div>{el}</div>
+                    </div>
+                )
+            })
+        }
     }
 
     render () {
@@ -385,7 +390,7 @@ class PrintReportA extends Component {
                                     </div>
                 
                                     <div className="content-pdf-value-1">
-                                        {/* {this.props.data.tempatKejadian.toUpperCase()}, {this.props.data.kelurahan.toUpperCase()}, {this.props.data.kecamatan.toUpperCase()}, {this.props.data.kota.toUpperCase()}, {this.props.data.provinsi.toUpperCase()} */}
+                                        {this.props.data.tempatKejadian.toUpperCase()}, {this.props.data.kelurahan.toUpperCase()}, {this.props.data.kecamatan.toUpperCase()}, {this.props.data.kota.toUpperCase()}, {this.props.data.provinsi.toUpperCase()}
                                     </div>
                 
                                 </div>

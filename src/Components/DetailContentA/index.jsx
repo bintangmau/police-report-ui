@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux'
 // STYLE
 import './style.css'
 
+// CHILDREN STYLE
+import './form.css'
+
 // COMPONENTS
 import Left from './Left'
 import Right from './Right'
@@ -16,12 +19,14 @@ import Loader from '../Loader'
 function DetailContentA (props) {
 
     const params = props.match.params.id
-    const [ data, setData ] = useState([])
+    const [ data, setData ] = useState(null)
     const [dataMember ,setDataMember] = useState([])
 
     // FOR CHILDREN
     const [selectedUnit,setSelectedUnit] = useState(null)
     const [selectedPenyidik,setSelectedPenyidik] = useState([])
+    const [penyidikState,setPenyidikState] = useState("")
+    // conn
 
     // REDUX
     const jabatanState = useSelector(state=>state.user.jabatan) 
@@ -37,6 +42,8 @@ function DetailContentA (props) {
         .then((res) => {
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
+
+            // setLoad
 
             console.log(res.data.dataMember , ' <<< FIX >>>')
 
@@ -143,13 +150,30 @@ function DetailContentA (props) {
         .catch(err=>console.log(err , ' << ERROR CUK'))
     }
 
+    let updatePenyidik = () =>  {
+        Axios({
+            method : 'POST',
+            data : {
+                idLaporan : params,
+                value : penyidikState
+            },
+            headers : {
+                token : localStorage.getItem('token')
+            },
+            url : `${api}report/update-perkembangan-laporan`
+        })
+        .then(({data})=>{
+            alert('BERHASIL INPUT')
+        })
+        .catch(console.log)
+    }
+
     return (
         <div>
            <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Details Laporan A</h1> 
                 {
-                    data.length === 0
-                    ?
+                    !data?
                     <div style={{ marginTop: '24px', marginLeft: '10px' }}>
                         <Loader />
                     </div>
@@ -169,7 +193,7 @@ function DetailContentA (props) {
                 }
 
                 {
-                    jabatanState && jabatanState !== "PENYIDIK" &&
+                    data && jabatanState  &&
                     <Right 
                         dataMember={dataMember}
                         selectedUnit={selectedUnit}
@@ -178,6 +202,9 @@ function DetailContentA (props) {
                         fillPenyidik={fillPenyidik}
                         selectedPenyidik={selectedPenyidik}
                         setSelectedPenyidik={setSelectedPenyidik}
+                        penyidikState={penyidikState}
+                        setPenyidikState={setPenyidikState}
+                        updatePenyidik={updatePenyidik}
                     />
                 }
 

@@ -116,23 +116,28 @@ export default function Left(props) {
                     {data.uraianSingkatKejadian}
                 </div>
                 
-                <ReactToPrint
-                    trigger={()=> <div className="da-button"> </div> }
-                    content={() => componentRef.current}
-                    pageStyle=""
-                />
-
+                {
+                    data &&
+                    <ReactToPrint
+                        trigger={()=> <div className="da-button"> </div> }
+                        content={() => componentRef.current}
+                        pageStyle=""
+                    />
+                }
                 
-                {/* {
+                {
                     data &&
                     <div style={{display : "none"}}>
-                        <PrintReportA
-                            data={data}
-                            ref={componentRef}
-                        />
+                        {
+                            data &&
+                            <PrintReportA
+                                data={data}
+                                ref={componentRef}
+                            />
+                        }
                     </div>
                 }
- */}
+
 
         </div>
     )
