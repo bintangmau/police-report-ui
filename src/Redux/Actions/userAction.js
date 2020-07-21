@@ -1,5 +1,6 @@
 export const loginPersonil = (token, email, nama, id, nrp, jabatan, unit, submit) => {
     localStorage.setItem('token', token)
+    console.log(token, email, nama, id, nrp, jabatan, unit, submit)
     return (dispatch) => {
         dispatch({
         type: 'LOGIN',

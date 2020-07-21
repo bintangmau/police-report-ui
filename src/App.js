@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Switch, Route, withRouter, useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { api } from './helper/database'
-import { useDispatch } from 'react-redux'
+import { useDispatch} from 'react-redux'
 
 // COMPONENTS
 import InputPersonil from './Pages/InputPersonil'
@@ -15,9 +15,19 @@ import LupaPassword from './Pages/LupaPassword'
 import { dataAuth } from './Redux/Actions/userAction'
 
 function App() {
-
   const dispatch = useDispatch()
   const history = useHistory()
+
+  const style = {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+  }
+
   const getDataAuth = () => {
     Axios({
       method : 'GET',
@@ -38,10 +48,12 @@ function App() {
   useEffect(() => {
     if(localStorage.getItem('token')) {
       getDataAuth()
+      // if ()
     } else if(!localStorage.getItem('token')) {
       history.push('/login')
     }
   }, [])
+
 
 
   return (

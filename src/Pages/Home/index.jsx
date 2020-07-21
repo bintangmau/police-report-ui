@@ -48,7 +48,7 @@ function Home () {
 
     const drawer = (
         <div >
-            <Notification />
+            
         <div className={classes.toolbar} />
             <div className={classes.imgContainer}>
             {/* <img src={logoSgu} className={classes.logosgu} alt="img" /> */}
@@ -235,6 +235,7 @@ function Home () {
                     </Drawer>
                 </Hidden>
             </nav>
+            <Notification />
 
             <main className={classes.content}>
                 <div className={classes.toolbar}/>

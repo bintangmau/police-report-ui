@@ -1,23 +1,50 @@
-import React from 'react';
- 
+// MODULES
+import React, { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import io from 'socket.io-client'
+import { useSelector } from 'react-redux'
+
+// API
+import { api } from '../../helper/database'
 
 function Notification(){
-const notify = () => toast('🦄 Wow so easy!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
+        // REDUX
+        const jabatanState = useSelector(state=>state.user.jabatan) 
+
+        const style = {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        }
+        const notify = () => toast(`🦄 ${jabatanState}`, style);
+
+        const inputLaporanANotif = () => toast("Laporan baru telah masuk", style)
+
+        useEffect(() => {
+            if (jabatanState ) {
+                const socket = io(`${api}`)
+                socket.on('input-report-a', data => {
+                    if(jabatanState === "WAKASAT") {
+                        inputLaporanANotif()
+                    }
+                })
+                socket.on('input-report-b', data => {
+                    if(jabatanState === "WAKASAT") {
+                        inputLaporanANotif()
+                    }
+                })
+
+            }
+        },[jabatanState])
 
 return (
     <div>
-    <button onClick={notify}>Notify !</button>
-    <ToastContainer />
+        <ToastContainer />
     </div>
 );
 }
