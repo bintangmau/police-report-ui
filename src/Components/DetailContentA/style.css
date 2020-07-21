@@ -81,3 +81,11 @@
     cursor: pointer;
     margin-top: 24px;
 }
+
+.da-button {
+    width: 20%;
+    height: 60px;
+    background-color: blue;
+    border-radius: 6px;
+    cursor: pointer;
+}

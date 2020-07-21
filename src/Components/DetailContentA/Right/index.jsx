@@ -63,7 +63,7 @@ export default function Right(props) {
                                     }}
                             onClick={e=>setSelectedUnit(el.idSubmit)}
                         >
-                            {el.jabatan + " " + el.submit}
+                            {el.jabatan + " " + el.submit }
                         </div>
                     )
                 })
