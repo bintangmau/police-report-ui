@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Switch, Route, withRouter, useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { api } from './helper/database'
-import { useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // COMPONENTS
 import InputPersonil from './Pages/InputPersonil'
@@ -37,7 +37,7 @@ function App() {
       }
     })
     .then((res) => {
-      // dataAuth(res.data)
+
       dispatch(dataAuth(res.data))
     })
     .catch((err) => {

@@ -20,7 +20,9 @@ export default (state = INITIAL_STATE, action) => {
                 nrp: action.payload.nrp,
                 jabatan: action.payload.jabatan,
                 unit: action.payload.unit,
-                subnit: action.payload.subnit
+                subnit: action.payload.subnit,
+                idUnit: action.payload.idUnit,
+                idSubnit: action.payload.idSubnit
             }
         case 'DATA_AUTH' :
             return {...INITIAL_STATE,

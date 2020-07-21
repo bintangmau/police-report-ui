@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 // ACTIONS
 import { loginPersonil } from '../../Redux/Actions'
@@ -25,6 +26,7 @@ function Login () {
     const [ loading, setLoading ] = useState(false)
     const [ loginMessage, setLoginMessage ] = useState(null)
 
+    const dispatch = useDispatch()
     const history = useHistory()
     
     const loginPersonilBtn = () => {
@@ -46,12 +48,12 @@ function Login () {
                     setLoading(false)
                     setLoginMessage(res.data.message)
                 } else {
-                    console.log(res.data)
+                    localStorage.setItem('token', res.data.token)
                     var data = res.data.data
                     setLoginMessage('')
                     setLoading(false)
+                    dispatch(loginPersonil(data))
                     history.push('/')
-                    loginPersonil(res.data.token, data.email, data.nama, data.id, data.nrp, data.jabatan, data.unit, data.submit, data.idUnit, data.idSubnit)
                 }
             })
             .catch((err) => {

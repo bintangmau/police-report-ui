@@ -45,8 +45,6 @@ function DetailContentA (props) {
 
             // setLoad
 
-            console.log(res.data.dataMember , ' <<< FIX >>>')
-
             if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
                 setSelectedUnit(res.data.dataLaporan.unit )
             }
@@ -60,7 +58,6 @@ function DetailContentA (props) {
                 setSelectedPenyidik(res.data.dataLaporan.penyidik)
             }
 
-            console.log(res.data.dataLaporan , ' <<< DATA LAPORAN >>>>')
         })
         .catch((err) => {
             console.log(err)

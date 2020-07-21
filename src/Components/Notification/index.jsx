@@ -43,20 +43,20 @@ function Notification(){
                     }
                 })
                 socket.on('update-status-disposisi-unit', data => {
-                    // console.log(idUnit)
-                    // console.log(data.idUnitOrSubnit)
+                    console.log(idUnit + '=' + data.idUnitOrSubnit, "KANIT BRO")
+                  
                     if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
                         disposisiKanitNotif()
                     }
                 })
                 socket.on('update-status-disposisi-b-unit', data => {
-                    // console.log(idUnit)
-                    // console.log(data.idUnitOrSubnit)
+                    
                     if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
                         disposisiKanitNotif()
                     }
                 })
                 socket.on('update-status-disposisi-subnit', data => {
+                    console.log(idSubnit + '=' + data.idUnitOrSubnit, "KASUBNITs BRO")
                     if(jabatanState === "KASUBNIT" && idSubnit == data.idUnitOrSubnit) {
                         disposisiKasubnitNotif()
                     }

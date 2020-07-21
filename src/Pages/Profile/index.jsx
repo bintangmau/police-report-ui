@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import io from 'socket.io-client'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory  } from 'react-router-dom'
 
 // API
@@ -24,6 +24,7 @@ import Save from '../../Images/Profile/save.png'
 import Cancel from '../../Images/Profile/cancel.png'
 
 function Profile() {
+    const dispatch = useDispatch()
     const history = useHistory()
 
     const [ dataJabatan, setDataJabatan ] = useState([])
@@ -172,7 +173,7 @@ function Profile() {
 
     const logOutBtn = () => {
         if(window.confirm('Yakin untuk keluar?')) {
-            logOut()
+           dispatch(logOut())
         }
     }
 
