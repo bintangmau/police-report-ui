@@ -5,7 +5,9 @@ const INITIAL_STATE = {
     nrp: '',
     jabatan: null,
     unit: '',
-    subnit: ''
+    subnit: '',
+    idUnit: '',
+    idSubnit: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,7 +30,9 @@ export default (state = INITIAL_STATE, action) => {
                 nrp: action.payload.nrp,
                 jabatan: action.payload.jabatan,
                 unit: action.payload.unit,
-                subnit: action.payload.subnit
+                subnit: action.payload.subnit,
+                idUnit: action.payload.idUnit,
+                idSubnit: action.payload.idSubnit
             }
         case 'KEEP_LOGIN':
             return {...INITIAL_STATE,

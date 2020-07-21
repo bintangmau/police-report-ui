@@ -1,4 +1,4 @@
-export const loginPersonil = (token, email, nama, id, nrp, jabatan, unit, submit) => {
+export const loginPersonil = (token, email, nama, id, nrp, jabatan, unit, submit, idUnit, idSubnit) => {
     localStorage.setItem('token', token)
     console.log(token, email, nama, id, nrp, jabatan, unit, submit)
     return (dispatch) => {
@@ -11,7 +11,9 @@ export const loginPersonil = (token, email, nama, id, nrp, jabatan, unit, submit
                 nrp: nrp,
                 jabatan: jabatan,
                 unit: unit,
-                subnit: submit
+                subnit: submit,
+                idUnit: idUnit,
+                idSubnit: idSubnit
             }
         })
     }
@@ -20,7 +22,7 @@ export const loginPersonil = (token, email, nama, id, nrp, jabatan, unit, submit
 export const dataAuth = (data) => {
     return (dispatch) => {
         dispatch({
-        type: 'LOGIN',
+        type: 'DATA_AUTH',
             payload: {
                 id: data.id,
                 name: data.nama,
@@ -28,7 +30,9 @@ export const dataAuth = (data) => {
                 nrp: data.nrp,
                 jabatan: data.jabatan,
                 unit: data.unit,
-                subnit: data.submit
+                subnit: data.submit,
+                idUnit: data.idUnit,
+                idSubnit: data.idSubnit
             }
         })
     }
