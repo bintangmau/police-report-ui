@@ -123,7 +123,7 @@ export default function Left(props) {
                 />
 
                 
-                {
+                {/* {
                     data &&
                     <div style={{display : "none"}}>
                         <PrintReportA
@@ -132,7 +132,7 @@ export default function Left(props) {
                         />
                     </div>
                 }
-
+ */}
 
         </div>
     )
