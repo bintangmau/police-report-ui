@@ -342,7 +342,7 @@ function Profile() {
                                             <option value="" disabled selected>Pilih Unit</option>
                                             {dataUnit.map((val) => {
                                                 return (
-                                                    <option value={val.idUnit} key={val.idUnit}>{val.unit}</option>
+                                                    <option value={val.idUnit} key={val.idUnit}>UNIT {val.unit}</option>
                                                 )
                                             })}
                                         </select>
@@ -367,7 +367,7 @@ function Profile() {
                                             <option value="" disabled selected>Pilih Subnit</option>
                                             {dataSubnit.map((val) => {
                                                 return (
-                                                    <option value={val.idSubnit} key={val.idUnit}>{val.subnit}</option>
+                                                    <option value={val.idSubnit} key={val.idUnit}>SUBNIT {val.subnit}</option>
                                                 )
                                             })}
                                         </select>

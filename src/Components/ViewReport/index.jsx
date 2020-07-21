@@ -1,6 +1,7 @@
 // MODULE
 import React , { useEffect , useState } from 'react'
 import Axios from 'axios'
+import { useSelector } from 'react-redux'
 
 // STYLE
 import './style.css'
@@ -14,20 +15,38 @@ import io from 'socket.io-client'
 import {api} from '../../helper/database/index'
 
 function ViewReport () {
+    const jabatanState = useSelector(state=>state.user.jabatan) 
 
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
     const [ searchMessage, setSearchMessage ] = useState('')
+    
+    const style = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    }
 
     useEffect(()=>{
         getDataReport(0)
-        const socket = io(`${api}`)
-        socket.on('input-report-a', data => {
-            getDataReport(0)
-        })
-    },[])   
+    },[])
 
-    let getDataReport = (offsetParams) => {
+    useEffect(()=>{
+        // getDataReport(0)
+        if (jabatanState) {
+            const socket = io(`${api}`)
+            socket.on('input-report-a', data => {
+                getDataReport(0,true)
+            })
+        }
+ 
+    },[jabatanState])   
+
+    let getDataReport = (offsetParams,isNotif) => {
         setDataReport([])
         Axios({
             method : "POST",

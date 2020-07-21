@@ -65,15 +65,20 @@
 }
 
 .jabatan-input-edit {
-    width: 80%;
+    width: 100%;
     margin-top: -15px;
 }
 
+.jabatan-input-edit select {
+    border: 0.5px solid #dbdbdb;
+    outline: none;
+    padding-left: 7px;
+    padding-right: 7px;
+}
 
 .jabatan-input-edit img {
     width: 18px;
     margin-left: 10px;
-    transition: 0.5s;
     border-radius: 3px;  
 }
 
@@ -84,7 +89,6 @@
 .profile-info-details-column-right img {
     width: 16px;
     margin-left: 10px;
-    transition: 0.5s;
     border-radius: 3px;
 }
 
@@ -97,7 +101,6 @@
 }
 
 .profile-info-details-input-box input {
-    /* background-color: #dbdbdb; */
     border: 0.5px solid #dbdbdb;
     outline: none;
     height: 22px;
@@ -107,16 +110,22 @@
     padding-bottom: 5px;
 }
 
+.profile-info-details-input-box select {
+    border: 0.5px solid #dbdbdb;
+    outline: none;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
 .profile-info-details-input-box img {
     width: 18px;
     height: 18px;
-    transition: 0.5s;
+
 }
 
 .edit-button-01 {
     width: 16px;
     height: 16px;
-    transition: 0.5s;
     margin-left: 5px;
 }
 
@@ -144,7 +153,6 @@
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    transition: 0.3s;
     margin-bottom: 50px;
 }
 
