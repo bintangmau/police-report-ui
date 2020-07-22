@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // ACTIONS
-import { loginPersonil } from '../../Redux/Actions'
+import { loginPersonil, logOut } from '../../Redux/Actions'
 
 // API
 import { api } from '../../helper/database'
@@ -26,10 +26,12 @@ function Login () {
     const [ loading, setLoading ] = useState(false)
     const [ loginMessage, setLoginMessage ] = useState(null)
 
+    const idUnitState = useSelector(state => state.user.idUnit)
     const dispatch = useDispatch()
     const history = useHistory()
     
     const loginPersonilBtn = () => {
+        console.log(idUnitState, "JANCOK LOGIN")
         if(!nrp) {
             setLoginMessage(null)
             setNrpEmpty('(Masukkan NRP!)')

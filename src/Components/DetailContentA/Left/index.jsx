@@ -13,8 +13,6 @@ export default function Left(props) {
 
     const componentRef = useRef()
 
-    console.log(data , ' << VALUE DATA >>')
-
     return (
         <div className='detail-a-left'>
              <div className="da-title" style={{marginTop : 0}}>

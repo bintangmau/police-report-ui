@@ -45,7 +45,7 @@ function Notification(){
                 socket.on('update-status-disposisi-unit', data => {
                     console.log(idUnit + '=' + data.idUnitOrSubnit, "KANIT BRO")
                   
-                    if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
+                    if(jabatanState === "KANIT" && idUnit === data.idUnitOrSubnit) {
                         disposisiKanitNotif()
                     }
                 })
@@ -63,7 +63,7 @@ function Notification(){
                 })
 
             }
-        },[jabatanState])
+        },[jabatanState,idUnit])
 
 return (
     <div>

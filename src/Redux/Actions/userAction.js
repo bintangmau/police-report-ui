@@ -1,7 +1,7 @@
 export const loginPersonil = (data) => {
     return (dispatch) => {
         dispatch({
-            type: 'LOGIN',
+            type: 'DATA_AUTH',
             payload: {
                 id: data.id,
                 name: data.nama,
