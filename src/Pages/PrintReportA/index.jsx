@@ -354,13 +354,14 @@ class PrintReportA extends Component {
                 
                                     <div className="content-pdf-value-1">
                                         Hari {this.state.hari[new Date(this.props.data.waktuKejadian).getDay()]}, {this.showDate(this.props.data.waktuKejadian)}, sekitar jam {
-                                            new Date(this.props.data.waktuKejadianJam).getHours() < 9 ? 
-                                            '0' + new Date(this.props.data.waktuKejadianJam).getHours() : 
-                                            new Date(this.props.data.waktuKejadianJam).getHours()                                            
-                                        }:{
-                                            new Date(this.props.data.waktuKejadianJam).getMinutes() < 9 ? 
-                                            '0' + new Date(this.props.data.waktuKejadianJam).getMinutes() : 
-                                            new Date(this.props.data.waktuKejadianJam).getMinutes()
+                                            this.props.data.waktuKejadianJam
+                                        //     new Date(this.props.data.waktuKejadianJam).getHours() < 9 ? 
+                                        //     '0' + new Date(this.props.data.waktuKejadianJam).getHours() : 
+                                        //     new Date(this.props.data.waktuKejadianJam).getHours()                                            
+                                        // }:{
+                                        //     new Date(this.props.data.waktuKejadianJam).getMinutes() < 9 ? 
+                                        //     '0' + new Date(this.props.data.waktuKejadianJam).getMinutes() : 
+                                        //     new Date(this.props.data.waktuKejadianJam).getMinutes()
                                         }
                                     </div>
                 
@@ -606,7 +607,7 @@ class PrintReportA extends Component {
                                     </div>
                                     <div className="content-reporta-1-first-content" style={{marginTop: "10px"}}>
                                         {
-                                            this.renderBarangBukti(this.props.data.barangBukti ? this.props.data.barangBukti : [])
+                                            this.renderBarangBukti(this.props.data.barangbukti ? this.props.data.barangbukti : [])
                                         }
                                         {/* <div style={{width: "100%" , display: "flex" , flexDirection: "row"}}>
                                             <div>
@@ -711,7 +712,7 @@ class PrintReportA extends Component {
                                         <div style={{marginRight: "10%", width :  "30%"}}>Jabatan & NRP</div>
                                         <div >:</div>
                                         {/* <div style={{marginLeft: "5%"}}>IPDA Nrp, 94071331</div> */}
-                                        <div style={{marginLeft: "5%"}}>{this.props.data.PangkatPelapor + " Nrp " + this.props.data.NrpPelapor }</div>
+                                        <div style={{marginLeft: "5%"}}>{this.props.data.jabatan + " Nrp " + this.props.data.NrpPelapor }</div>
                                     </div>
                 
                                     <div style={{display: "flex" ,flexDirection: "row" , width: "100%" , marginTop: "auto"}}>

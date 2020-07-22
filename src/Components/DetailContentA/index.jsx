@@ -40,6 +40,7 @@ function DetailContentA (props) {
             }
         })
         .then((res) => {
+            console.log(res.data.dataLaporan)
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
 
