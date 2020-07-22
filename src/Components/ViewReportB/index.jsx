@@ -14,6 +14,8 @@ function ViewReport () {
 
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
+    const [ searchMessage, setSearchMessage ] = useState('')
+    const [ loading, setLoading ] = useState(false)
 
     useEffect(()=>{
         getDataReport(0)
@@ -21,9 +23,19 @@ function ViewReport () {
         socket.on('input-report-b', data => {
             getDataReport(0)
         })
+        socket.on('update-status-disposisi-b-unit', data => {
+            getDataReport(0,true)
+        })
+        socket.on('update-status-disposisi-b-subnit', data => {
+            getDataReport(0,true)
+        })
+        socket.on('update-status-disposisi-b-penyidik', data => {
+            getDataReport(0,true)
+        })
     },[])
 
     let getDataReport = (offsetParams) => {
+        setLoading(true)
         setDataReport([])
         Axios({
             method : "POST",
@@ -37,18 +49,30 @@ function ViewReport () {
             }
         })
         .then(({data})=>{
-            setDataReport(data)
+            if(data.length < 1) {
+                setLoading(false)
+                setSearchMessage("Data tidak ada")
+            } else {
+                setLoading(false)
+                setDataReport(data)
+            }
         })
-        .catch(console.log)
+        .catch((err) => 
+            setLoading(false)
+        )
     }
 
     let searchData = (str) => {
         setDataReport([])
+        setSearchMessage('')
         Axios({
             method : "GET",
             url : `${api}report/search-report-b?keyword=${str}`
         })
         .then(({data})=>{
+            if(data.length < 1) {
+                setSearchMessage("Hasil Pencarian Tidak Ditemukan")
+            }
             setDataReport(data)
         })
         .catch(err=>{
@@ -61,7 +85,7 @@ function ViewReport () {
             <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Lihat Laporan B</h1> 
                 {
-                    !dataReport[0]
+                    loading
                     ?
                     <div style={{ marginTop: '24px', marginLeft: '10px' }}>
                         <Loader />
@@ -76,8 +100,9 @@ function ViewReport () {
                 className="search-report-02" 
                 placeholder="Cari Laporan"
                 onChange={e=>searchData(e.target.value)}
+                style={{ marginRight: '20px' }}
             />
-
+            {searchMessage}
             <TableContent 
                 getDataReport={getDataReport} 
                 dataReport={dataReport}

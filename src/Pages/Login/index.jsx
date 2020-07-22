@@ -31,7 +31,6 @@ function Login () {
     const history = useHistory()
     
     const loginPersonilBtn = () => {
-        console.log(idUnitState, "JANCOK LOGIN")
         if(!nrp) {
             setLoginMessage(null)
             setNrpEmpty('(Masukkan NRP!)')

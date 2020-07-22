@@ -13,10 +13,11 @@ function Notification(){
         const jabatanState = useSelector(state=>state.user.jabatan) 
         const idUnit = useSelector(state => state.user.idUnit)
         const idSubnit = useSelector(state => state.user.idSubnit)
+        const idPenyidik = useSelector(state => state.user.id)
 
         const style = {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 12000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -28,6 +29,7 @@ function Notification(){
         const inputLaporanANotif = () => toast("Laporan baru telah masuk", style)
         const disposisiKanitNotif = () => toast("Disposisi dari Wakasat telah masuk", style)
         const disposisiKasubnitNotif = () => toast("Disposisi dari Kanit telah masuk", style)
+        const disposisiPenyidikNotif = () => toast("Disposisi dari Kasubnit telah masuk", style)
 
         useEffect(() => {
             if (jabatanState ) {
@@ -43,27 +45,42 @@ function Notification(){
                     }
                 })
                 socket.on('update-status-disposisi-unit', data => {
-                    console.log(idUnit + '=' + data.idUnitOrSubnit, "KANIT BRO")
-                  
                     if(jabatanState === "KANIT" && idUnit === data.idUnitOrSubnit) {
                         disposisiKanitNotif()
                     }
                 })
                 socket.on('update-status-disposisi-b-unit', data => {
-                    
                     if(jabatanState === "KANIT" && idUnit == data.idUnitOrSubnit) {
                         disposisiKanitNotif()
                     }
                 })
                 socket.on('update-status-disposisi-subnit', data => {
-                    console.log(idSubnit + '=' + data.idUnitOrSubnit, "KASUBNITs BRO")
                     if(jabatanState === "KASUBNIT" && idSubnit == data.idUnitOrSubnit) {
                         disposisiKasubnitNotif()
                     }
                 })
-
+                socket.on('update-status-disposisi-b-subnit', data => {
+                    if(jabatanState === "KASUBNIT" && idSubnit === data.idUnitOrSubnit) {
+                        disposisiKasubnitNotif()
+                    }
+                })
+                socket.on('update-status-disposisi-penyidik', data => {
+                    data.idUnitOrSubnit.forEach((val) => {
+                        if(jabatanState === "PENYIDIK" && idPenyidik === val) {
+                            disposisiPenyidikNotif()
+                        }
+                    })
+                })
+                socket.on('update-status-disposisi-b-penyidik', data => {
+                    // console.log(data.idUnitOrSubnit)
+                    data.idUnitOrSubnit.forEach((val) => {
+                        if(jabatanState === "PENYIDIK" && idPenyidik === val) {
+                            disposisiPenyidikNotif()
+                        }
+                    })
+                })
             }
-        },[jabatanState,idUnit])
+        },[jabatanState])
 
 return (
     <div>
