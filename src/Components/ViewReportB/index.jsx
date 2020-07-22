@@ -21,6 +21,15 @@ function ViewReport () {
         socket.on('input-report-b', data => {
             getDataReport(0)
         })
+        socket.on('update-status-disposisi-b-unit', data => {
+            getDataReport(0,true)
+        })
+        socket.on('update-status-disposisi-b-subnit', data => {
+            getDataReport(0,true)
+        })
+        socket.on('update-status-disposisi-b-penyidik', data => {
+            getDataReport(0,true)
+        })
     },[])
 
     let getDataReport = (offsetParams) => {

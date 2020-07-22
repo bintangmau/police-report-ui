@@ -173,6 +173,7 @@ function Profile() {
 
     const logOutBtn = () => {
         if(window.confirm('Yakin untuk keluar?')) {
+            window.location.reload(false)
            dispatch(logOut())
         }
     }

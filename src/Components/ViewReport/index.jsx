@@ -45,6 +45,12 @@ function ViewReport () {
             socket.on('update-status-disposisi-unit', data => {
                 getDataReport(0,true)
             })
+            socket.on('update-status-disposisi-subnit', data => {
+                getDataReport(0,true)
+            })
+            socket.on('update-status-disposisi-penyidik', data => {
+                getDataReport(0,true)
+            })
         }
  
     },[jabatanState])   
