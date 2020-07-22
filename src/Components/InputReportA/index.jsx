@@ -25,7 +25,7 @@ function InputReportA () {
     // LEFT CONTENT STATE
     const [ nomorLaporanPolisi, setNomorLaporanPolisi ] = useState('')
     const [ waktuKejadian, setWaktuKejadian ] = useState('')
-    const [ waktuKejadianJam, setWaktuKejadianJam ] = useState('')
+    const [ waktuKejadianJam, setWaktuKejadianJam ] = useState(null)
     const [ tempatKejadian, setTempatKejadian ] = useState('')
     const [ provinsi, setProvinsi ] = useState('')
     const [ kota, setKota ] = useState('')
@@ -36,7 +36,7 @@ function InputReportA () {
     const [ korban, setKorban ] = useState([''])
     const [ waktuDilaporkan, setWaktuDilaporkan ] = useState('')
     const [ tindakPidanaAtauPasal, setTindakPidanaAtauPasal ] = useState([''])
-    const [ waktuDilaporkanJam, setWaktuDilaporkanJam ] = useState('')
+    const [ waktuDilaporkanJam, setWaktuDilaporkanJam ] = useState(null)
     const [ sumir, setSumir ] = useState('') 
 
     // RIGHT CONTENT STATE

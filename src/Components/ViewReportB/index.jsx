@@ -15,6 +15,7 @@ function ViewReport () {
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
     const [ searchMessage, setSearchMessage ] = useState('')
+    const [ loading, setLoading ] = useState(false)
 
     useEffect(()=>{
         getDataReport(0)
@@ -34,6 +35,7 @@ function ViewReport () {
     },[])
 
     let getDataReport = (offsetParams) => {
+        setLoading(true)
         setDataReport([])
         Axios({
             method : "POST",
@@ -47,9 +49,17 @@ function ViewReport () {
             }
         })
         .then(({data})=>{
-            setDataReport(data)
+            if(data.length < 1) {
+                setLoading(false)
+                setSearchMessage("Data tidak ada")
+            } else {
+                setLoading(false)
+                setDataReport(data)
+            }
         })
-        .catch(console.log)
+        .catch((err) => 
+            setLoading(false)
+        )
     }
 
     let searchData = (str) => {
@@ -75,7 +85,7 @@ function ViewReport () {
             <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Lihat Laporan B</h1> 
                 {
-                    !dataReport[0]
+                    loading
                     ?
                     <div style={{ marginTop: '24px', marginLeft: '10px' }}>
                         <Loader />
@@ -90,6 +100,7 @@ function ViewReport () {
                 className="search-report-02" 
                 placeholder="Cari Laporan"
                 onChange={e=>searchData(e.target.value)}
+                style={{ marginRight: '20px' }}
             />
             {searchMessage}
             <TableContent 

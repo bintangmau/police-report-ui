@@ -53,7 +53,7 @@ export default function InputReportB() {
 
     // LOWER CONTENT STATE
     const [waktuKejadian,setWaktuKejadian] = useState("")
-    const [waktuKejadianJam,setWaktuKejadianJam] = useState("")
+    const [waktuKejadianJam,setWaktuKejadianJam] = useState(null)
     const [tempatKejadian,setTempatKejadian] = useState("")
     const [provinsiKejadian,setProvinsiKejadian] = useState("")
     const [kotaKejadian,setKotaKejadian] = useState("")
@@ -64,7 +64,7 @@ export default function InputReportB() {
     const [ korban, setKorban ] = useState([''])
     const [ saksi, setSaksi ] = useState([''])
     const [waktuDilaporkan,setWaktuDilaporkan] = useState("")
-    const [waktuDilaporkanJam,setWaktuDilaporkanJam] = useState("")
+    const [waktuDilaporkanJam,setWaktuDilaporkanJam] = useState(null)
     const [uraianSingkatKejadian,setUraianSingkatKejadian] = useState("")
 
     const BtnInputReportB = () => {
