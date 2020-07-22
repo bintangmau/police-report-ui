@@ -76,6 +76,7 @@ function ViewReport () {
 
     let searchData = (str) => {
         setDataReport([])
+        setSearchMessage('')
         Axios({
             method : "GET",
             url : `${api}report/search-report-a?keyword=${str}`

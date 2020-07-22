@@ -66,8 +66,6 @@ function Notification(){
                 })
                 socket.on('update-status-disposisi-penyidik', data => {
                     data.idUnitOrSubnit.forEach((val) => {
-                        console.log(val)
-                        console.log(idPenyidik)
                         if(jabatanState === "PENYIDIK" && idPenyidik === val) {
                             disposisiPenyidikNotif()
                         }
@@ -76,8 +74,6 @@ function Notification(){
                 socket.on('update-status-disposisi-b-penyidik', data => {
                     // console.log(data.idUnitOrSubnit)
                     data.idUnitOrSubnit.forEach((val) => {
-                        console.log(val)
-                        console.log(idPenyidik)
                         if(jabatanState === "PENYIDIK" && idPenyidik === val) {
                             disposisiPenyidikNotif()
                         }
