@@ -1,11 +1,22 @@
+// MODULE
+import React , { useRef } from 'react'
+import ReactToPrint from "react-to-print"
 
-import React from 'react'
+// COMPONENT
+import PrintReportB from '../../../Pages/PrintReportB'
+
 
 export default function Left(props) {
+
+
     const {
         data,
         showDate
     } = props
+
+    const componentRef = useRef()
+
+
     return (
         <div className='detail-a-left'>
              <div className="da-title" style={{marginTop : 0}}>
@@ -106,6 +117,28 @@ export default function Left(props) {
                 <div className="da-text">
                     {data.uraianSingkatKejadian}
                 </div>
+
+                {
+                    data &&
+                    <ReactToPrint
+                        trigger={()=> <div className="da-button"> </div> }
+                        content={() => componentRef.current}
+                        pageStyle=""
+                    />
+                }
+                
+                {
+                    data &&
+                    <div style={{display : "none"}}>
+                        {
+                            data &&
+                            <PrintReportB
+                                data={data}
+                                ref={componentRef}
+                            />
+                        }
+                    </div>
+                }
 
         </div>
     )

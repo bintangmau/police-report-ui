@@ -19,7 +19,7 @@ function DetailContentA (props) {
 
     const history = useHistory()
     const params = props.match.params.id
-    const [ data, setData ] = useState('')
+    const [ data, setData ] = useState(null)
 
     const [dataMember ,setDataMember] = useState([])
 
@@ -165,7 +165,7 @@ function DetailContentA (props) {
            <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Details Laporan B</h1> 
                 {
-                    data.length === 0
+                    data
                     ?
                     <div style={{ marginTop: '24px', marginLeft: '10px' }}>
                         <Loader />
