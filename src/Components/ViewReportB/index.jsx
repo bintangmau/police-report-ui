@@ -67,7 +67,10 @@ function ViewReport () {
         setSearchMessage('')
         Axios({
             method : "GET",
-            url : `${api}report/search-report-b?keyword=${str}`
+            url : `${api}report/search-report-b?keyword=${str}`,
+            headers: {
+                token: localStorage.getItem('token')
+            }
         })
         .then(({data})=>{
             if(data.length < 1) {

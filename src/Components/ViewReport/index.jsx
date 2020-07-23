@@ -85,13 +85,17 @@ function ViewReport () {
         setSearchMessage('')
         Axios({
             method : "GET",
-            url : `${api}report/search-report-a?keyword=${str}`
+            url : `${api}report/search-report-a?keyword=${str}`,
+            headers: {
+                token: localStorage.getItem('token')
+            }
         })
         .then(({data})=>{
             if(data.length < 1) {
                 setLoading(false)
                 setSearchMessage("Hasil Pencarian Tidak Ditemukan")
             }
+            console.log(str.length)
             setLoading(false)
             // setSearchMessage('')
             setDataReport(data)

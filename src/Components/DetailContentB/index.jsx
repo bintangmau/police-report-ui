@@ -20,6 +20,7 @@ function DetailContentA (props) {
     const history = useHistory()
     const params = props.match.params.id
     const [ data, setData ] = useState(null)
+    const [ loading, setLoading ] = useState(false)
 
     const [dataMember ,setDataMember] = useState([])
 
@@ -29,6 +30,7 @@ function DetailContentA (props) {
     const [penyidikState,setPenyidikState] = useState("")
 
     const getDetailsReportA = () => {
+        setLoading(true)
         Axios({
             method: "GET",
             url: api + 'report/get-report-b-details/' + params,
@@ -36,7 +38,8 @@ function DetailContentA (props) {
                 token: localStorage.getItem('token')
             }
         })
-        .then((res) => {            
+        .then((res) => {    
+            setLoading(false)        
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
             console.log(res.data.dataLaporan)
@@ -55,6 +58,7 @@ function DetailContentA (props) {
             // setData(res.data)
         })
         .catch((err) => {
+            setLoading(false)
             console.log(err)
         })
     }
@@ -166,7 +170,7 @@ function DetailContentA (props) {
            <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Details Laporan B</h1> 
                 {
-                    data
+                    loading
                     ?
                     <div style={{ marginTop: '24px', marginLeft: '10px' }}>
                         <Loader />
