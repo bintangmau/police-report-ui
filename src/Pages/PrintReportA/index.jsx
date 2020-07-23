@@ -269,6 +269,19 @@ class PrintReportA extends Component {
         }
     }
 
+    renderAlamatSaksi = (arr) => {
+        if (arr) {
+
+            return arr.map((el,index)=>{
+                return (
+                    <div style={{display: "flex" , flexDirection: "row" ,  width: "100%"}}>
+                        <div>{el}</div>
+                    </div>
+                )
+            })
+        }
+    }
+
     render () {
         return (
             <div className="container">
@@ -536,13 +549,14 @@ class PrintReportA extends Component {
                 
                                     <div className="content-pdf-value-1">
                                         Hari {this.state.hari[new Date(this.props.data.waktuDilaporkan).getDay()]}, {this.showDate(this.props.data.waktuDilaporkan)}, jam {
-                                            new Date(this.props.data.waktuDilaporkanJam).getHours() < 9 ? 
-                                            '0' + new Date(this.props.data.waktuDilaporkanJam).getHours() : 
-                                            new Date(this.props.data.waktuDilaporkanJam).getHours()                                            
-                                        }:{
-                                            new Date(this.props.data.waktuDilaporkanJam).getMinutes() < 9 ? 
-                                            '0' + new Date(this.props.data.waktuDilaporkanJam).getMinutes() : 
-                                            new Date(this.props.data.waktuDilaporkanJam).getMinutes()
+                                            this.props.data.waktuDilaporkanJam
+                                        //     new Date(this.props.data.waktuDilaporkanJam).getHours() < 9 ? 
+                                        //     '0' + new Date(this.props.data.waktuDilaporkanJam).getHours() : 
+                                        //     new Date(this.props.data.waktuDilaporkanJam).getHours()                                            
+                                        // }:{
+                                        //     new Date(this.props.data.waktuDilaporkanJam).getMinutes() < 9 ? 
+                                        //     '0' + new Date(this.props.data.waktuDilaporkanJam).getMinutes() : 
+                                        //     new Date(this.props.data.waktuDilaporkanJam).getMinutes()
                                         }
                                     </div>
                 
@@ -587,7 +601,9 @@ class PrintReportA extends Component {
                                             <u>NAMA DAN ALAMAT SAKSI</u> 
                                         </div>
                 
-                                        {this.renderSaksi(this.props.data.namaSaksi)}
+                                        {this.renderSaksi(this.props.data.namasaksi)}
+
+                                        {this.renderAlamatSaksi(this.props.data.alamatsaksi)}
                 
                                         <div style={{width: "100%" , marginLeft: "3.5%"}}>
                                             d/a Sat Reskrim Polres Metro Jakarta Utara
@@ -682,14 +698,14 @@ class PrintReportA extends Component {
                                     <div>a.n KAPOLRES METRO JAKARTA UTARA</div>
                                     <div>KAP SPKT TERPADU</div>
                                     <div>u.b</div>
-                                    <div>{this.props.data.mengetahuiUnit}</div>
+                                    <div>UNIT {this.props.data.UnitYangMengetahui}</div>
                 
                                     <div style={{marginTop: "80px" , width: "auto" ,  fontSize: "15px" , fontWeight: "bold" , borderBottomWidth : "0.5px" , borderBottomColor : "black" , borderBottomStyle : "solid" , borderBottom: "1.5px solid black"}}>
                                         { this.props.data.mengetahui}
                                     </div>
                 
                                     <div style={{fontSize: "15px" , fontWeight: "bold"}}>
-                                        {this.props.data.pangkat + " " + "NRP" + " " + this.props.data.nrp }
+                                        {this.props.data.JabatanMengetahui + " " + "NRP" + " " + this.props.data.nrp }
                                     </div>
                 
                                 </div>
@@ -712,7 +728,7 @@ class PrintReportA extends Component {
                                         <div style={{marginRight: "10%", width :  "30%"}}>Jabatan & NRP</div>
                                         <div >:</div>
                                         {/* <div style={{marginLeft: "5%"}}>IPDA Nrp, 94071331</div> */}
-                                        <div style={{marginLeft: "5%"}}>{this.props.data.pangkatPelapor + " Nrp " + this.props.data.nrpPelapor }</div>
+                                        <div style={{marginLeft: "5%"}}>{this.props.data.JabatanPelapor + " Nrp " + this.props.data.nrpPelapor }</div>
                                     </div>
                 
                                     <div style={{display: "flex" ,flexDirection: "row" , width: "100%" , marginTop: "auto"}}>

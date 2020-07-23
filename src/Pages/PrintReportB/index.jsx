@@ -985,14 +985,14 @@ class PrintReportB extends Component {
                                     <div>a.n KEPALA KEPOLISIAN RESOR METRO JAKUT</div>
                                     <div>KAP SPKT</div>
                                     <div>u.b</div>
-                                    <div>{this.props.data.unitMengetahui}</div>
+                                    <div>UNIT {this.props.data.UnitYangMengetahui}</div>
     
                                     <div style={{marginTop: "80px" , width: "auto" ,  fontSize: "15px" , fontWeight: "bold"}}>
                                         {this.props.data.mengetahui}
                                     </div>
     
                                     <div style={{fontSize: "15px" , fontWeight: "bold" , borderTopWidth : "1.5px" , borderTopStyle : "solid" ,  borderTopColor : "black"   }}>
-                                        {this.props.data.pangkatMengetahui + " NRP " + this.props.data.NRPMengetahui} 
+                                        {this.props.data.JabatanMengetahui + " NRP " + this.props.data.nrpMengetahui} 
                                     </div>
     
                                 </div>
@@ -1009,7 +1009,7 @@ class PrintReportB extends Component {
                                         {this.props.data.yangMenerimaLaporan}
                                     </div>
                                     <div style={{fontSize: "15px" , fontWeight: "bold" ,  borderTopWidth : "1.5px" , borderTopStyle : "solid" ,  borderTopColor : "black" }}>
-                                        {this.props.data.pangkatyangMenerimaLaporan + " NRP " + this.props.data.NRPyangMenerimaLaporan}
+                                        {this.props.data.JabatanPenerimaLaporan + " NRP " + this.props.data.nrpYangMenerimaLaporan}
                                     </div>
     
                                 </div>

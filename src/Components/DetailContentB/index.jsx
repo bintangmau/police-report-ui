@@ -39,6 +39,7 @@ function DetailContentA (props) {
         .then((res) => {            
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
+            console.log(res.data.dataLaporan)
             if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
                 setSelectedUnit(res.data.dataLaporan.unit )
             }
