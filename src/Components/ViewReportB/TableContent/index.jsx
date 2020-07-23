@@ -306,7 +306,7 @@ function TableContent (props) {
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.penyidik.length ? row.penyidik.length + " orang" : "-" }
+                    {row.penyidik ? row.penyidik.length + " orang" : "-" }
                   </div>
                 </TableCell>
                 <TableCell >

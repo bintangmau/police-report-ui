@@ -4,8 +4,14 @@ import Axios from 'axios'
 import { api } from '../../../helper/database'
 import swal from 'sweetalert'
 import io from 'socket.io-client'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 export default function ManageJabatan() {
+
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+
     const [ dataJabatan, setDataJabatan ] = useState([])
     const [ showAdd, setShowAdd ] = useState(false)
     const [ newJabatan, setNewJabatan ] = useState('')
@@ -101,6 +107,11 @@ export default function ManageJabatan() {
         })
     }, [])
     
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
+    
+
     return (
         <div>
             <div style={{ display: 'flex' }}>

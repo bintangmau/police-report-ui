@@ -13,7 +13,7 @@ export default function Navbar() {
     return (
         <div className='navbar-container'>
             
-            <div className="nav-profile-icon" style={{ marginRight: '10px' }}>
+            {/* <div className="nav-profile-icon" style={{ marginRight: '10px' }}>
                 <Link>
                     <img 
                         src={Bell} 
@@ -21,7 +21,7 @@ export default function Navbar() {
                         className='profile-icon'
                         />
                 </Link>
-            </div>
+            </div> */}
             <div className='nav-profile-icon' style={{ marginRight: '20px' }}>
                 <Link to='/profile'>
                     <img 

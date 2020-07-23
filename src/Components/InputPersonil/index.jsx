@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import swal from 'sweetalert'
 import io from 'socket.io-client'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 // API
 import { api } from '../../helper/database'
@@ -15,6 +17,14 @@ import Left from './LeftContent'
 import Right from './RightContent'
 
 function InputPersonil () {
+
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
+
     const [ emptyMessage, setEmptyMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
 

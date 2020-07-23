@@ -1,12 +1,18 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // CSS
 import './style.css'
 
 export default function Settings() {
-    const history = useHistory()
 
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
     return (
         <div className='setting-container'>
             

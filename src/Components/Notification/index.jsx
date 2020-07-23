@@ -24,12 +24,12 @@ function Notification(){
             draggable: true,
             progress: undefined,
         }
-        const notify = () => toast(`🦄 ${jabatanState}`, style);
+        const notify = () => toast.success(`🦄 ${jabatanState}`, style);
 
-        const inputLaporanANotif = () => toast("Laporan baru telah masuk", style)
-        const disposisiKanitNotif = () => toast("Disposisi dari Wakasat telah masuk", style)
-        const disposisiKasubnitNotif = () => toast("Disposisi dari Kanit telah masuk", style)
-        const disposisiPenyidikNotif = () => toast("Disposisi dari Kasubnit telah masuk", style)
+        const inputLaporanANotif = () => toast.info("Laporan baru telah masuk", style)
+        const disposisiKanitNotif = () => toast.info("Disposisi dari Wakasat telah masuk", style)
+        const disposisiKasubnitNotif = () => toast.info("Disposisi dari Kanit telah masuk", style)
+        const disposisiPenyidikNotif = () => toast.info("Disposisi dari Kasubnit telah masuk", style)
 
         useEffect(() => {
             if (jabatanState ) {

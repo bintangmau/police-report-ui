@@ -2,6 +2,8 @@
 import React , { useEffect , useState } from 'react'
 import Axios from 'axios'
 import io from 'socket.io-client'
+import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // COMPONENT 
 import TableContent from './TableContent'
@@ -12,12 +14,18 @@ import {api} from '../../helper/database/index'
 
 function ViewReport () {
 
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
     const [ searchMessage, setSearchMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
 
     useEffect(()=>{
+        if(jabatanState === "ADMIN") {
+            history.push('/inputa')
+        }
         getDataReport(0)
         const socket = io(`${api}`)
         socket.on('input-report-b', data => {
@@ -37,6 +45,7 @@ function ViewReport () {
     let getDataReport = (offsetParams) => {
         setLoading(true)
         setDataReport([])
+        setSearchMessage("")
         Axios({
             method : "POST",
             url : `${api}report/get-data-report-b`,
@@ -81,6 +90,10 @@ function ViewReport () {
         .catch(err=>{
             console.log(err)
         })
+    }
+
+    if(jabatanState === "ADMIN") {
+        history.push('/inputa')
     }
 
     return (

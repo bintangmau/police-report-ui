@@ -2,6 +2,7 @@
 import React , { useEffect , useState } from 'react'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 // STYLE
 import './style.css'
@@ -15,12 +16,19 @@ import io from 'socket.io-client'
 import {api} from '../../helper/database/index'
 
 function ViewReport () {
+    
     const jabatanState = useSelector(state=>state.user.jabatan) 
+    const history = useHistory()
+
+    if(jabatanState === "ADMIN") {
+        history.push('/inputa')
+    }
 
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
     const [ searchMessage, setSearchMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
+
     
     const style = {
         position: "top-right",
@@ -32,7 +40,7 @@ function ViewReport () {
         progress: undefined,
     }
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         getDataReport(0)
     },[])
 
@@ -108,7 +116,7 @@ function ViewReport () {
             console.log(err)
         })
     }
-
+  
     return (
         <div className="view-report-container-02">
 

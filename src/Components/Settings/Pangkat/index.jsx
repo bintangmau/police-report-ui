@@ -4,8 +4,19 @@ import Axios from 'axios'
 import { api } from '../../../helper/database'
 import swal from 'sweetalert'
 import io from 'socket.io-client'
+import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function ManagePangkat() {
+    
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+
+
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
+    
     const [ dataPangkat, setDataPangkat ] = useState([])
     const [ showAdd, setShowAdd ] = useState(false)
     const [ newPangkat, setNewPangkat ] = useState('')

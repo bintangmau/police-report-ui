@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import swal from 'sweetalert'
 import io from 'socket.io-client'
+import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // API
 import { api } from '../../helper/database'
@@ -15,6 +17,9 @@ import Left from './LeftContent'
 import Right from './RightContent'
 
 function InputReportA () {
+
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
 
     // STATE
     const [ emptyMessage, setEmptyMessage ] = useState('')
@@ -200,6 +205,10 @@ function InputReportA () {
             getDataPangkat()
         })
     }, [])
+
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
 
     return (
         <div style={{width : "100%" , height : 800 }}>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route ,  useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // COMPONENTS
 import Navbar from '../../Components/Navbar'
@@ -41,6 +42,7 @@ import Logo from '../../Images/Sidebar/musito.jpeg'
 
 function Home () {
 
+    const jabatanState = useSelector(state => state.user.jabatan)
     const classes = useStyles();
     const theme = useTheme();
     const history = useHistory()
@@ -59,29 +61,35 @@ function Home () {
 
             <List>
                 
-                <ListItem 
+                {
+                    jabatanState === "ADMIN"
+                    ?
+                    null
+                    :
+                    <>
+                    <ListItem 
                     button 
                     className={classes.sidebar}
                     style={
                         {
-                            backgroundColor : route === "/" ? "#00698C" : null
+                                backgroundColor : route === "/" ? "#00698C" : null
+                            }
                         }
-                    }
-                    onClick={() => history.push('/') }
-                >
-                    <ListItemIcon>
-                        <AssignmentIcon style={{color : route === "/" ? "white" : null}} />
-                    </ListItemIcon>
-                    <p 
-                        className={classes.sidebarText}
-                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
-                        style={{ color : route === "/" ? 'white' : null }}
-                    > 
-                        Lihat Laporan A
-                    </p>
-                </ListItem>
+                        onClick={() => history.push('/') }
+                        >
+                        <ListItemIcon>
+                            <AssignmentIcon style={{color : route === "/" ? "white" : null}} />
+                        </ListItemIcon>
+                        <p 
+                            className={classes.sidebarText}
+                            // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                            style={{ color : route === "/" ? 'white' : null }}
+                            > 
+                            Lihat Laporan A
+                        </p>
+                    </ListItem>
 
-                <ListItem 
+                    <ListItem 
                     button 
                     className={classes.sidebar}
                     style={
@@ -90,107 +98,116 @@ function Home () {
                         }
                     }
                     onClick={() => history.push('/viewreportb') }
-                >
-                    <ListItemIcon>
-                        <AssignmentIcon style={{color : route === "/viewreportb" ? "white" : null}} />
-                    </ListItemIcon>
-                    <p 
-                        className={classes.sidebarText}
-                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
-                        style={{ color : route === "/viewreportb" ? 'white' : null }}
-                    > 
-                        Lihat Laporan B
-                    </p>
-                </ListItem>
+                    >
+                        <ListItemIcon>
+                            <AssignmentIcon style={{color : route === "/viewreportb" ? "white" : null}} />
+                        </ListItemIcon>
+                        <p 
+                            className={classes.sidebarText}
+                            // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                            style={{ color : route === "/viewreportb" ? 'white' : null }}
+                            > 
+                            Lihat Laporan B
+                        </p>
+                    </ListItem>
+                    </>
+                }   
 
-                <ListItem 
-                    button 
-                    className={classes.sidebar}
-                    style={
-                        {
-                            backgroundColor : route === "/inputa" ? "#00698C" : null
+                {
+                    jabatanState !== "ADMIN"
+                    ?
+                    null
+                    :
+                    <>
+                    <ListItem 
+                        button 
+                        className={classes.sidebar}
+                        style={
+                            {
+                                backgroundColor : route === "/inputa" ? "#00698C" : null
+                            }
                         }
-                    }
-                    onClick={() => history.push('/inputa') }
-                >
-                    <ListItemIcon>
-                        <AssignmentIcon style={{color : route === "/inputa" ? "white" : null}} />
-                    </ListItemIcon>
-                    <p 
-                        className={classes.sidebarText}
-                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
-                        style={{ color : route === "/inputa" ? 'white' : null }}
-                    > 
-                        Input Laporan A
-                    </p>
-                </ListItem>
+                        onClick={() => history.push('/inputa') }
+                        >
+                        <ListItemIcon>
+                            <AssignmentIcon style={{color : route === "/inputa" ? "white" : null}} />
+                        </ListItemIcon>
+                        <p 
+                            className={classes.sidebarText}
+                            // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                            style={{ color : route === "/inputa" ? 'white' : null }}
+                            > 
+                            Input Laporan A
+                        </p>
+                    </ListItem>
 
-                <ListItem 
-                    button 
-                    className={classes.sidebar}
-                    style={
-                        {
-                            backgroundColor : route === "/inputb" ? "#00698C" : null
+                    <ListItem 
+                        button 
+                        className={classes.sidebar}
+                        style={
+                            {
+                                backgroundColor : route === "/inputb" ? "#00698C" : null
+                            }
                         }
-                    }
-                    onClick={() => history.push('/inputb') }
-                >
-                    <ListItemIcon>
-                        <AssignmentIcon style={{color : route === "/inputb" ? "white" : null}} />
-                    </ListItemIcon>
-                    <p 
-                        className={classes.sidebarText}
-                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
-                        style={{ color : route === "/inputb" ? 'white' : null }}
-                    > 
-                        Input Laporan B
-                    </p>
-                </ListItem>
+                        onClick={() => history.push('/inputb') }
+                    >
+                        <ListItemIcon>
+                            <AssignmentIcon style={{color : route === "/inputb" ? "white" : null}} />
+                        </ListItemIcon>
+                        <p 
+                            className={classes.sidebarText}
+                            // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                            style={{ color : route === "/inputb" ? 'white' : null }}
+                        > 
+                            Input Laporan B
+                        </p>
+                    </ListItem>
 
-                <ListItem 
-                    button 
-                    className={classes.sidebar}
-                    style={
-                        {
-                            backgroundColor : route === "/inputpersonil" ? "#00698C" : null
+                    <ListItem 
+                        button 
+                        className={classes.sidebar}
+                        style={
+                            {
+                                backgroundColor : route === "/inputpersonil" ? "#00698C" : null
+                            }
                         }
-                    }
-                    onClick={() => history.push('/inputpersonil') }
-                >
-                    <ListItemIcon>
-                        <AssignmentIcon style={{color : route === "/inputpersonil" ? "white" : null}} />
-                    </ListItemIcon>
-                    <p 
-                        className={classes.sidebarText}
-                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
-                        style={{ color : route === "/inputpersonil" ? 'white' : null }}
-                    > 
-                        Input Personil
-                    </p>
-                </ListItem>
+                        onClick={() => history.push('/inputpersonil') }
+                    >
+                        <ListItemIcon>
+                            <AssignmentIcon style={{color : route === "/inputpersonil" ? "white" : null}} />
+                        </ListItemIcon>
+                        <p 
+                            className={classes.sidebarText}
+                            // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                            style={{ color : route === "/inputpersonil" ? 'white' : null }}
+                        > 
+                            Input Personil
+                        </p>
+                    </ListItem>
 
-                <ListItem 
-                    button 
-                    className={classes.sidebar}
-                    style={
-                        {
-                            backgroundColor : route === "/settings" ? "#00698C" : null
+                    <ListItem 
+                        button 
+                        className={classes.sidebar}
+                        style={
+                            {
+                                backgroundColor : route === "/settings" ? "#00698C" : null
+                            }
                         }
+                        onClick={() => history.push('/settings') }
+                    >
+                        <ListItemIcon>
+                            <AssignmentIcon style={{color : route === "/settings" ? "white" : null}} />
+                        </ListItemIcon>
+                        <p 
+                            className={classes.sidebarText}
+                            // style={{color : cekPathname() ? '#f16821' : "#888888"}}
+                            style={{ color : route === "/settings" ? 'white' : null }}
+                        > 
+                            Pengaturan
+                        </p>
+                    </ListItem>
+                    </>
                     }
-                    onClick={() => history.push('/settings') }
-                >
-                    <ListItemIcon>
-                        <AssignmentIcon style={{color : route === "/settings" ? "white" : null}} />
-                    </ListItemIcon>
-                    <p 
-                        className={classes.sidebarText}
-                        // style={{color : cekPathname() ? '#f16821' : "#888888"}}
-                        style={{ color : route === "/settings" ? 'white' : null }}
-                    > 
-                        Pengaturan
-                    </p>
-                </ListItem>
-
 
             </List>
         </div>

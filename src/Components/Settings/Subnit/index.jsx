@@ -4,8 +4,18 @@ import Axios from 'axios'
 import { api } from '../../../helper/database'
 import swal from 'sweetalert'
 import io from 'socket.io-client'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 export default function ManageSubnit() {
+
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+    
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
+
     const [ dataSubnit, setDataSubnit ] = useState([])
     const [ showAdd, setShowAdd ] = useState(false)
     const [ newSubnit, setNewSubnit ] = useState('')

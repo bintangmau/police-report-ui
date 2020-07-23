@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import swal from 'sweetalert'
 import io from 'socket.io-client'
+import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // API
 import { api } from '../../helper/database'
@@ -16,6 +18,14 @@ import Right from './RightContent'
 import Lower from './LowerContent'
 
 export default function InputReportB() {
+
+    const history = useHistory()
+    const jabatanState = useSelector(state => state.user.jabatan)
+
+    if(jabatanState !== "ADMIN") {
+        history.push('/')
+    }
+
     // STATE
     const [ emptyMessage, setEmptyMessage ] = useState('')
     const [ loading, setLoading ] = useState(false)
