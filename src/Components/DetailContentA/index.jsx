@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { api } from '../../helper/database'
 import { useSelector } from 'react-redux'
+import io from 'socket.io-client'
 
 
 // STYLE
@@ -21,11 +22,13 @@ function DetailContentA (props) {
     const params = props.match.params.id
     const [ data, setData ] = useState(null)
     const [dataMember ,setDataMember] = useState([])
+    const [ dataPenyidik, setDataPenyidik ] = useState([])
 
     // FOR CHILDREN
     const [selectedUnit,setSelectedUnit] = useState(null)
     const [selectedPenyidik,setSelectedPenyidik] = useState([])
     const [penyidikState,setPenyidikState] = useState("")
+    const [ statusLaporan, setStatusLaporan ] = useState("")
     // conn
 
     // REDUX
@@ -40,10 +43,10 @@ function DetailContentA (props) {
             }
         })
         .then((res) => {
-            console.log(res.data.dataLaporan)
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
-
+            setStatusLaporan(res.data.status)
+            setDataPenyidik(res.data.dataPenyidik)
             // setLoad
 
             if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
@@ -65,9 +68,21 @@ function DetailContentA (props) {
         })
     }
 
+
     useEffect(() => {
         if (jabatanState ) {
             getDetailsReportA()
+            const socket = io(`${api}`)
+            socket.on('update-status-disposisi-unit', data => {
+                getDetailsReportA()
+            })
+            socket.on('update-status-disposisi-subnit', data => {
+                getDetailsReportA()
+            })
+            socket.on('update-status-disposisi-penyidik', data => {
+                getDetailsReportA()
+            })
+
         }
     }, [jabatanState])
     
@@ -187,6 +202,8 @@ function DetailContentA (props) {
                     <Left 
                         data={data}
                         showDate={showDate}    
+                        statusLaporan={statusLaporan}
+                        dataPenyidik={dataPenyidik}
                     />
                 }
 

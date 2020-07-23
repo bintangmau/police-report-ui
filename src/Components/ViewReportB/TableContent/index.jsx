@@ -284,22 +284,22 @@ function TableContent (props) {
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.unit ? row.unit : "-" }
+                    {row.unit !== "-" ? "UNIT " + row.unit : "-" }
                   </div>
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.subnit ? row.subnit : "-" }
+                    {row.subnit !== "-" ? "SUBNIT " + row.subnit : "-" }
                   </div>
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.penyidik ? row.penyidik : "-" }
+                    {row.penyidik.length ? row.penyidik.length + " orang" : "-" }
                   </div>
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    -
+                    {row.statusReport ? row.statusReport : "-"}
                   </div>
                 </TableCell>
                 <TableCell >

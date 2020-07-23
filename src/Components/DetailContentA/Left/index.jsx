@@ -8,7 +8,7 @@ import PrintReportA from '../../../Pages/PrintReportA'
 export default function Left(props) {
 
     const {
-        data, showDate
+        data, showDate, statusLaporan, dataPenyidik
     } = props
 
     const componentRef = useRef()
@@ -20,7 +20,7 @@ export default function Left(props) {
                 </div>
 
                 <div className="da-text">
-                     {data.statusLaporan}
+                    {statusLaporan}
                 </div>
 
                 <div className="da-title" >
@@ -28,7 +28,7 @@ export default function Left(props) {
                 </div>
 
                 <div className="da-text">
-                    {data.kanit}
+                    UNIT {data.UnitYangMenangani}
                 </div>
 
                 <div className="da-title" >
@@ -36,20 +36,20 @@ export default function Left(props) {
                 </div>
 
                 <div className="da-text">
-                    {data.kasubmit}
+                    SUBNIT {data.SubnitYangMenangani}
                 </div>
 
                 <div className="da-title" >
                     Penyidik
                 </div>
 
-                <div className="da-text">
-                    {data.penyidik}
-                </div>
-
-                <div className="da-text">
-                    Hodor
-                </div>
+                {dataPenyidik.map((val) => {
+                    return (
+                        <div className="da-text">
+                            {val.nama_penyidik}
+                        </div>
+                    )
+                })}
 
                 <div className="da-title" >
                     Terlapor

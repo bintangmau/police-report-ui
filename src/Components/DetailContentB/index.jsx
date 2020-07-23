@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
+import io from 'socket.io-client'
 
 
 // API
@@ -23,6 +24,8 @@ function DetailContentA (props) {
     const [ loading, setLoading ] = useState(false)
 
     const [dataMember ,setDataMember] = useState([])
+    const [ dataPenyidik, setDataPenyidik ] = useState([])
+    const [ statusLaporan, setStatusLaporan ] = useState('')
 
     // FOR CHILDREN
     const [selectedUnit,setSelectedUnit] = useState(null)
@@ -42,7 +45,8 @@ function DetailContentA (props) {
             setLoading(false)        
             setDataMember(res.data.dataMember)
             setData(res.data.dataLaporan)
-            console.log(res.data.dataLaporan)
+            setDataPenyidik(res.data.dataPenyidik)
+            setStatusLaporan(res.data.status)
             if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
                 setSelectedUnit(res.data.dataLaporan.unit )
             }
@@ -163,6 +167,16 @@ function DetailContentA (props) {
     
     useEffect(() => {
         getDetailsReportA()
+        const socket = io(`${api}`)
+        socket.on('update-status-disposisi-b-unit', data => {
+            getDetailsReportA()
+        })
+        socket.on('update-status-disposisi-b-subnit', data => {
+            getDetailsReportA()
+        })
+        socket.on('update-status-disposisi-b-penyidik', data => {
+            getDetailsReportA()
+        })
     }, [])
 
     return (
@@ -187,6 +201,8 @@ function DetailContentA (props) {
                     <Left 
                         data={data}
                         showDate={showDate}    
+                        dataPenyidik={dataPenyidik}
+                        statusLaporan={statusLaporan}
                     />
                 }
 

@@ -698,7 +698,7 @@ class PrintReportA extends Component {
                                     <div>a.n KAPOLRES METRO JAKARTA UTARA</div>
                                     <div>KAP SPKT TERPADU</div>
                                     <div>u.b</div>
-                                    <div>UNIT {this.props.data.UnitYangMengetahui}</div>
+                                    <div>UNIT {this.props.data.unitMengetahui}</div>
                 
                                     <div style={{marginTop: "80px" , width: "auto" ,  fontSize: "15px" , fontWeight: "bold" , borderBottomWidth : "0.5px" , borderBottomColor : "black" , borderBottomStyle : "solid" , borderBottom: "1.5px solid black"}}>
                                         { this.props.data.mengetahui}
