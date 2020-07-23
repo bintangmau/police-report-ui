@@ -144,6 +144,18 @@ function TableContent (props) {
         setPage(0);
     };
 
+    const handleStatusReport = (status) => {
+      if(status === "0") {
+        return <span style={{ fontSize: "10px" }}>Menunggu Disposisi Dari Wakasat</span>
+      } else if(status === "1") {
+        return <span style={{ fontSize: "10px" }}>Menunggu Disposisi Dari Kanit</span>
+      } else if(status === "2") {
+        return <span style={{ fontSize: "10px" }}>Menunggu Disposisi Dari Kasubnit</span>
+      } else if(status === "3") {
+        return <span style={{ fontSize: "10px" }}>Sudah Diterima Penyidik</span>
+      }
+    }
+
     function TablePaginationActions(props) {
         const classes = useStyles1();
         const theme = useTheme();
@@ -299,7 +311,7 @@ function TableContent (props) {
                 </TableCell>
                 <TableCell >
                   <div className="guest-table-per-col-1" style={{color : "#444444"}}>
-                    {row.statusReport ? row.statusReport : "-"}
+                    {handleStatusReport(row.statusReport)}
                   </div>
                 </TableCell>
                 <TableCell >

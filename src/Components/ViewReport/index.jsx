@@ -71,6 +71,9 @@ function ViewReport () {
             }
         })
         .then(({data})=>{
+            if(data.length < 1) {
+                setSearchMessage("Data Tidak Ada")
+            }
             setLoading(false)
             setDataReport(data)
         })
