@@ -712,7 +712,7 @@ class PrintReportA extends Component {
                                         <div style={{marginRight: "10%", width :  "30%"}}>Jabatan & NRP</div>
                                         <div >:</div>
                                         {/* <div style={{marginLeft: "5%"}}>IPDA Nrp, 94071331</div> */}
-                                        <div style={{marginLeft: "5%"}}>{this.props.data.jabatan + " Nrp " + this.props.data.NrpPelapor }</div>
+                                        <div style={{marginLeft: "5%"}}>{this.props.data.jabatan + " Nrp " + this.props.data.nrp }</div>
                                     </div>
                 
                                     <div style={{display: "flex" ,flexDirection: "row" , width: "100%" , marginTop: "auto"}}>

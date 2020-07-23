@@ -20,6 +20,7 @@ function ViewReport () {
     const [offset,setOffset] = useState(0)
     const [dataReport,setDataReport] = useState([])
     const [ searchMessage, setSearchMessage ] = useState('')
+    const [ loading, setLoading ] = useState(false)
     
     const style = {
         position: "top-right",
@@ -56,6 +57,7 @@ function ViewReport () {
     },[jabatanState])   
 
     let getDataReport = (offsetParams,isNotif) => {
+        setLoading(true)
         setDataReport([])
         Axios({
             method : "POST",
@@ -69,12 +71,16 @@ function ViewReport () {
             }
         })
         .then(({data})=>{
+            setLoading(false)
             setDataReport(data)
         })
-        .catch(console.log)
+        .catch((err) => {
+            setLoading(false)
+        })
     }
 
     let searchData = (str) => {
+        setLoading(true)
         setDataReport([])
         setSearchMessage('')
         Axios({
@@ -83,12 +89,15 @@ function ViewReport () {
         })
         .then(({data})=>{
             if(data.length < 1) {
+                setLoading(false)
                 setSearchMessage("Hasil Pencarian Tidak Ditemukan")
             }
+            setLoading(false)
             // setSearchMessage('')
             setDataReport(data)
         })
         .catch(err=>{
+            setLoading(false)
             console.log(err)
         })
     }
@@ -99,7 +108,7 @@ function ViewReport () {
             <div style={{ display: 'flex', width: '100%' }}>
                 <h1>Lihat Laporan A</h1> 
                 {
-                    !dataReport[0]
+                    loading
                     ?
                     <div style={{ marginTop: '24px', marginLeft: '10px' }}>
                         <Loader />
