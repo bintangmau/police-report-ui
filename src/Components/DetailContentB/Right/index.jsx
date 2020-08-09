@@ -14,7 +14,9 @@ export default function Right(props) {
         setSelectedPenyidik,
         penyidikState,
         setPenyidikState,
-        updatePenyidik
+        updatePenyidik,
+        disableButton,
+        disposisiMessage
     } = props
 
     const jabatanState = useSelector(state=>state.user.jabatan) 
@@ -110,9 +112,16 @@ export default function Right(props) {
                 </textarea>
             }
 
-            <div className="detail-disposisi-button" onClick={e=> jabatanState !== "PENYIDIK" ? disposisiKanitUnit() :  updatePenyidik()}>
+            <div 
+                className="detail-disposisi-button" 
+                onClick={e=> jabatanState !== "PENYIDIK" ? disposisiKanitUnit() :  updatePenyidik()}
+                style={{
+                    cursor : disableButton ? "auto" : null
+                }}
+            >
                 Simpan
             </div>
+            <span style={{ color: "red", fontSize: '12px', marginTop: '10px' }}>{disposisiMessage}</span>
 
         </div>
     )

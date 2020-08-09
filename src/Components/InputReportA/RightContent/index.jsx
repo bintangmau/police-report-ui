@@ -18,7 +18,7 @@ export default function RightContentInputA(props) {
         namaSaksi, setNamaSaksi, alamatSaksi, setAlamatSaksi, barangBukti, setBarangBukti, tindakanYangDiambil, setTindakanYangDiambil,
         uraianSingkatKejadian, setUraianSingkatKejadian, mengetahui, setMengetahui, mengetahuiUnit, setMengetahuiUnit, NrpPelapor,
         setNrpPelapor, PangkatPelapor, setPangkatPelapor, pelapor, setPelapor, nrp, setNrp, BtnInputReportA, pangkat, setPangkat, emptyMessage, setEmptyMessage,
-        loading, dataPangkat, dataUnit
+        loading, dataPangkat, dataUnit, cekIfNrpEmpty
     } = props
 
     const arrayKey = [ namaSaksi, alamatSaksi, barangBukti, tindakanYangDiambil ]
@@ -27,6 +27,7 @@ export default function RightContentInputA(props) {
     function PlusInput (type) {
         let result = [...arrayKey[type]]
         result.push("")
+        console.log(result , ' <<< VALUE RESULT -------')
         fnKey[type](result)
     }
 
@@ -246,7 +247,7 @@ export default function RightContentInputA(props) {
             </div>
 
             <div className="input-a-input-box">
-                <label>Pangkat</label> <br />
+                <label>Pangkat Pelapor</label> <br />
                 <select onChange={(e) => setPangkatPelapor(e.target.value)}>
                     <option value="" disabled selected>Pilih Pangkat Pelapor</option>
                     {dataPangkat.map((val) => {
@@ -258,7 +259,7 @@ export default function RightContentInputA(props) {
             </div>
 
             <div className="input-a-input-box">
-                <label>NRP</label> <br />
+                <label>NRP Pelapor</label> <br />
                 <input 
                     type="text" 
                     placeholder="Masukkan NRP Pelapor"
@@ -276,7 +277,7 @@ export default function RightContentInputA(props) {
             </div>
 
             <div className="input-a-input-box">
-                <label>Pangkat</label> <br />
+                <label>Pangkat Yang Mengetahui</label> <br />
                 <select onChange={(e) => setPangkat(e.target.value)}>
                     <option value="" disabled selected>Pilih Pangkat Mengetahui</option>
                     {dataPangkat.map((val) => {
@@ -288,7 +289,7 @@ export default function RightContentInputA(props) {
             </div>
 
             <div className="input-a-input-box">
-                <label>NRP</label> <br />
+                <label>NRP Yang Mengetahui</label> <br />
                 <input 
                     type="text" 
                     placeholder="Masukkan NRP Yang Mengetahui"
@@ -325,7 +326,7 @@ export default function RightContentInputA(props) {
                     :
                     <button 
                     className='input-a-submit-btn' 
-                    onClick={BtnInputReportA}
+                    onClick={cekIfNrpEmpty}
                     style={{
                         marginBottom: '5px'
                     }}

@@ -92,6 +92,56 @@ function InputReportA () {
 
     // TO API
     const BtnInputReportA = () => {
+            setEmptyMessage("")
+            const jamKejadian = new Date(waktuKejadianJam).getHours() + ':'  + new Date(waktuKejadianJam).getMinutes()
+            const jamPelaporan = new Date(waktuDilaporkanJam).getHours() + ':'  + new Date(waktuDilaporkanJam).getMinutes()
+            Axios({
+                method: "POST",
+                url: api + 'report/input-report-a',
+                data: {
+                    mengetahuiUnit,
+                    NrpPelapor,
+                    PangkatPelapor,
+                    nomorLaporanPolisi,
+                    waktuKejadian,
+                    waktuKejadianJam: jamKejadian,
+                    tempatKejadian,
+                    provinsi,
+                    kota,
+                    kecamatan,
+                    kelurahan,
+                    apaYangTerjadi,
+                    pelaku,
+                    korban,
+                    waktuDilaporkan,  
+                    waktuDilaporkanJam: jamPelaporan,
+                    tindakPidanaAtauPasal,
+                    sumir,
+                    namaSaksi,
+                    alamatSaksi,        
+                    uraianSingkatKejadian,
+                    barangBukti,
+                    tindakanYangDiambil,
+                    mengetahui,
+                    pelapor,    
+                    pangkat,
+                    nrp 
+                },
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            .then((res) => {
+                setLoading(false)
+                swal('Success', 'Input Laporan A Berhasil!', 'success')
+            })
+            .catch((err) => {
+                setLoading(false)
+            })
+        
+    }
+
+    const cekIfNrpEmpty = () => {
         if(!nomorLaporanPolisi) {
             setEmptyMessage('Masukkan Nomor Laporan!')
         } else if(!waktuKejadian) {
@@ -145,51 +195,28 @@ function InputReportA () {
         } else if(!uraianSingkatKejadian) {
             setEmptyMessage("Masukkan Uraian Singkat Kejadian!")
         } else {
-            setEmptyMessage("")
-            const jamKejadian = new Date(waktuKejadianJam).getHours() + ':'  + new Date(waktuKejadianJam).getMinutes()
-            const jamPelaporan = new Date(waktuDilaporkanJam).getHours() + ':'  + new Date(waktuDilaporkanJam).getMinutes()
             Axios({
                 method: "POST",
-                url: api + 'report/input-report-a',
+                url: api + "report/cek-if-nrp-empty",
                 data: {
-                    mengetahuiUnit,
-                    NrpPelapor,
-                    PangkatPelapor,
-                    nomorLaporanPolisi,
-                    waktuKejadian,
-                    waktuKejadianJam: jamKejadian,
-                    tempatKejadian,
-                    provinsi,
-                    kota,
-                    kecamatan,
-                    kelurahan,
-                    apaYangTerjadi,
-                    pelaku,
-                    korban,
-                    waktuDilaporkan,  
-                    waktuDilaporkanJam: jamPelaporan,
-                    tindakPidanaAtauPasal,
-                    sumir,
-                    namaSaksi,
-                    alamatSaksi,        
-                    uraianSingkatKejadian,
-                    barangBukti,
-                    tindakanYangDiambil,
-                    mengetahui,
-                    pelapor,    
-                    pangkat,
-                    nrp 
+                    nrpPelapor: NrpPelapor,
+                    nrpMengetahui: nrp
                 },
                 headers: {
                     token: localStorage.getItem('token')
                 }
             })
             .then((res) => {
-                setLoading(false)
-                swal('Success', 'Input Laporan A Berhasil!', 'success')
+                if(res.data.statusPelapor === "tidak") {
+                    setEmptyMessage(res.data.messagePelapor)
+                } else if(res.data.statusMengetahui === "tidak") {
+                    setEmptyMessage(res.data.messageMengetahui)
+                } else {
+                    BtnInputReportA()
+                }
             })
             .catch((err) => {
-                setLoading(false)
+                console.log(err)
             })
         }
     }
@@ -283,6 +310,7 @@ function InputReportA () {
                     setPangkat={setPangkat}
                     dataPangkat={dataPangkat}
                     dataUnit={dataUnit}
+                    cekIfNrpEmpty={cekIfNrpEmpty}
                 />
                  
             </div>

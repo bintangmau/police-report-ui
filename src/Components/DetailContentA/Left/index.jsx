@@ -117,7 +117,7 @@ export default function Left(props) {
                 {
                     data &&
                     <ReactToPrint
-                        trigger={()=> <div className="da-button"> </div> }
+                        trigger={()=> <div className="da-button"> PRINT </div> }
                         content={() => componentRef.current}
                         pageStyle=""
                     />

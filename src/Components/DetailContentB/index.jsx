@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client'
-
+import swal from 'sweetalert'
 
 // API
 import { api } from '../../helper/database'
@@ -31,6 +31,9 @@ function DetailContentA (props) {
     const [selectedUnit,setSelectedUnit] = useState(null)
     const [selectedPenyidik,setSelectedPenyidik] = useState([])
     const [penyidikState,setPenyidikState] = useState("")
+    const [disableButton , setDisableButton] = useState(false)
+    const [ disposisiMessage, setDisposisiMessage ] = useState("")
+
 
     const getDetailsReportA = () => {
         setLoading(true)
@@ -49,15 +52,17 @@ function DetailContentA (props) {
             setStatusLaporan(res.data.status)
             if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
                 setSelectedUnit(res.data.dataLaporan.unit )
+                setDisableButton(true)
             }
 
             if (res.data.dataLaporan.subnit && jabatanState === "KANIT") {
                 setSelectedUnit(res.data.dataLaporan.subnit)
+                setDisableButton(true)
             }
             
             if (res.data.dataLaporan.penyidik && jabatanState === "KASUBNIT") {
-                
                 setSelectedPenyidik(res.data.dataLaporan.penyidik)
+                setDisableButton(true)
             }
             // setData(res.data)
         })
@@ -127,39 +132,47 @@ function DetailContentA (props) {
     }
 
     let disposisiKanitUnit = () => {
-        Axios({
-            method : "POST",
-            url : `${api}report/update-report-status-disposisi-b`,
-            data : {
-                value : jabatanState !== "KASUBNIT" ? selectedUnit : selectedPenyidik,
-                idReport : params
-            },
-            headers : {
-                token : localStorage.getItem('token')
-            }
-        })
-        .then(({data})=>{
-            alert('SUKSES')
-        })
-        .catch(err=>console.log(err , ' << ERROR CUK'))
+        if (!disableButton) {
+            Axios({
+                method : "POST",
+                url : `${api}report/update-report-status-disposisi-b`,
+                data : {
+                    value : jabatanState !== "KASUBNIT" ? selectedUnit : selectedPenyidik,
+                    idReport : params
+                },
+                headers : {
+                    token : localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+                swal("Success", "Laporan Telah Disposisi", "success")
+            })
+            .catch(err=>console.log(err , ' << ERROR CUK'))
+        }else {
+            setDisposisiMessage("Laporan Sudah Disposisi")
+        }
     }
 
     let updatePenyidik = () =>  {
-        Axios({
-            method : 'POST',
-            data : {
-                idLaporan : params,
-                value : penyidikState
-            },
-            headers : {
-                token : localStorage.getItem('token')
-            },
-            url : `${api}report/update-perkembangan-laporan-b`
-        })
-        .then(({data})=>{
-            alert('BERHASIL INPUT')
-        })
-        .catch(console.log)
+        if (!disableButton) {
+            Axios({
+                method : 'POST',
+                data : {
+                    idLaporan : params,
+                    value : penyidikState
+                },
+                headers : {
+                    token : localStorage.getItem('token')
+                },
+                url : `${api}report/update-perkembangan-laporan-b`
+            })
+            .then(({data})=>{
+                alert('BERHASIL INPUT')
+            })
+            .catch(console.log)
+        }else {
+            setDisposisiMessage("Laporan Sudah Disposisi")
+        }
     }
 
     // REDUX
@@ -219,6 +232,8 @@ function DetailContentA (props) {
                         penyidikState={penyidikState}
                         setPenyidikState={setPenyidikState}
                         updatePenyidik={updatePenyidik}
+                        disableButton={disableButton}
+                        disposisiMessage={disposisiMessage}
                     />
                 }
 

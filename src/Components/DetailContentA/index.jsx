@@ -4,7 +4,7 @@ import Axios from 'axios'
 import { api } from '../../helper/database'
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client'
-
+import swal from 'sweetalert'
 
 // STYLE
 import './style.css'
@@ -29,7 +29,8 @@ function DetailContentA (props) {
     const [selectedPenyidik,setSelectedPenyidik] = useState([])
     const [penyidikState,setPenyidikState] = useState("")
     const [ statusLaporan, setStatusLaporan ] = useState("")
-    // conn
+    const [disableButton , setDisableButton] = useState(false)
+    const [ disposisiMessage, setDisposisiMessage ] = useState('')
 
     // REDUX
     const jabatanState = useSelector(state=>state.user.jabatan) 
@@ -48,18 +49,20 @@ function DetailContentA (props) {
             setStatusLaporan(res.data.status)
             setDataPenyidik(res.data.dataPenyidik)
             // setLoad
-
-            if (res.data.dataLaporan.unit && jabatanState === "WAKASAT") {
+            // console.log(res.data.dataLaporan.unit, "UNIT")
+            if (res.data.dataLaporan.unit < 1 && jabatanState === "WAKASAT") {
                 setSelectedUnit(res.data.dataLaporan.unit )
+                setDisableButton(false)
             }
 
-            if (res.data.dataLaporan.subnit && jabatanState === "KANIT") {
+            if (res.data.dataLaporan.subnit < 1 && jabatanState === "KANIT") {
                 setSelectedUnit(res.data.dataLaporan.subnit)
+                setDisableButton(false)
             }
             
-            if (res.data.dataLaporan.penyidik && jabatanState === "KASUBNIT") {
-                
+            if (res.data.dataLaporan.penyidik < 1 && jabatanState === "KASUBNIT") {
                 setSelectedPenyidik(res.data.dataLaporan.penyidik)
+                setDisableButton(false)
             }
 
         })
@@ -67,7 +70,6 @@ function DetailContentA (props) {
             console.log(err)
         })
     }
-
 
     useEffect(() => {
         if (jabatanState ) {
@@ -87,6 +89,7 @@ function DetailContentA (props) {
     }, [jabatanState])
     
     let fillPenyidik = (id) => {
+        console.log(id)
         let arr = [...selectedPenyidik]
         if (selectedPenyidik.filter(e=>e === id).length > 0) {
             arr = arr.filter(e=>e !== id)
@@ -146,39 +149,48 @@ function DetailContentA (props) {
     }
 
     let disposisiKanitUnit = () => {
-        Axios({
-            method : "POST",
-            url : `${api}report/update-report-status-disposisi`,
-            data : {
-                value : jabatanState !== "KASUBNIT" ? selectedUnit : selectedPenyidik,
-                idReport : params
-            },
-            headers : {
-                token : localStorage.getItem('token')
-            }
-        })
-        .then(({data})=>{
-            alert('SUKSES')
-        })
-        .catch(err=>console.log(err , ' << ERROR CUK'))
+        console.log(disableButton)
+        if (!disableButton) {
+            Axios({
+                method : "POST",
+                url : `${api}report/update-report-status-disposisi`,
+                data : {
+                    value : jabatanState !== "KASUBNIT" ? selectedUnit : selectedPenyidik,
+                    idReport : params
+                },
+                headers : {
+                    token : localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+                swal("Success", "Laporan Telah Disposisi", "success")
+            })
+            .catch(err=>console.log(err , ' << ERROR CUK'))
+        }else {
+            setDisposisiMessage("Laporan Sudah Disposisi bos")
+        }
     }
 
     let updatePenyidik = () =>  {
-        Axios({
-            method : 'POST',
-            data : {
-                idLaporan : params,
-                value : penyidikState
-            },
-            headers : {
-                token : localStorage.getItem('token')
-            },
-            url : `${api}report/update-perkembangan-laporan`
-        })
-        .then(({data})=>{
-            alert('BERHASIL INPUT')
-        })
-        .catch(console.log)
+        if (!disableButton) {
+            Axios({
+                method : 'POST',
+                data : {
+                    idLaporan : params,
+                    value : penyidikState
+                },
+                headers : {
+                    token : localStorage.getItem('token')
+                },
+                url : `${api}report/update-perkembangan-laporan`
+            })
+            .then(({data})=>{
+                alert('BERHASIL INPUT')
+            })
+            .catch(console.log)
+        }else {
+            setDisposisiMessage("Laporan Sudah Disposisi")
+        }
     }
 
     return (
@@ -220,6 +232,8 @@ function DetailContentA (props) {
                         penyidikState={penyidikState}
                         setPenyidikState={setPenyidikState}
                         updatePenyidik={updatePenyidik}
+                        disableButton={disableButton}
+                        disposisiMessage={disposisiMessage}
                     />
                 }
 
